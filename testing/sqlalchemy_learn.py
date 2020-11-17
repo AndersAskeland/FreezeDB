@@ -25,6 +25,7 @@ class User_class(Base):
     def __repr__(self):
         return f"User(id={self.id!r}, name={self.name!r}, fullname={self.fullname!r})"
 
+
 class Address_class(Base):
     __tablename__ = 'address_class'
     id = Column(Integer, primary_key=True)
