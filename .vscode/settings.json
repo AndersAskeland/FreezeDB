@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/usr/local/opt/python@3.9/bin/python3.9",
+    "python.pythonPath": "/Users/aaske/.pyenv/versions/FreezeDB/bin/python",
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
     "python.testing.pytestArgs": [
@@ -7,5 +7,16 @@
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": false,
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "python"
+    ],
+    "python.linting.pylintEnabled": false,
+    "python.testing.promptToConfigure": false
 }

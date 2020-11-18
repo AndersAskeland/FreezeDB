@@ -1,4 +1,4 @@
-# A "module" for defining different classes used in the sqllite database.
+# A "module" for defining different classes used in the sqlite database.
 # Will be imported into application.py (__init___). I have defined s
 # ample (unique id), blood, urine, operator, location
 
@@ -9,21 +9,22 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.sql.sqltypes import DateTime
 
+
 # SETTINGS
 Base = declarative_base()
 
-# Add participant_ID ect to sample instead of blood.
+# Add participant_ID etc to sample instead of blood.
 
 
 # DATABASE CLASSES
 # Sample
 class sample(Base):
-    __tablename__ = 'sample'
+    __tablename__ = "sample"
 
     id = Column(Integer, primary_key=True, nullabe=False, unique=True)
 
     # Foreign key
-    participant_id = Column(Integer, ForeignKey('blood.participant_id'))
+    participant_id = Column(Integer, ForeignKey("blood.participant_id"))
 
     # Back population
     sample = relationship("")
@@ -31,7 +32,7 @@ class sample(Base):
 
 # Blood samples
 class blood(Base):
-    __tablename__ = 'blood'
+    __tablename__ = "blood"
 
     participant_id = Column(Integer, primary_key=True, nullable=False)
     identifier = Column(Integer, primary_key=True, nullable=False, unique=True)
@@ -44,17 +45,18 @@ class blood(Base):
     notes = Column(String, nullable=True)
 
     # Foreign key
-    id = Column(Integer, ForeignKey('sample.id'))
+    id = Column(Integer, ForeignKey("sample.id"))
 
     # Back population
     locations = relationship("Location", back_populates="samples")
-    
+
     def __repr__(self):
         return f"Sample(participant_id={self.participant_id!r}, identifier={self.identifier!r}, blood_type={self.blood_type!r}, date={self.date!r})"
 
-### Urine samples
+
+# Urine samples
 class urine(Base):
-    __tablename__ = 'urine'
+    __tablename__ = "urine"
 
     participant_id = Column(Integer, primary_key=True, nullable=False)
     dateTime = Column(DateTime, nullable=False)
@@ -63,16 +65,16 @@ class urine(Base):
     notes = Column(String, Nullable=True)
 
     # Foreign key
-    id = Column(Integer, ForeignKey('sample.id'))
+    id = Column(Integer, ForeignKey("sample.id"))
 
 
 # LOCATION OF SAMPLE IN FREEZER
 class Location(Base):
-    __tablename__ = 'location'
+    __tablename__ = "location"
 
     rack_id = Column(Integer, primary_key=True)
     physical_location = Column(String, nullable=False)
-    participant_id = Column(Integer, ForeignKey('sample.participant_id'))
+    participant_id = Column(Integer, ForeignKey("sample.participant_id"))
 
     samples = relationship("Sample", back_populates="locations")
 
