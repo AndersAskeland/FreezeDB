@@ -13,7 +13,7 @@ from sqlalchemy.orm import (
 )
 from datetime import datetime
 
-nt# Internal modules
+nt  # Internal modules
 from freezedb.database_classes import Sample, Location, Base
 
 # SET NAME
