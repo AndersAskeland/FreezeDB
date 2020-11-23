@@ -1,6 +1,7 @@
 # This is a the main application file for FreezeDB.
 # It will be slowly updated as I understand more
-# and more.elli
+# and more.
+
 # IMPORT
 # External modules
 from sqlalchemy import create_engine, text, MetaData, insert
@@ -9,20 +10,18 @@ from sqlalchemy.orm import (
     relationship,
     declarative_base,
     registry,
-    Session,
+    Session
 )
 from datetime import datetime
 
-nt  # Internal modules
-from freezedb.database_classes import Sample, Location, Base
+# Internal modules
+from freezedb.database_classes import Blood, Urine, Sample, Location, Base
 
 # SET NAME
 app = __name__
 
 # SETTINGS
-engine = create_engine(
-    "sqlite:///freeze.db", echo=True, future=True
-)  # Configure SQL database using engine object (echo = logging)
+engine = create_engine("sqlite:///freeze.db", echo=True, future=True)  # Configure SQL database using engine object (echo = logging)
 session = Session(bind=engine)
 
 # WRITE TO DB
@@ -32,7 +31,7 @@ session.add_all()
 # DISPLAY SWITCH STATEMENTS
 
 # QUERY DATABASe
-query_test = session.query(User).filter_by(participant_id=4005).first()
+query_test = session.query(Blood).filter_by(participant_id=4005).first()
 
 # WRITE DATA
 u1 = Sample(participant_id=4005, identifier=2, blood_type="Plasma")
