@@ -3,3 +3,4 @@
 /.vscode
 /Icon
 /freeze.db
+/freezedb/__pycache__
