@@ -4,7 +4,7 @@
 
 # IMPORT
 # External modules
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.sql.sqltypes import DateTime
 
@@ -18,7 +18,7 @@ Base = declarative_base()
 class Sample(Base):
     __tablename__ = "sample"
 
-    id = Column(Integer, nullabe=False, unique=True, primary_key=True)
+    id = Column(Integer, nullable=False, unique=True, primary_key=True)
 
     # Relationships
     blood_sample = relationship("Blood", back_populates="sample")
@@ -37,7 +37,7 @@ class Blood(Base):
     freeze_cycles = Column(Integer, nullable=True)
     operator_collection = Column(String, nullable=False)
     operator_centrifugation = Column(String, nullable=False)
-    rack_id = Column(Integer, Nullable=False)
+    rack_id = Column(Integer, nullable=False)
     location = Column(String, nullable=False)
     notes = Column(String, nullable=True)
 
@@ -61,9 +61,9 @@ class Urine(Base):
     visit = Column(String, nullable=False)
     operator_centrifugation = Column(String, nullable=False)
     freez_thaw_cycles = Column(Integer, nullable=True)
-    rack_id = Column(Integer, Nullable=False)
+    rack_id = Column(Integer, nullable=False)
     location = Column(String, nullable=False)
-    notes = Column(String, Nullable=True)
+    notes = Column(String, nullable=True)
 
     # Foreign key
     id = Column(Integer, ForeignKey("sample.id"))
