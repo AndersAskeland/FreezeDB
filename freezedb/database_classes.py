@@ -12,8 +12,6 @@ from sqlalchemy.sql.sqltypes import DateTime
 # SETTINGS
 Base = declarative_base()
 
-# Add participant_ID etc to sample instead of blood.
-
 
 # DATABASE CLASSES
 # Sample
@@ -39,13 +37,14 @@ class Blood(Base):
     freeze_cycles = Column(Integer, nullable=True)
     operator_collection = Column(String, nullable=False)
     operator_centrifugation = Column(String, nullable=False)
+    rack_id = Column(Integer, Nullable=False)
+    location = Column(String, nullable=False)
     notes = Column(String, nullable=True)
 
     # Foreign key
     id = Column(Integer, ForeignKey("sample.id"))
 
-    # Back population
-    locations = relationship("Location", back_populates="blood_sample")
+    # Back populate sample
     sample = relationship("Sample", back_populates="blood_sample")
 
     # Print method
@@ -62,32 +61,16 @@ class Urine(Base):
     visit = Column(String, nullable=False)
     operator_centrifugation = Column(String, nullable=False)
     freez_thaw_cycles = Column(Integer, nullable=True)
+    rack_id = Column(Integer, Nullable=False)
+    location = Column(String, nullable=False)
     notes = Column(String, Nullable=True)
 
     # Foreign key
     id = Column(Integer, ForeignKey("sample.id"))
 
-    # Back population
-    locations = relationship("Location", back_populates="urine_sample")
+    # Back populate sample
     sample = relationship("Sample", back_populates="urine_sample")
-    
+
     # Print method
     def __repr__(self):
         return(f"Sample(ID={self.participant_id!r} date={self.date_time!r})")
-
-
-# LOCATION OF SAMPLE IN FREEZER
-class Location(Base):
-    __tablename__ = "location"
-
-    rack_id = Column(Integer, primary_key=True)
-    location = Column(String, nullable=False)
-    participant_id = Column(Integer, ForeignKey("sample.participant_id"))
-
-    # Relationship - I dont believe i can back populate this way.
-    blood_sample = relationship("Blood", back_populates="locations")
-    urine_sample = relationship("Urine", back_populates="locations")
-
-    # Print method
-    def __repr__(self):
-        return((f"Location(rack_id={self.rack_id!r}, location={self.location!r}, participant_id={self.participant_id!r})"))
