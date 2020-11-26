@@ -5,6 +5,7 @@
 # IMPORT
 # External modules
 from sqlalchemy import create_engine, text, MetaData, insert
+import os
 from datetime import datetime
 from sqlalchemy.orm import (
     sessionmaker,
@@ -16,7 +17,7 @@ from sqlalchemy.orm import (
 
 # Internal modules
 from freezedb.database_classes import Blood, Urine, Sample, Base
-from freezedb.modules import data_input, delete, lookup, settings, quit
+from freezedb.modules import data_input, delete, lookup, settings, quit, menu, welcome
 
 # SET NAME
 app = __name__
@@ -31,34 +32,42 @@ session = Session(bind=engine)
 # WRITE TO DB
 Base.metadata.create_all(engine)
 
+
 # DISPLAY MAIN SWITCH(IF/ELIF CHAIN) STATEMENTS #
-# show options
-print("###################################")
-print("####### Welcome to FreezeDB #######")
-print("###################################\n")
-print("What do you want to do?")
-print("   1. Input database values.")
-print("   2. Delete database values.")
-print("   3. View data.")
-print("   4. Settings")
-print("   5. Quit program\n")
+# Print menu
+welcome()
+menu()
 
 # gather input
-switch = int(input("Enter: "))
+selection = int(input("Selection: "))
+os.system('cls' if os.name == 'nt' else 'clear') # clear terminal - multi-platform
 
-# error check input
-# USE FUNCTION
-if switch == 1:
-    data_input()
-elif switch == 2:
-    delete()
-elif switch == 3:
-    lookup()
-elif switch == 4:
-    settings()
-elif switch == 5:
-    quit()
+while selection != 5:
+    if selection == 1:
+        data_input()
+    elif selection == 2:
+        delete()
+    elif selection == 3:
+        lookup()
+    elif selection == 4:
+        settings()
+    
+    # New input
+    menu()
+    selection = int(input("Selection: "))
 
+# Exit program
+quit()
+
+
+
+
+
+
+
+
+
+# Testing stuff
 # QUERY DATABASe
 query_test = session.query(Blood).filter_by(participant_id=4005).first()
 
