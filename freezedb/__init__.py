@@ -5,12 +5,13 @@
 # IMPORT
 # External modules
 from sqlalchemy import create_engine, text, MetaData, insert
-import os
 from datetime import datetime
 
 # Internal modules
 from freezedb.classes import Blood, Urine, Sample, Base
-from freezedb.functions import data_input, delete, lookup, settings, quit, engine, session, menu
+from freezedb.modules.etc import delete, lookup, settings, quit, engine, session
+from freezedb.modules.insert import data_input
+from freezedb.modules.menu import menu
 
 # SET NAME
 app = __name__
@@ -18,10 +19,8 @@ app = __name__
 # SETTINGS
 Base.metadata.create_all(engine)
 
-
 # SHOW MENU
 selection = menu()
-
 
 # Menu loop
 while selection.arg0 != 5:

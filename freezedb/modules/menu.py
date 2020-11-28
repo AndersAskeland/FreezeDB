@@ -1,22 +1,73 @@
-# A file containing all the different functions that are possible.
-
-# IMPORT
-# External modules
-import sys, os
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+# The menu module. This module is responbile for showing
+# and doing menu stuff. I might turn the menu into classes.
 
 
-# Internal modules
-from freezedb.classes import Blood, Urine, Sample, ReturnValue
-from freezedb.menu import main_menu, sub_menu_input, sub_menu_delete, sub_menu_lookup, sub_menu_settings
+## IMPORT STUFF ##
+# External
+import os
+
+# internal
+from freezedb.classes import ReturnValue
 
 
-# SETTINGS
-engine = create_engine("sqlite:///freeze.db", echo=True, future=True)  # Configure SQL database using engine object (echo = logging)
-session = Session(bind=engine)
+## MENU PRINT
+# Main menu
+def main_menu():
+    # Clear terminal
+    os.system('cls' if os.name == 'nt' else 'clear') # clear terminal - multi-platform
+    
+    # Menu print
+    print("###################################")
+    print("############ FreezeDB #############")
+    print("###################################")
+    print("What do you want to do?")
+    print("   [1] Input database values.")
+    print("   [2] Delete database values.")
+    print("   [3] View data.")
+    print("   [4] Settings")
+    print("   [Q] Quit program")
 
-# MENU
+
+def sub_menu_input(val = 0):
+    # Clear terminal
+    os.system('cls' if os.name == 'nt' else 'clear') # clear terminal - multi-platform
+
+    print("Choose database")
+    print("  [1] Blood sample DB")
+    print("  [2] Urine sample DB")
+    if val == 1:
+        print("  [3] Write to DB")
+    print("  [R] Return")
+    print("  [Q] Quit program")
+
+
+
+def sub_menu_delete(test):
+    print("Choose database")
+    print("  [1] Blood sample DB")
+    if test == "1":
+        print("woho")
+    print("  [2] Urine sample DB")
+    print("  [3] Return")
+
+    input("Fasdfas")
+def sub_menu_lookup():
+    print("Choose database")
+    print("  [1] Blood sample DB")
+    print("  [2] Urine sample DB")
+    print("  [3] Return")
+
+def sub_menu_settings():
+    print("Choose database")
+    print("  [1] Blood sample DB")
+    print("  [2] Urine sample DB")
+    print("  [3] Return")
+
+
+
+
+## MENU FUNCTION
+# Menu
 def menu(main_lvl=0, setting=0):
     # This function defines the menu which is to be presented to the user
     # it can either be a standard menu, or an altered menu, based on settings = 1.
@@ -83,67 +134,4 @@ def menu(main_lvl=0, setting=0):
             sub_menu_settings()
             selection = int(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)          
-
-
-# INPUT
-def data_input(selection):
-    # Blood database
-    if selection == 1:
-        # Inputs required
-        participant_id = int(input("Participant ID: "))
-        visit = str(input("Visit: "))
-        blood_type = str(input("Blood type: "))
-
-        # Add to class
-        dat = Blood(participant_id=participant_id, visit=visit, blood_type=blood_type)
-
-        # Add to session
-        session.add(dat)
-
-        # Return
-        return ReturnValue(1, 1, None)
-    
-    # Urine database
-    elif selection == 2:
-        # Inputs required
-        participant_id = int(input("Participant ID: "))
-        visit = str(input("Visit: "))
-        
-        # Add to class
-        dat = Urine(participant_id=participant_id, visit=visit)
-
-        # Add to session
-        session.add(dat)
-
-        # Return
-        return ReturnValue(1, 1, None)
-    
-    # Comit to db
-    elif selection == 3:
-        session.flush()
-        session.commit()
-        return ReturnValue(1, 0, None)
-    
-    else:
-        pass
-
-
-# DELETE
-def delete():
-    print("Delete menu")
-
-
-# VIEW
-def lookup():
-    print("View menu")
-
-
-# SETTINGS
-def settings():
-    print("Settings menu")
-
-
-# EXIT
-def quit():
-    sys.exit("Exiting program")
 

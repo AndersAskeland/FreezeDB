@@ -6,7 +6,7 @@
 # External modules
 from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship, declarative_base
-from sqlalchemy.sql.sqltypes import DateTime
+from sqlalchemy.sql.sqltypes import Date
 
 
 # SETTINGS
@@ -25,7 +25,7 @@ class ReturnValue:
 class Sample(Base):
     __tablename__ = "sample"
 
-    id = Column(Integer, nullable=False, unique=True, primary_key=True, autoincrement=True)
+    id = Column(Integer, nullable=False, unique=True, primary_key=True)
 
     # Relationships
     blood_sample = relationship("Blood", back_populates="sample")
@@ -36,11 +36,11 @@ class Sample(Base):
 class Blood(Base):
     __tablename__ = "blood"
 
-    participant_id = Column(Integer, primary_key=True, nullable=False)
-    identifier = Column(Integer, primary_key=True, nullable=True, unique=True)
+    participant_id = Column(Integer, nullable=False)
+    identifier = Column(Integer, nullable=True, primary_key=True, unique=True)
     visit = Column(String, nullable=False)
     blood_type = Column(String, nullable=False)
-    date_time = Column(DateTime, nullable=True)
+    date_time = Column(Date, nullable=True)
     freeze_cycles = Column(Integer, nullable=True)
     operator_collection = Column(String, nullable=True)
     operator_centrifugation = Column(String, nullable=True)
@@ -64,7 +64,7 @@ class Urine(Base):
     __tablename__ = "urine"
 
     participant_id = Column(Integer, primary_key=True, nullable=False)
-    date_time = Column(DateTime, nullable=True)
+    date_time = Column(Date, nullable=True)
     visit = Column(String, nullable=True)
     operator_centrifugation = Column(String, nullable=True)
     freez_thaw_cycles = Column(Integer, nullable=True)
