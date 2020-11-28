@@ -7,56 +7,44 @@
 from sqlalchemy import create_engine, text, MetaData, insert
 import os
 from datetime import datetime
-from sqlalchemy.orm import (
-    sessionmaker,
-    relationship,
-    declarative_base,
-    registry,
-    Session
-    )
 
 # Internal modules
-from freezedb.database_classes import Blood, Urine, Sample, Base
-from freezedb.modules import data_input, delete, lookup, settings, quit, menu, welcome
+from freezedb.classes import Blood, Urine, Sample, Base
+from freezedb.functions import data_input, delete, lookup, settings, quit, engine, session, menu
 
 # SET NAME
 app = __name__
 
 # SETTINGS
-engine = create_engine("sqlite:///freeze.db", echo=True, future=True)  # Configure SQL database using engine object (echo = logging)
-session = Session(bind=engine)
-
-# SWITCH MENU
-
-
-# WRITE TO DB
 Base.metadata.create_all(engine)
 
 
-# DISPLAY MAIN SWITCH(IF/ELIF CHAIN) STATEMENTS #
-# Print menu
-welcome()
-menu()
+# SHOW MENU
+selection = menu()
 
-# gather input
-selection = int(input("Selection: "))
-os.system('cls' if os.name == 'nt' else 'clear') # clear terminal - multi-platform
 
-while selection != 5:
-    if selection == 1:
-        data_input()
-    elif selection == 2:
-        delete()
-    elif selection == 3:
-        lookup()
-    elif selection == 4:
-        settings()
+# Menu loop
+while selection.arg0 != 5:
+    selection = menu(main_lvl=selection.arg0, setting=selection.arg1)
+
+    # Data input
+    if selection.arg1 == 1:
+        selection = data_input(selection.arg0)
+
+    # Delete
+    elif selection.arg1 == 2:
+        delete(selection.arg0)
+
+    # Lookup/query
+    elif selection.arg1 == 3:
+        lookup(selection.arg0)
+
+    # Settings
+    elif selection.arg1 == 4:
+        settings(selection.arg0)
     
-    # New input
-    menu()
-    selection = int(input("Selection: "))
 
-# Exit program
+# QUIT
 quit()
 
 

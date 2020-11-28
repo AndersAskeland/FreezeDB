@@ -12,13 +12,20 @@ from sqlalchemy.sql.sqltypes import DateTime
 # SETTINGS
 Base = declarative_base()
 
+# REGULAR CLASSES
+class ReturnValue:
+    def __init__(self, arg0, arg1, arg2):
+        self.arg0 = arg0
+        self.arg1 = arg1
+        self.arg2 = arg2
+
 
 # DATABASE CLASSES
 # Sample
 class Sample(Base):
     __tablename__ = "sample"
 
-    id = Column(Integer, nullable=False, unique=True, primary_key=True)
+    id = Column(Integer, nullable=False, unique=True, primary_key=True, autoincrement=True)
 
     # Relationships
     blood_sample = relationship("Blood", back_populates="sample")
@@ -30,15 +37,15 @@ class Blood(Base):
     __tablename__ = "blood"
 
     participant_id = Column(Integer, primary_key=True, nullable=False)
-    identifier = Column(Integer, primary_key=True, nullable=False, unique=True)
+    identifier = Column(Integer, primary_key=True, nullable=True, unique=True)
     visit = Column(String, nullable=False)
     blood_type = Column(String, nullable=False)
-    date_time = Column(DateTime, nullable=False)
+    date_time = Column(DateTime, nullable=True)
     freeze_cycles = Column(Integer, nullable=True)
-    operator_collection = Column(String, nullable=False)
-    operator_centrifugation = Column(String, nullable=False)
-    rack_id = Column(Integer, nullable=False)
-    location = Column(String, nullable=False)
+    operator_collection = Column(String, nullable=True)
+    operator_centrifugation = Column(String, nullable=True)
+    rack_id = Column(Integer, nullable=True)
+    location = Column(String, nullable=True)
     notes = Column(String, nullable=True)
 
     # Foreign key
@@ -57,12 +64,12 @@ class Urine(Base):
     __tablename__ = "urine"
 
     participant_id = Column(Integer, primary_key=True, nullable=False)
-    date_time = Column(DateTime, nullable=False)
-    visit = Column(String, nullable=False)
-    operator_centrifugation = Column(String, nullable=False)
+    date_time = Column(DateTime, nullable=True)
+    visit = Column(String, nullable=True)
+    operator_centrifugation = Column(String, nullable=True)
     freez_thaw_cycles = Column(Integer, nullable=True)
-    rack_id = Column(Integer, nullable=False)
-    location = Column(String, nullable=False)
+    rack_id = Column(Integer, nullable=True)
+    location = Column(String, nullable=True)
     notes = Column(String, nullable=True)
 
     # Foreign key
