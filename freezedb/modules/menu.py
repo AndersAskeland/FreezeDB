@@ -76,62 +76,65 @@ def menu(main_lvl=0, setting=0):
         # Main menu
         if main_lvl == 0:
             main_menu()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # Input
-        elif main_lvl == 1:
+        elif main_lvl == "1":
             sub_menu_input()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # delete
-        elif main_lvl == 2:
+        elif main_lvl == "2":
             sub_menu_delete()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # lookup
-        elif main_lvl == 3:
+        elif main_lvl == "3":
             sub_menu_lookup()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # settings
-        elif main_lvl == 4:
+        elif main_lvl == "4":
             sub_menu_settings()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None) 
     
     # Conditional menu
     if setting == 1:
         # Main menu
-        if main_lvl == 0:
+        if main_lvl == "0":
             main_menu()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # Input
-        elif main_lvl == 1:
+        elif main_lvl == "1":
             sub_menu_input(1)
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # delete
-        elif main_lvl == 2:
+        elif main_lvl == "2":
             sub_menu_delete()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # lookup
-        elif main_lvl == 3:
+        elif main_lvl == "3":
             sub_menu_lookup()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)
 
         # settings
-        elif main_lvl == 4:
+        elif main_lvl == "4":
             sub_menu_settings()
-            selection = int(input("Selection: ")) # arg0
+            selection = str(input("Selection: ")) # arg0
             return ReturnValue(selection, main_lvl, None)          
+
+    # Invalid input
+    return ReturnValue(main_lvl, None, None)
 

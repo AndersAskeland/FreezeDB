@@ -22,25 +22,35 @@ Base.metadata.create_all(engine)
 # SHOW MENU
 selection = menu()
 
+print(selection.arg0.upper())
 # Menu loop
-while selection.arg0 != 5:
+while selection.arg0.upper() != "Q":
     selection = menu(main_lvl=selection.arg0, setting=selection.arg1)
 
+    # return
+    if selection.arg0.upper() == "R":
+        selection = menu()
+    
     # Data input
-    if selection.arg1 == 1:
+    elif selection.arg1 == "1":
         selection = data_input(selection.arg0)
 
     # Delete
-    elif selection.arg1 == 2:
+    elif selection.arg1 == "2":
         delete(selection.arg0)
 
     # Lookup/query
-    elif selection.arg1 == 3:
+    elif selection.arg1 == "3":
         lookup(selection.arg0)
 
     # Settings
-    elif selection.arg1 == 4:
+    elif selection.arg1 == "4":
         settings(selection.arg0)
+
+    # Invalid input
+    else:
+        print("Invalid input. Try again")
+        selection = menu()
     
 
 # QUIT

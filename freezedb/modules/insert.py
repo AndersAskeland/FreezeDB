@@ -20,8 +20,14 @@ session = Session(bind=engine)
 
 ## MAIN
 def data_input(selection):
+    if 'setting' not in locals():
+        setting = 0
+    
     # Blood database
-    if selection == 1:
+    if selection == "1":
+        # Set setting
+        setting = 1
+
         # Inputs required
         participant_id = int(input("Participant ID: "))
         visit = str(input("Visit: "))
@@ -105,11 +111,14 @@ def data_input(selection):
             session.add(dat)
 
         # Return
-        return ReturnValue(1, 1, None)
+        return ReturnValue("1", 1, None)
 
     
     # Urine database
-    elif selection == 2:
+    elif selection == "2":
+        # Setting
+        setting = 1
+
         # Inputs required
         participant_id = int(input("Participant ID: "))
         visit = str(input("Visit: "))
@@ -121,14 +130,24 @@ def data_input(selection):
         session.add(dat)
 
         # Return
-        return ReturnValue(1, 1, None)
+        return ReturnValue(1, setting, None)
     
     # Comit to db
-    elif selection == 3:
+    elif selection == "3":
+        # Setting
+        setting = 0
+
+        # write to db
         session.flush()
         session.commit()
-        return ReturnValue(1, 0, None)
+        return ReturnValue("1", setting, None)
     
+    # Return
+    elif selection.upper() == "R" or selection.upper() == "Q":
+        return ReturnValue(selection, setting, None)
+
+    # Error checking
     else:
-        pass
+        print("Invalid input. Try again.")
+        return ReturnValue("1", setting, None)
 
