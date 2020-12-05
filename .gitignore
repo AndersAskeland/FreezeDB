@@ -3,5 +3,6 @@
 /.vscode
 /Icon
 /freeze.db
-/freezedb/__pycache__
+/modules/__pycache__
 /freeze.db
+/export.csv

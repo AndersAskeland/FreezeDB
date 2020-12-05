@@ -9,8 +9,8 @@ from sqlalchemy import create_engine, func
 from sqlalchemy.orm import Session
 
 # Internal
-from freezedb.classes import Blood, Urine, Sample, ReturnValue
-from freezedb.modules.etc import max_identifier
+from classes import Blood, Urine, Sample, MenuSelection
+from functions import max_identifier
 
 
 ## SETTINGS
@@ -19,15 +19,9 @@ session = Session(bind=engine)
 
 
 ## MAIN
-def data_input(selection):
-    if 'setting' not in locals():
-        setting = 0
-    
+def data_input(sub_menu, setting):
     # Blood database
-    if selection == "1":
-        # Set setting
-        setting = 1
-
+    if sub_menu == "1":
         # Inputs required
         participant_id = int(input("Participant ID: "))
         visit = str(input("Visit: "))
@@ -111,14 +105,11 @@ def data_input(selection):
             session.add(dat)
 
         # Return
-        return ReturnValue("1", 1, None)
+        return MenuSelection(level="1", sub_menu=sub_menu, setting="alternative")
 
     
     # Urine database
-    elif selection == "2":
-        # Setting
-        setting = 1
-
+    elif sub_menu == "2":
         # Inputs required
         participant_id = int(input("Participant ID: "))
         visit = str(input("Visit: "))
@@ -130,24 +121,21 @@ def data_input(selection):
         session.add(dat)
 
         # Return
-        return ReturnValue(1, setting, None)
+        return MenuSelection(level="1", sub_menu=sub_menu, setting="alternative")
     
     # Comit to db
-    elif selection == "3":
-        # Setting
-        setting = 0
-
+    elif sub_menu == "3":
         # write to db
         session.flush()
         session.commit()
-        return ReturnValue("1", setting, None)
+        return MenuSelection(level="1", sub_menu=sub_menu, setting="default")
     
     # Return
-    elif selection.upper() == "R" or selection.upper() == "Q":
-        return ReturnValue(selection, setting, None)
+    elif sub_menu.upper() == "R" or sub_menu.upper() == "Q":
+        return MenuSelection(level=sub_menu, sub_menu=None, setting=None)
 
     # Error checking
     else:
         print("Invalid input. Try again.")
-        return ReturnValue("1", setting, None)
+        return MenuSelection(level="1", sub_menu=None, setting=setting)
 

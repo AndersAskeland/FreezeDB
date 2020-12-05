@@ -13,11 +13,11 @@ from sqlalchemy.sql.sqltypes import Date
 Base = declarative_base()
 
 # REGULAR CLASSES
-class ReturnValue:
-    def __init__(self, arg0, arg1, arg2):
-        self.arg0 = arg0
-        self.arg1 = arg1
-        self.arg2 = arg2
+class MenuSelection:
+    def __init__(self, level, sub_menu, setting):
+        self.level = level
+        self.sub_menu = sub_menu
+        self.setting = setting
 
 
 # DATABASE CLASSES

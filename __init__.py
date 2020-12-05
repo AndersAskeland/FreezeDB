@@ -8,10 +8,11 @@ from sqlalchemy import create_engine, text, MetaData, insert
 from datetime import datetime
 
 # Internal modules
-from freezedb.classes import Blood, Urine, Sample, Base
-from freezedb.modules.etc import delete, lookup, settings, quit, engine, session
-from freezedb.modules.insert import data_input
-from freezedb.modules.menu import menu
+from classes import Blood, Urine, Sample, Base
+from functions import delete, lookup, settings, quit, engine, session
+from modules.insert import data_input
+from modules.export import export
+from modules.menu import menu
 
 # SET NAME
 app = __name__
@@ -19,33 +20,38 @@ app = __name__
 # SETTINGS
 Base.metadata.create_all(engine)
 
-# SHOW MENU
-selection = menu()
+# SHOW FIRST MENU
+selection = menu(level="main", sub_menu="NA", setting="default")
 
-print(selection.arg0.upper())
 # Menu loop
-while selection.arg0.upper() != "Q":
-    selection = menu(main_lvl=selection.arg0, setting=selection.arg1)
+while selection.level.upper() != "Q":
+    # Go to submenu
+    selection = menu(level=selection.level, setting=selection.setting)
 
-    # return
-    if selection.arg0.upper() == "R":
-        selection = menu()
+    # Main menu (return)
+    if selection.level.upper() == "R":
+        selection = menu(level="main", sub_menu="NA", setting="default")
     
+    ## SUBMENUS FUNCTIONS
     # Data input
-    elif selection.arg1 == "1":
-        selection = data_input(selection.arg0)
+    elif selection.level == "1":
+        selection = data_input(sub_menu=selection.sub_menu, setting=selection.setting)
 
     # Delete
-    elif selection.arg1 == "2":
-        delete(selection.arg0)
+    elif selection.level == "2":
+        delete(selection.sub_menu)
 
     # Lookup/query
-    elif selection.arg1 == "3":
-        lookup(selection.arg0)
+    elif selection.level == "3":
+        selection = lookup(selection.sub_menu)
+
+    # Export
+    elif selection.level == "4":
+        selection = export(sub_menu=selection.sub_menu)
 
     # Settings
-    elif selection.arg1 == "4":
-        settings(selection.arg0)
+    elif selection.level == "5":
+        settings(selection.sub_menu)
 
     # Invalid input
     else:
