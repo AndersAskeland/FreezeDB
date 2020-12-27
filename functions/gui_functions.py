@@ -12,13 +12,13 @@
 
 # External modules
 import os
-from PySide6 import QtCore
-from PySide6.QtWidgets import QTreeWidgetItem
+from PySide6 import QtCore, QtWidgets
+from PySide6.QtWidgets import QTreeWidgetItem, QTableWidgetItem
 from PySide6.QtCore import QCoreApplication, QPropertyAnimation
 
 # Internal modules
 from ui.css import css_btn_pressed, css_btn_idle
-from functions.sql_functions import n_samples
+from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict
 from classes.sql_classes import Blood
 
 ##################################################################
@@ -119,3 +119,33 @@ def change_database(self):
     ## TODO
     # LAST EDITED
         # Do max value on datetime to find this
+
+
+# 3.6 LOAD SQL DATA - Loads the data in the currenrly selected db and table and displays it in tablewidget
+def load_sql_data(self):
+    # Selected item
+    selected_db = self.ui.tree_select_database.currentItem().text(0)
+
+    # Load column names
+    columns = sql_column_keys(database=selected_db, table=Blood)
+
+    # Set table and row count
+    self.ui.tableWidget_db_view.setRowCount(int(n_samples(database=selected_db, table=Blood))) # Row
+    self.ui.tableWidget_db_view.setColumnCount(len(columns)) # Column
+    
+    # Write column names to widget
+    for i, column in enumerate(columns):
+        # Create widget
+        self.ui.tableWidget_db_view.setHorizontalHeaderItem(i, QTableWidgetItem())
+
+        # Set widget column text
+        widgetColumn = self.ui.tableWidget_db_view.horizontalHeaderItem(i)
+        widgetColumn.setText(QCoreApplication.translate("MainWindow", column, None));       
+    
+    # Get data from SQL database
+    sql_data = sql_to_dict(database=selected_db, table=Blood)
+    
+    # Write to  QTableWidget
+    for i, data in enumerate(sql_data):
+        for j, column in enumerate(columns):
+            self.ui.tableWidget_db_view.setItem(i, j, QtWidgets.QTableWidgetItem(str(data.__dict__[column])))

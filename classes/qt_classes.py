@@ -11,17 +11,18 @@
 ##################################################################
 
 # External modules
-from PySide6.QtWidgets import QMainWindow, QWidget
+from PySide6 import QtGui
+from PySide6.QtWidgets import QMainWindow, QWidget, QDialog
 from PySide6.QtCore import QSize
 
 # Internal modules
-from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page
+from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_sql_data
 from functions.sql_functions import n_samples
 from classes.sql_classes import Blood
 
 # UI files
 from ui.ui_mainwindow import Ui_MainWindow
-from ui.ui_popup import Ui_Form_create_database
+from ui.ui_createdatabase import Ui_CreateDatabase
 
 ##################################################################
 ## 2 - SETTING AND CONSTANTS                                    ##
@@ -73,8 +74,8 @@ class MainWindow(QMainWindow):
         # Set database text
         self.ui.label_current_database.setText(self.ui.tree_select_database.currentItem().text(0))
 
-        # Populate table
-        # loadData(self)
+        # Populate table on add data page
+        load_sql_data(self)
 
         ##########################
         ## 2.3 - Connections    ##
@@ -91,10 +92,39 @@ class MainWindow(QMainWindow):
         # Change database
         self.ui.tree_select_database.itemClicked.connect(lambda: change_database(self))
 
+        # Test settings
+        self.ui.pushButton_6.clicked.connect(self.popup)
+    
+    
+    def popup(self):
+        self.popup_window = CreateDatabase()
+
+        self.popup_window.show()
+
+
+ 
 
 ##################################################################
 ## 3 - DEFINE POPUP WINDOW                                      ##
 ##################################################################
 
 class CreateDatabase(QWidget):
-    pass
+    def __init__(self):
+        super(CreateDatabase, self).__init__()
+
+        # Load generated python class fomr UI file
+        self.ui = Ui_CreateDatabase()
+        self.ui.setupUi(self)
+
+        #########################
+        ## 2.1 - Settings      ## 
+        #########################
+
+        # Set window title
+        self.setWindowTitle("Create new database")
+
+        # Set window size
+        window_size = QSize(500, 300)
+        self.resize(window_size)
+        self.setMinimumSize(window_size)
+    

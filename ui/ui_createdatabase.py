@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'popup_createDB.ui'
+## Form generated from reading UI file 'ui_createdatabase.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.0.0
 ##
@@ -13,16 +13,16 @@ from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
 
-class Ui_Form_create_database(object):
-    def setupUi(self, Form_create_database):
-        if not Form_create_database.objectName():
-            Form_create_database.setObjectName(u"Form_create_database")
-        Form_create_database.resize(400, 300)
-        self.verticalLayout = QVBoxLayout(Form_create_database)
+class Ui_CreateDatabase(object):
+    def setupUi(self, CreateDatabase):
+        if not CreateDatabase.objectName():
+            CreateDatabase.setObjectName(u"CreateDatabase")
+        CreateDatabase.resize(400, 300)
+        self.verticalLayout = QVBoxLayout(CreateDatabase)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(Form_create_database)
+        self.frame = QFrame(CreateDatabase)
         self.frame.setObjectName(u"frame")
         self.frame.setMaximumSize(QSize(16777215, 40))
         self.frame.setStyleSheet(u"background-color: rgb(27, 29, 35);")
@@ -44,7 +44,7 @@ class Ui_Form_create_database(object):
 
         self.verticalLayout.addWidget(self.frame)
 
-        self.frame_2 = QFrame(Form_create_database)
+        self.frame_2 = QFrame(CreateDatabase)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setStyleSheet(u"background-color: #222831")
         self.frame_2.setFrameShape(QFrame.NoFrame)
@@ -53,13 +53,13 @@ class Ui_Form_create_database(object):
         self.verticalLayout.addWidget(self.frame_2)
 
 
-        self.retranslateUi(Form_create_database)
+        self.retranslateUi(CreateDatabase)
 
-        QMetaObject.connectSlotsByName(Form_create_database)
+        QMetaObject.connectSlotsByName(CreateDatabase)
     # setupUi
 
-    def retranslateUi(self, Form_create_database):
-        Form_create_database.setWindowTitle(QCoreApplication.translate("Form_create_database", u"Form", None))
-        self.label.setText(QCoreApplication.translate("Form_create_database", u"Create new database", None))
+    def retranslateUi(self, CreateDatabase):
+        CreateDatabase.setWindowTitle(QCoreApplication.translate("CreateDatabase", u"Form", None))
+        self.label.setText(QCoreApplication.translate("CreateDatabase", u"Create new database", None))
     # retranslateUi
 

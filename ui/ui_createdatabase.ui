@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form_create_database</class>
- <widget class="QWidget" name="Form_create_database">
+ <class>CreateDatabase</class>
+ <widget class="QWidget" name="CreateDatabase">
   <property name="geometry">
    <rect>
     <x>0</x>
