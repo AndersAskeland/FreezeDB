@@ -393,6 +393,7 @@
     <file>icons/24x24/cil-plus.png</file>
   </qresource>
   <qresource prefix="other">
+    <file>piechart_example.png</file>
     <file>add.png</file>
     <file>logo.png</file>
     <file>remove.png</file>

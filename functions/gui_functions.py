@@ -12,15 +12,16 @@
 
 # External modules
 import os
+from datetime import date
 from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QTreeWidgetItem, QTableWidgetItem
 from PySide6.QtCore import QCoreApplication, QPropertyAnimation
 
 # Internal modules
 from ui.css import css_btn_pressed, css_btn_idle
-from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict
+from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict, create_database, engine_connect, max_identifier, add_sql_data, delete_sql_data
 from functions.settings_functions import config_check_selected_db, config_write_selected_db
-from classes.sql_classes import Blood
+from classes.sql_classes import Database
 
 ##################################################################
 ## 2 - SETTINGS AND CONSTANTS                                   ##
@@ -37,8 +38,15 @@ def update_db_list(self):
     # Define manual itterator
     i = 0    
 
-    for file in os.scandir("./databases"):
-        if file.name.endswith(".db"):
+    # Clear item
+    self.ui.tree_select_database.clear()
+    self.ui.tree_select_database_2.clear()
+
+
+    for file in os.scandir("databases"):
+        print(file.name)
+        if file.name.endswith(".db") or file.name == ".db":
+            print(f"Creating input for {file} at id {i}")
             # Create item
             QTreeWidgetItem(self.ui.tree_select_database)
             QTreeWidgetItem(self.ui.tree_select_database_2)
@@ -107,7 +115,6 @@ def reset_button(self, page):
 
 # 3.5 CHANGE DATABASE - Changes the database and updates values on home page
 def change_database(self, button): 
-
     # Find button pressed
     if button == 1:
         # Get item, name and index
@@ -132,7 +139,7 @@ def change_database(self, button):
     self.ui.label_current_database.setText(db_name)
 
     # Set sample n 
-    self.ui.label_n_samples.setText(str(n_samples(db_name, Blood)))
+    self.ui.label_n_samples.setText(str(n_samples(db_name)))
 
     # Load new data into table
     load_sql_data(self)
@@ -157,10 +164,10 @@ def load_sql_data(self):
     selected_db = self.ui.tree_select_database.currentItem().text(0)
 
     # Load column names
-    columns = sql_column_keys(database=selected_db, table=Blood)
+    columns = sql_column_keys(database=selected_db)
 
     # Set table and row count
-    self.ui.tableWidget_db_view.setRowCount(int(n_samples(database=selected_db, table=Blood))) # Row
+    self.ui.tableWidget_db_view.setRowCount(int(n_samples(selected_db))) # Row
     self.ui.tableWidget_db_view.setColumnCount(len(columns)) # Column
     
     # Update text for table
@@ -174,10 +181,9 @@ def load_sql_data(self):
         # Set widget column text
         widgetColumn = self.ui.tableWidget_db_view.horizontalHeaderItem(i)
         widgetColumn.setText(QCoreApplication.translate("MainWindow", column, None))     
-    
-
+        print(column)
     # Get data from SQL database
-    sql_data = sql_to_dict(database=selected_db, table=Blood)
+    sql_data = sql_to_dict(database=selected_db, table=Database)
     
     # Write to  QTableWidget
     for i, data in enumerate(sql_data):
@@ -197,7 +203,7 @@ def load_settings(self):
         self.ui.tree_select_database_2.setCurrentItem(self.ui.tree_select_database_2.topLevelItem(index)) # Selects multisite
 
         # Update number of samples
-        self.ui.label_n_samples.setText(str(n_samples(self.ui.tree_select_database.currentItem().text(0), Blood)))
+        self.ui.label_n_samples.setText(str(n_samples(self.ui.tree_select_database.currentItem().text(0))))
 
         # Set database text
         self.ui.label_current_database.setText(self.ui.tree_select_database.currentItem().text(0))
@@ -210,3 +216,97 @@ def load_settings(self):
 
     # TODO
     # More settings
+
+# Create new db and update list
+def new_database_creation(self):
+    # Get db name
+    db_name = get_line_text(self)
+
+    # Check if file exsist - Throw exception
+    if os.path.exists("databases/" + db_name + ".db"):
+        print("Database allready exsists. Doing nothing")
+    elif db_name == "":
+        print("Database must have a name")
+    else:
+    # Create db
+        create_database(db_name)
+
+        # update db list
+        update_db_list(self)
+
+
+    # Update db list
+    # load_sql_data(self)
+
+
+# Get lineEdit and reset field
+def get_line_text(self):
+    # Get text
+    text = self.ui.lineEdit.text()
+
+    # Reset field
+    self.ui.lineEdit.clear()
+
+    # Return
+    return(text)
+
+
+# Add to db
+def add_to_db(self):
+    # Get current db
+    db_name = self.ui.tree_select_database.currentItem().text(0)
+
+    # Create DB session
+    session = engine_connect(db_name)
+
+    # Write error checking function
+    # TODO 
+
+    # Write data to class
+    # Citrate
+    add_sql_data(self, session=session, sample_type="Citrate", n=20, identifier=1001)
+
+    # EDTA
+    add_sql_data(self, session=session, sample_type="EDTA", n=20, identifier=2001)
+
+    # Serum
+    add_sql_data(self, session=session, sample_type="Serum", n=10, identifier=3001)
+
+    # EDTA_EV
+    add_sql_data(self, session=session, sample_type="EV_EDTA", n=10, identifier=4001)
+
+    # Add to db
+    session.flush()
+    session.commit()
+
+    # Update view
+    load_sql_data(self)
+
+
+# Remove from db
+def remove_from_db(self):
+    # get current db
+    db_name = self.ui.tree_select_database.currentItem().text(0)
+
+    # Create DB session
+    session = engine_connect(db_name)
+
+
+    delete_sql_data()
+
+def delete_db(self):
+    # Get currently selected db in view
+    db_name = self.ui.tree_select_database.currentItem().text(0)
+
+    # Delete file
+    os.remove("databases/" + db_name + ".db")
+
+    # update data table
+    update_db_list(self)
+
+    # Update db count and name
+    self.ui.label_n_samples.setText("No selection")
+
+    # Set database text
+    self.ui.label_current_database.setText("No selection")
+

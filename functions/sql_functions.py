@@ -11,17 +11,22 @@
 ##################################################################
 
 # External modules
-import os
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+from datetime import date
+import os.path
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Date, Boolean, select, func
+from sqlalchemy.orm import Session, declarative_base
+
+# Internal modules
+from classes.sql_classes import Database, Base
 
 ##################################################################
 ## 2 - SETTINGS AND CONSTANTS                                   ##
 ##################################################################
 
+
 # Function that creates a connection to the needed database
 def engine_connect(database):
-    engine = create_engine("sqlite:///databases/" + database + ".db", echo=False, future=True)
+    engine = create_engine("sqlite:///databases/" + database + ".db", echo=True, future=True)
     return(Session(bind=engine))
 
 
@@ -30,12 +35,16 @@ def engine_connect(database):
 ##################################################################
 
 # 3.1 NUMBER OF SQL DATABASE ROWS - Function that calculates the number of samples in the specified database and table.
-def n_samples(database, table):
+def n_samples(database_name):
+    print(database_name)
     # Connect to engine
-    session = engine_connect(database=database)
+    session = engine_connect(database=database_name)
+
+
+    print(session)
 
     # Query db
-    samples_n = session.query(table).count()
+    samples_n = session.query(Database).count()
 
     # Close session
     session.close()
@@ -46,12 +55,13 @@ def n_samples(database, table):
 
 
 # 3.2 EXTRACT SQL TABLE NAMES - Extracts the keys/values of the column names
-def sql_column_keys(database, table):
+def sql_column_keys(database):
     # Create session
     session = engine_connect(database=database)
 
+    print(Database.__table__.columns.keys())
     # Get names in list
-    return(table.__table__.columns.keys())
+    return(Database.__table__.columns.keys())
 
 
 # 3.3 RETURN DICTIONARY OF SQL DB - Returns a itterable dictionary to use for qtablewidgets
@@ -60,10 +70,54 @@ def sql_to_dict(database, table):
     session = engine_connect(database=database)
 
     # Query db
-    dict = session.query(table).all()
+    dict = session.query(table).filter(Database.delete == False).all()
 
     # Close session
     session.close()
 
     # Return
     return(dict)
+
+
+
+def create_database(db_name):
+    # Connect to db
+    engine = create_engine("sqlite:///databases/" + db_name + ".db", echo=True, future=True)
+
+    # Write bases on base (classes) - See sql_classes.py
+    Base.metadata.create_all(engine)
+
+
+# Find current max
+def max_identifier(session, sample_type):
+    # Query
+    max = session.execute(select(Database, func.max(Database.identifier)).filter(Database.sample_type == sample_type)).fetchone()
+    print("WOHO") 
+    if max.Database is None:
+        return(None)
+    else:
+        return(int(max.Database.identifier) + 1)  
+
+# Add data
+def add_sql_data(self, session, sample_type, n, identifier):
+    current_identifer = max_identifier(session, sample_type)
+
+    if current_identifer is None:
+        current_identifer = identifier
+    
+    # Extract 
+    for i in range(n):
+        dat_citrate = Database(
+            participant_id = int(self.ui.lineEdit_add_participant_ID.text()),
+            visit = self.ui.lineEdit_add_visit.text(),
+            sample_type = sample_type,
+            identifier = current_identifer + i,
+            date=date.today(),
+            delete=0
+        )
+        # Add to session
+        session.add(dat_citrate)
+
+# Delete items
+def delete_sql_data(self, session, identifier):
+    pass

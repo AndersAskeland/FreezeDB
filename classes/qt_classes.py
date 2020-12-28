@@ -11,14 +11,12 @@
 ##################################################################
 
 # External modules
-from PySide6 import QtGui
-from PySide6.QtWidgets import QMainWindow, QWidget, QDialog
+from PySide6.QtWidgets import QMainWindow, QWidget
 from PySide6.QtCore import QSize
 
 # Internal modules
-from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_sql_data, load_settings
-from functions.sql_functions import n_samples
-from classes.sql_classes import Blood
+from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_settings, new_database_creation, add_to_db, delete_db
+from functions.sql_functions import sql_column_keys
 
 # UI files
 from ui.ui_mainwindow import Ui_MainWindow
@@ -27,6 +25,8 @@ from ui.ui_createdatabase import Ui_CreateDatabase
 ##################################################################
 ## 2 - SETTING AND CONSTANTS                                    ##
 ##################################################################
+
+
 
 
 ##################################################################
@@ -66,7 +66,7 @@ class MainWindow(QMainWindow):
 
         # Load setttings (config.ini)
         load_settings(self)
-
+        
         ##########################
         ## 2.3 - Connections    ##
         ##########################
@@ -85,8 +85,17 @@ class MainWindow(QMainWindow):
 
         # Popups
         self.ui.pushButton_6.clicked.connect(self.popup)
+        
+        # Create new database
+        self.ui.pushButton_5.clicked.connect(lambda: new_database_creation(self))
+
+        # Add stuff to db
+        self.ui.pushButton_add.clicked.connect(lambda: add_to_db(self))
     
-    
+        # Delete db
+        self.ui.pushButton_7.clicked.connect(lambda: delete_db(self))
+
+        
     def popup(self):
         self.popup_window = CreateDatabase()
 
@@ -115,7 +124,7 @@ class CreateDatabase(QWidget):
         self.setWindowTitle("Create new database")
 
         # Set window size
-        window_size = QSize(500, 300)
+        window_size = QSize(600, 340)
         self.resize(window_size)
         self.setMinimumSize(window_size)
     
