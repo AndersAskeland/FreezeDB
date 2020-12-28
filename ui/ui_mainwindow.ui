@@ -326,10 +326,16 @@ QSlider::handle:vertical:pressed {
           </property>
           <item>
            <widget class="QFrame" name="frame_toggle">
+            <property name="minimumSize">
+             <size>
+              <width>65</width>
+              <height>55</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>65</width>
-              <height>16777215</height>
+              <height>55</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -343,6 +349,9 @@ QSlider::handle:vertical:pressed {
              <enum>QFrame::Sunken</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>-1</number>
+             </property>
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -366,21 +375,20 @@ QSlider::handle:vertical:pressed {
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>65</height>
+                 <height>55</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>65</height>
+                 <width>65</width>
+                 <height>55</height>
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">QPushButton {
-	background-position: center;
-	background-repeat: no-reperat;
-	border: none;
+                <string notr="true">QPushButton{
+border:none;
 }
+
 QPushButton:hover {
 	background-color: rgb(33, 37, 43);
 }
@@ -398,7 +406,7 @@ QPushButton:pressed {
                </property>
                <property name="iconSize">
                 <size>
-                 <width>28</width>
+                 <width>24</width>
                  <height>24</height>
                 </size>
                </property>
@@ -418,7 +426,7 @@ QPushButton:pressed {
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>65</height>
+              <height>55</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -530,19 +538,19 @@ QPushButton:pressed {
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5">
              <property name="spacing">
-              <number>1</number>
+              <number>-1</number>
              </property>
              <property name="leftMargin">
               <number>0</number>
              </property>
              <property name="topMargin">
-              <number>1</number>
+              <number>0</number>
              </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
-              <number>1</number>
+              <number>0</number>
              </property>
              <item>
               <widget class="QPushButton" name="btn_home">
@@ -1736,13 +1744,13 @@ border-radius: 20px;</string>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_23">
                           <property name="leftMargin">
-                           <number>0</number>
+                           <number>12</number>
                           </property>
                           <property name="topMargin">
                            <number>0</number>
                           </property>
                           <property name="rightMargin">
-                           <number>0</number>
+                           <number>12</number>
                           </property>
                           <item>
                            <widget class="QFrame" name="frame_11">
@@ -1765,6 +1773,9 @@ border-radius: 20px;</string>
                              <property name="topMargin">
                               <number>6</number>
                              </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
                              <property name="bottomMargin">
                               <number>6</number>
                              </property>
@@ -1780,18 +1791,20 @@ border-radius: 20px;</string>
                                 <property name="leftMargin">
                                  <number>0</number>
                                 </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
                                 <item>
                                  <widget class="QLabel" name="label_16">
                                   <property name="styleSheet">
                                    <string notr="true">QLabel {
 	color: rgb(201, 202, 204);
 	font-size: 30px;
-	padding-left: 4px;
 }
 </string>
                                   </property>
                                   <property name="text">
-                                   <string>Table selection</string>
+                                   <string>Database</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -1801,12 +1814,11 @@ border-radius: 20px;</string>
                                    <string notr="true">QLabel {
 	color: rgb(201, 202, 204);
 	font-size: 15px;
-	padding-left: 7px;
 }
 </string>
                                   </property>
                                   <property name="text">
-                                   <string>Select database table to add 
+                                   <string>Select database to add 
 and remove to/from.</string>
                                   </property>
                                  </widget>
@@ -1818,22 +1830,28 @@ and remove to/from.</string>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QTreeWidget" name="treeWidget">
+                           <widget class="QTreeWidget" name="tree_select_database_2">
+                            <property name="horizontalScrollBarPolicy">
+                             <enum>Qt::ScrollBarAlwaysOff</enum>
+                            </property>
+                            <property name="sizeAdjustPolicy">
+                             <enum>QAbstractScrollArea::AdjustToContents</enum>
+                            </property>
                             <column>
                              <property name="text">
-                              <string>Table</string>
+                              <string>Database</string>
                              </property>
                             </column>
-                            <item>
+                            <column>
                              <property name="text">
-                              <string>Blood</string>
+                              <string>Creation date</string>
                              </property>
-                            </item>
-                            <item>
+                            </column>
+                            <column>
                              <property name="text">
-                              <string>Urine</string>
+                              <string>Last edited</string>
                              </property>
-                            </item>
+                            </column>
                            </widget>
                           </item>
                          </layout>
@@ -2710,21 +2728,6 @@ border-radius: 20px;</string>
                             <attribute name="horizontalHeaderVisible">
                              <bool>true</bool>
                             </attribute>
-                            <column>
-                             <property name="text">
-                              <string>Test</string>
-                             </property>
-                            </column>
-                            <column>
-                             <property name="text">
-                              <string>New Column</string>
-                             </property>
-                            </column>
-                            <column>
-                             <property name="text">
-                              <string>Vg</string>
-                             </property>
-                            </column>
                            </widget>
                           </item>
                           <item>

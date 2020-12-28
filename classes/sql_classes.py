@@ -68,7 +68,9 @@ class Blood(Base):
     def __repr__(self):
         return(f"Sample(ID={self.participant_id!r}, identifer={self.identifier!r}, blood type={self.blood_type!r}, date={self.date_time!r})")
 
-
+    # TODO
+    # Change class to only having one table. Choise if primray key should be user defined or auto-increment
+    # Bood-type == sample-type, new delete column (bool)
 # Urine samples
 class Urine(Base):
     __tablename__ = "urine"

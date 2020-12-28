@@ -19,6 +19,7 @@ from PySide6.QtCore import QCoreApplication, QPropertyAnimation
 # Internal modules
 from ui.css import css_btn_pressed, css_btn_idle
 from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict
+from functions.settings_functions import config_check_selected_db, config_write_selected_db
 from classes.sql_classes import Blood
 
 ##################################################################
@@ -40,10 +41,15 @@ def update_db_list(self):
         if file.name.endswith(".db"):
             # Create item
             QTreeWidgetItem(self.ui.tree_select_database)
+            QTreeWidgetItem(self.ui.tree_select_database_2)
 
             # Set item name
             item = self.ui.tree_select_database.topLevelItem(i)
             item.setText(0, QCoreApplication.translate("MainWindow", file.name[:-3], None))
+            item2 = self.ui.tree_select_database_2.topLevelItem(i)
+            item2.setText(0, QCoreApplication.translate("MainWindow", file.name[:-3], None))
+
+
             
             # Itterate
             i += 1
@@ -100,15 +106,39 @@ def reset_button(self, page):
 
 
 # 3.5 CHANGE DATABASE - Changes the database and updates values on home page
-def change_database(self):
-    # Get selection
-    current_db_name = self.ui.tree_select_database.currentItem().text(0)
+def change_database(self, button): 
+
+    # Find button pressed
+    if button == 1:
+        # Get item, name and index
+        item = self.ui.tree_select_database.currentItem()
+        db_name = item.text(0)
+        index = self.ui.tree_select_database.indexOfTopLevelItem(item)
+
+        # Update other table location
+        self.ui.tree_select_database_2.setCurrentItem(self.ui.tree_select_database_2.topLevelItem(index))
+
+
+    elif button == 2:
+        # Get item, name and index
+        item = self.ui.tree_select_database_2.currentItem()
+        db_name = item.text(0)
+        index = self.ui.tree_select_database_2.indexOfTopLevelItem(item)
+
+        # Update other table location
+        self.ui.tree_select_database.setCurrentItem(self.ui.tree_select_database.topLevelItem(index))
 
     # Set text
-    self.ui.label_current_database.setText(current_db_name)
+    self.ui.label_current_database.setText(db_name)
 
     # Set sample n 
-    self.ui.label_n_samples.setText(str(n_samples(current_db_name, Blood)))
+    self.ui.label_n_samples.setText(str(n_samples(db_name, Blood)))
+
+    # Load new data into table
+    load_sql_data(self)
+
+    # Write selection data to settings file
+    config_write_selected_db(index)
 
     ## TODO 
     # CREATION DATE
@@ -133,6 +163,9 @@ def load_sql_data(self):
     self.ui.tableWidget_db_view.setRowCount(int(n_samples(database=selected_db, table=Blood))) # Row
     self.ui.tableWidget_db_view.setColumnCount(len(columns)) # Column
     
+    # Update text for table
+    self.ui.label_14.setText("Table view for database: \"" + selected_db + "\".")
+
     # Write column names to widget
     for i, column in enumerate(columns):
         # Create widget
@@ -140,8 +173,9 @@ def load_sql_data(self):
 
         # Set widget column text
         widgetColumn = self.ui.tableWidget_db_view.horizontalHeaderItem(i)
-        widgetColumn.setText(QCoreApplication.translate("MainWindow", column, None));       
+        widgetColumn.setText(QCoreApplication.translate("MainWindow", column, None))     
     
+
     # Get data from SQL database
     sql_data = sql_to_dict(database=selected_db, table=Blood)
     
@@ -149,3 +183,30 @@ def load_sql_data(self):
     for i, data in enumerate(sql_data):
         for j, column in enumerate(columns):
             self.ui.tableWidget_db_view.setItem(i, j, QtWidgets.QTableWidgetItem(str(data.__dict__[column])))
+
+
+# 3.7 LOAD SETTINGS
+def load_settings(self):
+    # Database selection
+    try:
+        # Get index
+        index = config_check_selected_db()
+
+        # Set selection
+        self.ui.tree_select_database.setCurrentItem(self.ui.tree_select_database.topLevelItem(index)) # Selects multisite
+        self.ui.tree_select_database_2.setCurrentItem(self.ui.tree_select_database_2.topLevelItem(index)) # Selects multisite
+
+        # Update number of samples
+        self.ui.label_n_samples.setText(str(n_samples(self.ui.tree_select_database.currentItem().text(0), Blood)))
+
+        # Set database text
+        self.ui.label_current_database.setText(self.ui.tree_select_database.currentItem().text(0))
+
+        # Load data
+        load_sql_data(self)
+
+    except:
+        pass
+
+    # TODO
+    # More settings

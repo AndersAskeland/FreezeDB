@@ -268,25 +268,28 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame_toggle = QFrame(self.frame_top)
         self.frame_toggle.setObjectName(u"frame_toggle")
-        self.frame_toggle.setMaximumSize(QSize(65, 16777215))
+        self.frame_toggle.setMinimumSize(QSize(65, 55))
+        self.frame_toggle.setMaximumSize(QSize(65, 55))
         self.frame_toggle.setStyleSheet(u"background-color: rgb(27, 29, 35);\n"
 "")
         self.frame_toggle.setFrameShape(QFrame.NoFrame)
         self.frame_toggle.setFrameShadow(QFrame.Sunken)
         self.verticalLayout_4 = QVBoxLayout(self.frame_toggle)
+#ifndef Q_OS_MAC
+        self.verticalLayout_4.setSpacing(-1)
+#endif
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.btn_toggle_menu = QPushButton(self.frame_toggle)
         self.btn_toggle_menu.setObjectName(u"btn_toggle_menu")
         sizePolicy1.setHeightForWidth(self.btn_toggle_menu.sizePolicy().hasHeightForWidth())
         self.btn_toggle_menu.setSizePolicy(sizePolicy1)
-        self.btn_toggle_menu.setMinimumSize(QSize(0, 65))
-        self.btn_toggle_menu.setMaximumSize(QSize(16777215, 65))
-        self.btn_toggle_menu.setStyleSheet(u"QPushButton {\n"
-"	background-position: center;\n"
-"	background-repeat: no-reperat;\n"
-"	border: none;\n"
+        self.btn_toggle_menu.setMinimumSize(QSize(0, 55))
+        self.btn_toggle_menu.setMaximumSize(QSize(65, 55))
+        self.btn_toggle_menu.setStyleSheet(u"QPushButton{\n"
+"border:none;\n"
 "}\n"
+"\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(33, 37, 43);\n"
 "}\n"
@@ -296,7 +299,7 @@ class Ui_MainWindow(object):
         icon = QIcon()
         icon.addFile(u":/24x24/icons/24x24/cil-menu.png", QSize(), QIcon.Normal, QIcon.On)
         self.btn_toggle_menu.setIcon(icon)
-        self.btn_toggle_menu.setIconSize(QSize(28, 24))
+        self.btn_toggle_menu.setIconSize(QSize(24, 24))
 
         self.verticalLayout_4.addWidget(self.btn_toggle_menu)
 
@@ -306,7 +309,7 @@ class Ui_MainWindow(object):
         self.frame_info = QFrame(self.frame_top)
         self.frame_info.setObjectName(u"frame_info")
         self.frame_info.setMinimumSize(QSize(0, 65))
-        self.frame_info.setMaximumSize(QSize(16777215, 65))
+        self.frame_info.setMaximumSize(QSize(16777215, 55))
         self.frame_info.setStyleSheet(u"background-color: rgb(27, 29, 35);")
         self.frame_info.setFrameShape(QFrame.NoFrame)
         self.frame_info.setFrameShadow(QFrame.Sunken)
@@ -349,9 +352,11 @@ class Ui_MainWindow(object):
         self.frame_menu_bottom.setFrameShape(QFrame.NoFrame)
         self.frame_menu_bottom.setFrameShadow(QFrame.Sunken)
         self.verticalLayout_5 = QVBoxLayout(self.frame_menu_bottom)
-        self.verticalLayout_5.setSpacing(1)
+#ifndef Q_OS_MAC
+        self.verticalLayout_5.setSpacing(-1)
+#endif
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(0, 1, 0, 1)
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.btn_home = QPushButton(self.frame_menu_bottom)
         self.btn_home.setObjectName(u"btn_home")
         sizePolicy2 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Maximum)
@@ -918,7 +923,7 @@ class Ui_MainWindow(object):
         self.frame_table.setFrameShadow(QFrame.Raised)
         self.verticalLayout_23 = QVBoxLayout(self.frame_table)
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.verticalLayout_23.setContentsMargins(0, 0, 0, -1)
+        self.verticalLayout_23.setContentsMargins(12, 0, 12, -1)
         self.frame_11 = QFrame(self.frame_table)
         self.frame_11.setObjectName(u"frame_11")
         self.frame_11.setMaximumSize(QSize(16777215, 120))
@@ -926,20 +931,19 @@ class Ui_MainWindow(object):
         self.frame_11.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_12 = QHBoxLayout(self.frame_11)
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.horizontalLayout_12.setContentsMargins(0, 6, -1, 6)
+        self.horizontalLayout_12.setContentsMargins(0, 6, 0, 6)
         self.frame_24 = QFrame(self.frame_11)
         self.frame_24.setObjectName(u"frame_24")
         self.frame_24.setFrameShape(QFrame.NoFrame)
         self.frame_24.setFrameShadow(QFrame.Raised)
         self.verticalLayout_24 = QVBoxLayout(self.frame_24)
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
-        self.verticalLayout_24.setContentsMargins(0, -1, -1, -1)
+        self.verticalLayout_24.setContentsMargins(0, -1, 0, -1)
         self.label_16 = QLabel(self.frame_24)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setStyleSheet(u"QLabel {\n"
 "	color: rgb(201, 202, 204);\n"
 "	font-size: 30px;\n"
-"	padding-left: 4px;\n"
 "}\n"
 "")
 
@@ -950,7 +954,6 @@ class Ui_MainWindow(object):
         self.label_17.setStyleSheet(u"QLabel {\n"
 "	color: rgb(201, 202, 204);\n"
 "	font-size: 15px;\n"
-"	padding-left: 7px;\n"
 "}\n"
 "")
 
@@ -962,12 +965,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_23.addWidget(self.frame_11)
 
-        self.treeWidget = QTreeWidget(self.frame_table)
-        QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(self.treeWidget)
-        self.treeWidget.setObjectName(u"treeWidget")
+        self.tree_select_database_2 = QTreeWidget(self.frame_table)
+        self.tree_select_database_2.setObjectName(u"tree_select_database_2")
+        self.tree_select_database_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.tree_select_database_2.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
 
-        self.verticalLayout_23.addWidget(self.treeWidget)
+        self.verticalLayout_23.addWidget(self.tree_select_database_2)
 
 
         self.horizontalLayout_9.addWidget(self.frame_table)
@@ -1422,14 +1425,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.horizontalLayout_11.setContentsMargins(0, 0, -1, -1)
         self.tableWidget_db_view = QTableWidget(self.frame_22)
-        if (self.tableWidget_db_view.columnCount() < 3):
-            self.tableWidget_db_view.setColumnCount(3)
-        __qtablewidgetitem = QTableWidgetItem()
-        self.tableWidget_db_view.setHorizontalHeaderItem(0, __qtablewidgetitem)
-        __qtablewidgetitem1 = QTableWidgetItem()
-        self.tableWidget_db_view.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        __qtablewidgetitem2 = QTableWidgetItem()
-        self.tableWidget_db_view.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.tableWidget_db_view.setObjectName(u"tableWidget_db_view")
         sizePolicy.setHeightForWidth(self.tableWidget_db_view.sizePolicy().hasHeightForWidth())
         self.tableWidget_db_view.setSizePolicy(sizePolicy)
@@ -1649,20 +1644,13 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem.setText(2, QCoreApplication.translate("MainWindow", u"Last entry", None));
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"Creation date", None));
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Name", None));
-        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Table selection", None))
-        self.label_17.setText(QCoreApplication.translate("MainWindow", u"Select database table to add \n"
+        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Database", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"Select database to add \n"
 "and remove to/from.", None))
-        ___qtreewidgetitem1 = self.treeWidget.headerItem()
-        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Table", None));
-
-        __sortingEnabled = self.treeWidget.isSortingEnabled()
-        self.treeWidget.setSortingEnabled(False)
-        ___qtreewidgetitem2 = self.treeWidget.topLevelItem(0)
-        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Blood", None));
-        ___qtreewidgetitem3 = self.treeWidget.topLevelItem(1)
-        ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"Urine", None));
-        self.treeWidget.setSortingEnabled(__sortingEnabled)
-
+        ___qtreewidgetitem1 = self.tree_select_database_2.headerItem()
+        ___qtreewidgetitem1.setText(2, QCoreApplication.translate("MainWindow", u"Last edited", None));
+        ___qtreewidgetitem1.setText(1, QCoreApplication.translate("MainWindow", u"Creation date", None));
+        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Database", None));
         self.label_6.setText("")
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Add database entries.", None))
@@ -1684,12 +1672,6 @@ class Ui_MainWindow(object):
         self.lineEdit_4.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Identifier ID", None))
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u" Remove", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Table view", None))
-        ___qtablewidgetitem = self.tableWidget_db_view.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Test", None));
-        ___qtablewidgetitem1 = self.tableWidget_db_view.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"New Column", None));
-        ___qtablewidgetitem2 = self.tableWidget_db_view.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Vg", None));
         self.toolButton_delete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.toolButton_2.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Made by Anders Askeland", None))

@@ -16,7 +16,7 @@ from PySide6.QtWidgets import QMainWindow, QWidget, QDialog
 from PySide6.QtCore import QSize
 
 # Internal modules
-from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_sql_data
+from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_sql_data, load_settings
 from functions.sql_functions import n_samples
 from classes.sql_classes import Blood
 
@@ -60,22 +60,12 @@ class MainWindow(QMainWindow):
         ##########################
         ## 2.2 - Load settings  ##
         ##########################
-        # Currently this is static. Should be made dynamic (JSON files) at some point of time.
         
         # Update database list (populate treewidget on home page)
         update_db_list(self)
 
-        # Set db index
-        self.ui.tree_select_database.setCurrentItem(self.ui.tree_select_database.topLevelItem(1)) # Selects multisite
-
-        # Number of samples
-        self.ui.label_n_samples.setText(str(n_samples(self.ui.tree_select_database.currentItem().text(0), Blood)))
-
-        # Set database text
-        self.ui.label_current_database.setText(self.ui.tree_select_database.currentItem().text(0))
-
-        # Populate table on add data page
-        load_sql_data(self)
+        # Load setttings (config.ini)
+        load_settings(self)
 
         ##########################
         ## 2.3 - Connections    ##
@@ -90,9 +80,10 @@ class MainWindow(QMainWindow):
         self.ui.btn_view.clicked.connect(lambda: change_page(self, previous_page=self.ui.stackedWidget.currentIndex(), page="view")) # View
 
         # Change database
-        self.ui.tree_select_database.itemClicked.connect(lambda: change_database(self))
+        self.ui.tree_select_database.itemClicked.connect(lambda: change_database(self, button=1))
+        self.ui.tree_select_database_2.itemClicked.connect(lambda: change_database(self, button=2))
 
-        # Test settings
+        # Popups
         self.ui.pushButton_6.clicked.connect(self.popup)
     
     
@@ -102,7 +93,7 @@ class MainWindow(QMainWindow):
         self.popup_window.show()
 
 
- 
+
 
 ##################################################################
 ## 3 - DEFINE POPUP WINDOW                                      ##
