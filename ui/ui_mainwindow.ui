@@ -1382,22 +1382,52 @@ border-radius: 20px;</string>
                                     </widget>
                                    </item>
                                    <item>
-                                    <widget class="QLabel" name="label_25">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>20</width>
-                                       <height>20</height>
-                                      </size>
-                                     </property>
-                                     <property name="styleSheet">
-                                      <string notr="true">QLabel{
-	background-image: url(:/add.png);
-}
-</string>
-                                     </property>
-                                     <property name="text">
+                                    <widget class="QGroupBox" name="groupBox">
+                                     <property name="title">
                                       <string/>
                                      </property>
+                                     <layout class="QVBoxLayout" name="verticalLayout_35">
+                                      <property name="spacing">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="topMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="rightMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="bottomMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <item>
+                                       <widget class="QGraphicsView" name="graphicsView">
+                                        <property name="sizePolicy">
+                                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                          <horstretch>0</horstretch>
+                                          <verstretch>0</verstretch>
+                                         </sizepolicy>
+                                        </property>
+                                        <property name="frameShape">
+                                         <enum>QFrame::NoFrame</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                         <enum>QFrame::Raised</enum>
+                                        </property>
+                                        <property name="verticalScrollBarPolicy">
+                                         <enum>Qt::ScrollBarAlwaysOff</enum>
+                                        </property>
+                                        <property name="horizontalScrollBarPolicy">
+                                         <enum>Qt::ScrollBarAlwaysOff</enum>
+                                        </property>
+                                        <property name="sizeAdjustPolicy">
+                                         <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+                                        </property>
+                                        <property name="resizeAnchor">
+                                         <enum>QGraphicsView::AnchorViewCenter</enum>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                     </layout>
                                     </widget>
                                    </item>
                                   </layout>

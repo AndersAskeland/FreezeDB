@@ -11,12 +11,14 @@
 ##################################################################
 
 # External modules
-from PySide6.QtWidgets import QMainWindow, QWidget
+from PySide6.QtWidgets import QMainWindow, QWidget, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QVBoxLayout
 from PySide6.QtCore import QSize
+from PySide6.QtGui import QColor
+
 
 # Internal modules
-from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_settings, new_database_creation, add_to_db, delete_db
-from functions.sql_functions import sql_column_keys
+from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_settings, new_database_creation, add_to_db, delete_db, pie_chart
+from functions.sql_functions import sql_column_keys, db_query_sample_type
 
 # UI files
 from ui.ui_mainwindow import Ui_MainWindow
@@ -95,7 +97,7 @@ class MainWindow(QMainWindow):
         # Delete db
         self.ui.pushButton_7.clicked.connect(lambda: delete_db(self))
 
-        
+
     def popup(self):
         self.popup_window = CreateDatabase()
 

@@ -121,3 +121,24 @@ def add_sql_data(self, session, sample_type, n, identifier):
 # Delete items
 def delete_sql_data(self, session, identifier):
     pass
+
+def db_query_sample_type(self, db_name):
+    # Establish connection
+    session = engine_connect(db_name)
+
+    # Create empty return list
+    data = [
+        session.query(Database).filter(Database.sample_type == "Citrate").count(),
+        session.query(Database).filter(Database.sample_type == "EDTA").count(),
+        session.query(Database).filter(Database.sample_type == "Serum").count(),
+        session.query(Database).filter(Database.sample_type == "EV_EDTA").count()]
+
+    print(data)
+    # Remove all 0 values
+    clean_data = [x for x in data if x > 0]
+    print(clean_data)
+    # Check if list is empty
+    if not clean_data:
+        return False
+    else:
+        return clean_data

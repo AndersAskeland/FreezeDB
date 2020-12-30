@@ -14,12 +14,14 @@
 import os
 from datetime import date
 from PySide6 import QtCore, QtWidgets
-from PySide6.QtWidgets import QTreeWidgetItem, QTableWidgetItem
-from PySide6.QtCore import QCoreApplication, QPropertyAnimation
+from PySide6.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QVBoxLayout, QGraphicsTextItem
+from PySide6.QtCore import QCoreApplication, QPropertyAnimation, Qt
+from PySide6.QtGui import QColor, QPainter, QPen
+
 
 # Internal modules
 from ui.css import css_btn_pressed, css_btn_idle
-from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict, create_database, engine_connect, max_identifier, add_sql_data, delete_sql_data
+from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict, create_database, engine_connect, max_identifier, add_sql_data, delete_sql_data, db_query_sample_type
 from functions.settings_functions import config_check_selected_db, config_write_selected_db
 from classes.sql_classes import Database
 
@@ -144,6 +146,9 @@ def change_database(self, button):
     # Load new data into table
     load_sql_data(self)
 
+    # Change piechart
+    self.ui.graphicsView.setScene(pie_chart(self))
+
     # Write selection data to settings file
     config_write_selected_db(index)
 
@@ -171,7 +176,7 @@ def load_sql_data(self):
     self.ui.tableWidget_db_view.setColumnCount(len(columns)) # Column
     
     # Update text for table
-    self.ui.label_14.setText("Table view for database: \"" + selected_db + "\".")
+    self.ui.label_14.setText("Table view for database: \"" + selected_db + "\".") 
 
     # Write column names to widget
     for i, column in enumerate(columns):
@@ -207,6 +212,9 @@ def load_settings(self):
 
         # Set database text
         self.ui.label_current_database.setText(self.ui.tree_select_database.currentItem().text(0))
+        
+        # Load pie_chart
+        self.ui.graphicsView.setScene(pie_chart(self))
 
         # Load data
         load_sql_data(self)
@@ -304,9 +312,76 @@ def delete_db(self):
     # update data table
     update_db_list(self)
 
+    # Clear table
+    self.ui.tableWidget_db_view.clear()
+
     # Update db count and name
     self.ui.label_n_samples.setText("No selection")
 
     # Set database text
     self.ui.label_current_database.setText("No selection")
+
+# Create pie charts
+def pie_chart(self):
+    # Create scene and define settings
+    self.scene = QGraphicsScene(self)
+    colours = [QColor(97,158,97), QColor(235,142,64), QColor(197, 67, 62), QColor(83, 167, 185)] #  TODO update to prettier colours
+    set_angle = 0 # Start angle
+
+    # Get db name
+    db_name = self.ui.tree_select_database.currentItem().text(0)
+    
+    # get data
+    data = db_query_sample_type(self, db_name)
+    words = ["Citrate", "EDTA", "Serum", "EV-EDTA"]
+
+    # If empty - Add text to middle saying no selection
+    if not data:
+        # Create empty circle
+        ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
+        ellipse.setBrush(QColor(235,142,64)) # Set color
+        location = ellipse.boundingRect()
+
+
+        # Set text
+        text = QGraphicsTextItem("No data")
+        text.setPos(location.center().x() - 15, location.center().y() - 15)
+
+        # add stuff
+        self.scene.addItem(ellipse)
+        self.scene.addItem(text)        
+        
+        # Return
+        return self.scene
+    # Create pie chart
+    for i, section in enumerate(data):
+            # Create part of circle
+            angle = round(float(section*5760)/sum(data))
+            ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
+            ellipse.setStartAngle(set_angle) # from angle
+            ellipse.setSpanAngle(angle) # to angle
+
+            # Set text
+            text = words[i]
+            location = ellipse.boundingRect()
+            text = QGraphicsTextItem(text)
+            text.setPos(location.center().x() - 10, location.center().y() - 10)
+            print(location.center())
+            print(location.getCoords())
+            print(location.getRect())
+
+            
+            ellipse.setBrush(colours[i]) # Set color
+
+            # Change angle
+            set_angle += angle
+
+            # Add item
+            self.scene.addItem(ellipse)
+            self.scene.addItem(text)
+
+
+    # Return scene
+    return self.scene
+
 

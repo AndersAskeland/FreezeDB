@@ -751,15 +751,25 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_15.addWidget(self.label_8)
 
-        self.label_25 = QLabel(self.frame_10)
-        self.label_25.setObjectName(u"label_25")
-        self.label_25.setMinimumSize(QSize(20, 20))
-        self.label_25.setStyleSheet(u"QLabel{\n"
-"	background-image: url(:/add.png);\n"
-"}\n"
-"")
+        self.groupBox = QGroupBox(self.frame_10)
+        self.groupBox.setObjectName(u"groupBox")
+        self.verticalLayout_35 = QVBoxLayout(self.groupBox)
+        self.verticalLayout_35.setSpacing(0)
+        self.verticalLayout_35.setObjectName(u"verticalLayout_35")
+        self.verticalLayout_35.setContentsMargins(-1, 0, 0, 0)
+        self.graphicsView = QGraphicsView(self.groupBox)
+        self.graphicsView.setObjectName(u"graphicsView")
+        sizePolicy.setHeightForWidth(self.graphicsView.sizePolicy().hasHeightForWidth())
+        self.graphicsView.setSizePolicy(sizePolicy)
+        self.graphicsView.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.graphicsView.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.graphicsView.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContentsOnFirstShow)
+        self.graphicsView.setResizeAnchor(QGraphicsView.AnchorViewCenter)
 
-        self.verticalLayout_15.addWidget(self.label_25)
+        self.verticalLayout_35.addWidget(self.graphicsView)
+
+
+        self.verticalLayout_15.addWidget(self.groupBox)
 
 
         self.gridLayout.addWidget(self.frame_10, 1, 0, 1, 1)
@@ -1881,7 +1891,7 @@ class Ui_MainWindow(object):
         self.tableWidget_db_view.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableWidget_db_view.setRowCount(0)
         self.tableWidget_db_view.setColumnCount(0)
-        self.tableWidget_db_view.horizontalHeader().setVisible(True)
+        self.tableWidget_db_view.horizontalHeader().setVisible(False)
         self.tableWidget_db_view.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidget_db_view.horizontalHeader().setDefaultSectionSize(120)
         self.tableWidget_db_view.horizontalHeader().setStretchLastSection(True)
@@ -2065,7 +2075,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2090,7 +2100,7 @@ class Ui_MainWindow(object):
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"Number of samples", None))
         self.label_n_samples.setText(QCoreApplication.translate("MainWindow", u"No selection", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Sample distribution", None))
-        self.label_25.setText("")
+        self.groupBox.setTitle("")
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Group distribution", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Create  database", None))
         self.pushButton_6.setText("")
