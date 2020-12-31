@@ -5,7 +5,7 @@ The database element is managed by SQLAlchemy ORM. The GUI elements are written 
 
 The application is still in development, pending a larger rewrite, using more object-oriented programming style. Hence, not all features are fleshed out. Current version is 0.0.1.
 
-** Features included **
+**Features included**
 * Create databases
 * Delete databases
 * Add samples to database
@@ -15,7 +15,7 @@ The application is still in development, pending a larger rewrite, using more ob
 * Basic stats 
 * Basic settings system using "ConfigParser".
 
-** Upcoming features **
+**Upcoming features**
 * Dynamic database created with self-defined sample types and groups.
 * More data visualization methods
 * Export data to CSV. This is simple and quick, but I don’t have time right now.
