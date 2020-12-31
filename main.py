@@ -45,8 +45,6 @@ if __name__ == "__main__":
     # Check and create default settings if not allready present
     config_exist()
 
-
-
     # Show GUI window
     window = MainWindow()
     window.show()

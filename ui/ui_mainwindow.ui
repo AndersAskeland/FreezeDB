@@ -893,7 +893,7 @@ QPushButton:pressed {
                    <enum>QFrame::Sunken</enum>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="page_home">
                    <property name="autoFillBackground">
@@ -1139,6 +1139,12 @@ of clinical samples.</string>
                                 </property>
                                 <item row="0" column="0">
                                  <widget class="QFrame" name="frame_9">
+                                  <property name="sizePolicy">
+                                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                   </sizepolicy>
+                                  </property>
                                   <property name="styleSheet">
                                    <string notr="true">background-color: rgb(42,49,61);
 border-radius: 20px;</string>
@@ -1237,6 +1243,12 @@ border-radius: 20px;</string>
                                 </item>
                                 <item row="0" column="1">
                                  <widget class="QFrame" name="frame_7">
+                                  <property name="sizePolicy">
+                                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                   </sizepolicy>
+                                  </property>
                                   <property name="styleSheet">
                                    <string notr="true">background-color: rgb(42,49,61);
 border-radius: 20px;</string>
@@ -1335,6 +1347,12 @@ border-radius: 20px;</string>
                                 </item>
                                 <item row="1" column="0">
                                  <widget class="QFrame" name="frame_10">
+                                  <property name="sizePolicy">
+                                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                   </sizepolicy>
+                                  </property>
                                   <property name="styleSheet">
                                    <string notr="true">background-color: rgb(42,49,61);
 border-radius: 20px;</string>
@@ -1390,6 +1408,9 @@ border-radius: 20px;</string>
                                       <property name="spacing">
                                        <number>0</number>
                                       </property>
+                                      <property name="leftMargin">
+                                       <number>0</number>
+                                      </property>
                                       <property name="topMargin">
                                        <number>0</number>
                                       </property>
@@ -1402,7 +1423,7 @@ border-radius: 20px;</string>
                                       <item>
                                        <widget class="QGraphicsView" name="graphicsView">
                                         <property name="sizePolicy">
-                                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                           <horstretch>0</horstretch>
                                           <verstretch>0</verstretch>
                                          </sizepolicy>
@@ -1435,6 +1456,12 @@ border-radius: 20px;</string>
                                 </item>
                                 <item row="1" column="1">
                                  <widget class="QFrame" name="frame_8">
+                                  <property name="sizePolicy">
+                                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                   </sizepolicy>
+                                  </property>
                                   <property name="styleSheet">
                                    <string notr="true">background-color: rgb(42,49,61);
 border-radius: 20px;</string>
@@ -1449,8 +1476,11 @@ border-radius: 20px;</string>
                                    <property name="leftMargin">
                                     <number>22</number>
                                    </property>
-                                   <property name="bottomMargin">
+                                   <property name="rightMargin">
                                     <number>22</number>
+                                   </property>
+                                   <property name="bottomMargin">
+                                    <number>12</number>
                                    </property>
                                    <item>
                                     <widget class="QLabel" name="label_9">
@@ -1482,17 +1512,28 @@ border-radius: 20px;</string>
                                     </widget>
                                    </item>
                                    <item>
-                                    <spacer name="verticalSpacer_9">
-                                     <property name="orientation">
-                                      <enum>Qt::Vertical</enum>
+                                    <widget class="QGroupBox" name="groupBox_2">
+                                     <property name="title">
+                                      <string/>
                                      </property>
-                                     <property name="sizeHint" stdset="0">
-                                      <size>
-                                       <width>20</width>
-                                       <height>40</height>
-                                      </size>
-                                     </property>
-                                    </spacer>
+                                     <layout class="QVBoxLayout" name="verticalLayout_36">
+                                      <property name="leftMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="topMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="rightMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="bottomMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <item>
+                                       <widget class="QGraphicsView" name="graphicsView_2"/>
+                                      </item>
+                                     </layout>
+                                    </widget>
                                    </item>
                                   </layout>
                                  </widget>
@@ -1550,19 +1591,19 @@ border-radius: 20px;</string>
                                   </property>
                                   <layout class="QVBoxLayout" name="verticalLayout_32">
                                    <property name="spacing">
-                                    <number>0</number>
+                                    <number>-1</number>
                                    </property>
                                    <property name="leftMargin">
-                                    <number>0</number>
+                                    <number>22</number>
                                    </property>
                                    <property name="topMargin">
-                                    <number>0</number>
+                                    <number>12</number>
                                    </property>
                                    <property name="rightMargin">
-                                    <number>0</number>
+                                    <number>22</number>
                                    </property>
                                    <property name="bottomMargin">
-                                    <number>0</number>
+                                    <number>12</number>
                                    </property>
                                    <item>
                                     <widget class="QFrame" name="frame_26">
@@ -1579,6 +1620,21 @@ border-radius: 20px;</string>
                                       <enum>QFrame::Raised</enum>
                                      </property>
                                      <layout class="QHBoxLayout" name="horizontalLayout_15">
+                                      <property name="spacing">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="leftMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="topMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="rightMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="bottomMargin">
+                                       <number>0</number>
+                                      </property>
                                       <item>
                                        <widget class="QLabel" name="label_2">
                                         <property name="minimumSize">
@@ -1664,6 +1720,21 @@ QPushButton:pressed {
                                       <enum>QFrame::Raised</enum>
                                      </property>
                                      <layout class="QVBoxLayout" name="verticalLayout_33">
+                                      <property name="spacing">
+                                       <number>-1</number>
+                                      </property>
+                                      <property name="leftMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="topMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="rightMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="bottomMargin">
+                                       <number>0</number>
+                                      </property>
                                       <item>
                                        <widget class="QLabel" name="label_24">
                                         <property name="minimumSize">
@@ -1740,7 +1811,7 @@ QLineEdit:focus {
                                         <property name="sizeHint" stdset="0">
                                          <size>
                                           <width>20</width>
-                                          <height>40</height>
+                                          <height>20</height>
                                          </size>
                                         </property>
                                        </spacer>
@@ -1774,7 +1845,7 @@ QPushButton:pressed {
                                         <property name="maximumSize">
                                          <size>
                                           <width>16777215</width>
-                                          <height>170</height>
+                                          <height>200</height>
                                          </size>
                                         </property>
                                         <property name="frameShape">
@@ -1784,6 +1855,21 @@ QPushButton:pressed {
                                          <enum>QFrame::Raised</enum>
                                         </property>
                                         <layout class="QVBoxLayout" name="verticalLayout_31">
+                                         <property name="spacing">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="leftMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="topMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="rightMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="bottomMargin">
+                                          <number>0</number>
+                                         </property>
                                          <item>
                                           <widget class="QLabel" name="label">
                                            <property name="minimumSize">
@@ -1822,6 +1908,9 @@ QPushButton:pressed {
                                             <enum>QFrame::Raised</enum>
                                            </property>
                                            <layout class="QHBoxLayout" name="horizontalLayout_16">
+                                            <property name="spacing">
+                                             <number>-1</number>
+                                            </property>
                                             <property name="leftMargin">
                                              <number>0</number>
                                             </property>
@@ -1839,7 +1928,7 @@ QPushButton:pressed {
                                               <property name="maximumSize">
                                                <size>
                                                 <width>16777215</width>
-                                                <height>100</height>
+                                                <height>16777215</height>
                                                </size>
                                               </property>
                                               <property name="styleSheet">
@@ -1961,7 +2050,7 @@ QHeaderView::section:horizontal
                                              <widget class="QFrame" name="frame_23">
                                               <property name="minimumSize">
                                                <size>
-                                                <width>25</width>
+                                                <width>30</width>
                                                 <height>0</height>
                                                </size>
                                               </property>
@@ -1989,9 +2078,19 @@ QHeaderView::section:horizontal
                                                </property>
                                                <item>
                                                 <widget class="QPushButton" name="pushButton_7">
+                                                 <property name="minimumSize">
+                                                  <size>
+                                                   <width>30</width>
+                                                   <height>30</height>
+                                                  </size>
+                                                 </property>
                                                  <property name="styleSheet">
                                                   <string notr="true">QPushButton{
-	border-radius:15px;
+	border-radius:10px;
+	color: rgb(201, 202, 204);
+	background-color: rgb(52, 59, 72);
+
+
 }
 
 QPushButton:hover {
@@ -2001,7 +2100,9 @@ QPushButton:hover {
 QPushButton:pressed {	
 	background-color: rgb(35, 40, 49);
 	border: 2px solid rgb(43, 50, 61);
-}</string>
+}
+
+</string>
                                                  </property>
                                                  <property name="text">
                                                   <string/>
@@ -2735,7 +2836,7 @@ QLineEdit:focus {
 }</string>
                                      </property>
                                      <property name="text">
-                                      <string>Operator</string>
+                                      <string>Group</string>
                                      </property>
                                      <property name="alignment">
                                       <set>Qt::AlignCenter</set>
@@ -2743,7 +2844,7 @@ QLineEdit:focus {
                                     </widget>
                                    </item>
                                    <item>
-                                    <widget class="QLineEdit" name="lineEdit_add_operator">
+                                    <widget class="QLineEdit" name="lineEdit_add_group">
                                      <property name="minimumSize">
                                       <size>
                                        <width>0</width>
@@ -3364,10 +3465,10 @@ QHeaderView::section:horizontal
                              <number>0</number>
                             </property>
                             <property name="columnCount">
-                             <number>0</number>
+                             <number>1</number>
                             </property>
                             <attribute name="horizontalHeaderVisible">
-                             <bool>true</bool>
+                             <bool>false</bool>
                             </attribute>
                             <attribute name="horizontalHeaderCascadingSectionResizes">
                              <bool>true</bool>
@@ -3387,13 +3488,18 @@ QHeaderView::section:horizontal
                             <attribute name="verticalHeaderStretchLastSection">
                              <bool>true</bool>
                             </attribute>
+                            <column>
+                             <property name="text">
+                              <string>Test</string>
+                             </property>
+                            </column>
                            </widget>
                           </item>
                           <item>
                            <widget class="QFrame" name="btn_quick_edit">
                             <property name="minimumSize">
                              <size>
-                              <width>40</width>
+                              <width>65</width>
                               <height>0</height>
                              </size>
                             </property>
@@ -3427,6 +3533,12 @@ QHeaderView::section:horizontal
                              </property>
                              <item>
                               <widget class="QToolButton" name="toolButton_delete">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="minimumSize">
                                 <size>
                                  <width>40</width>
@@ -3435,8 +3547,8 @@ QHeaderView::section:horizontal
                                </property>
                                <property name="maximumSize">
                                 <size>
-                                 <width>40</width>
-                                 <height>40</height>
+                                 <width>16777215</width>
+                                 <height>43</height>
                                 </size>
                                </property>
                                <property name="styleSheet">
@@ -3476,7 +3588,13 @@ QToolButton:pressed {
                               </widget>
                              </item>
                              <item>
-                              <widget class="QToolButton" name="toolButton_2">
+                              <widget class="QToolButton" name="toolButton_update">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="minimumSize">
                                 <size>
                                  <width>40</width>
@@ -3485,8 +3603,8 @@ QToolButton:pressed {
                                </property>
                                <property name="maximumSize">
                                 <size>
-                                 <width>40</width>
-                                 <height>40</height>
+                                 <width>16777215</width>
+                                 <height>43</height>
                                 </size>
                                </property>
                                <property name="styleSheet">
@@ -3507,11 +3625,11 @@ QToolButton:pressed {
 }</string>
                                </property>
                                <property name="text">
-                                <string>Edit</string>
+                                <string>Update</string>
                                </property>
                                <property name="icon">
                                 <iconset>
-                                 <normalon>:/20x20/icons/20x20/cil-description.png</normalon>
+                                 <normalon>:/24x24/icons/24x24/cil-reload.png</normalon>
                                 </iconset>
                                </property>
                                <property name="iconSize">
@@ -3560,16 +3678,26 @@ border-radius: 20px;</string>
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QFrame" name="frame_2">
-                         <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_37">
+                          <item>
+                           <widget class="QLabel" name="label_25">
+                            <property name="font">
+                             <font>
+                              <pointsize>40</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #FFFFFF</string>
+                            </property>
+                            <property name="text">
+                             <string>Not completed</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>

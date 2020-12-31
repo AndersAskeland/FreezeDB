@@ -17,12 +17,13 @@ from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QVBoxLayout, QGraphicsTextItem
 from PySide6.QtCore import QCoreApplication, QPropertyAnimation, Qt
 from PySide6.QtGui import QColor, QPainter, QPen
+from sqlalchemy import exc
 
 
 # Internal modules
 from ui.css import css_btn_pressed, css_btn_idle
-from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict, create_database, engine_connect, max_identifier, add_sql_data, delete_sql_data, db_query_sample_type
-from functions.settings_functions import config_check_selected_db, config_write_selected_db
+from functions.sql_functions import n_samples, sql_column_keys, sql_to_dict, create_database, engine_connect, max_identifier, add_sql_data, delete_sql_data, db_query_sample_type, db_query_group, del_sql_entry
+from functions.settings_functions import config_check_selected_db, config_write_selected_db, read_columns
 from classes.sql_classes import Database
 
 ##################################################################
@@ -44,7 +45,6 @@ def update_db_list(self):
     self.ui.tree_select_database.clear()
     self.ui.tree_select_database_2.clear()
 
-
     for file in os.scandir("databases"):
         print(file.name)
         if file.name.endswith(".db") or file.name == ".db":
@@ -59,12 +59,13 @@ def update_db_list(self):
             item2 = self.ui.tree_select_database_2.topLevelItem(i)
             item2.setText(0, QCoreApplication.translate("MainWindow", file.name[:-3], None))
 
-
             
             # Itterate
             i += 1
         else:
             continue
+    
+    # Set selection to previous
 
 
 # 3.2 ANIMATE TOGGLE MENU - Open and close the toggle menu. Connected to button
@@ -146,8 +147,13 @@ def change_database(self, button):
     # Load new data into table
     load_sql_data(self)
 
+    # Load columns
+    load_column_names(self)
+
+
     # Change piechart
     self.ui.graphicsView.setScene(pie_chart(self))
+    self.ui.graphicsView_2.setScene(pie_chart_2(self))
 
     # Write selection data to settings file
     config_write_selected_db(index)
@@ -168,28 +174,30 @@ def load_sql_data(self):
     # Selected item
     selected_db = self.ui.tree_select_database.currentItem().text(0)
 
-    # Load column names
+    # Load actual columns from db
     columns = sql_column_keys(database=selected_db)
 
     # Set table and row count
     self.ui.tableWidget_db_view.setRowCount(int(n_samples(selected_db))) # Row
-    self.ui.tableWidget_db_view.setColumnCount(len(columns)) # Column
-    
+    self.ui.tableWidget_db_view.setColumnCount(len(columns) - 5) # Column
+    print(f"Rows were set to {int(n_samples(selected_db))}")
+
     # Update text for table
     self.ui.label_14.setText("Table view for database: \"" + selected_db + "\".") 
 
-    # Write column names to widget
-    for i, column in enumerate(columns):
-        # Create widget
-        self.ui.tableWidget_db_view.setHorizontalHeaderItem(i, QTableWidgetItem())
-
-        # Set widget column text
-        widgetColumn = self.ui.tableWidget_db_view.horizontalHeaderItem(i)
-        widgetColumn.setText(QCoreApplication.translate("MainWindow", column, None))     
-        print(column)
     # Get data from SQL database
-    sql_data = sql_to_dict(database=selected_db, table=Database)
+    sql_data = sql_to_dict(database=selected_db)
+
+    # Load pie charts
+    self.ui.graphicsView.setScene(pie_chart(self))
+    self.ui.graphicsView_2.setScene(pie_chart_2(self))
     
+    # Load columns
+    load_column_names(self)
+
+    # Load data number
+    self.ui.label_n_samples.setText(str(n_samples(self.ui.tree_select_database.currentItem().text(0))))
+
     # Write to  QTableWidget
     for i, data in enumerate(sql_data):
         for j, column in enumerate(columns):
@@ -200,6 +208,12 @@ def load_sql_data(self):
 def load_settings(self):
     # Database selection
     try:
+        # Update pie_charts
+        self.ui.graphicsView.setScene(pie_chart(self))
+        self.ui.graphicsView_2.setScene(pie_chart_2(self))
+
+        # Load column names
+        load_column_names(self)
         # Get index
         index = config_check_selected_db()
 
@@ -215,15 +229,39 @@ def load_settings(self):
         
         # Load pie_chart
         self.ui.graphicsView.setScene(pie_chart(self))
+        self.ui.graphicsView_2.setScene(pie_chart_2(self))
 
+        # Add CSS to item
         # Load data
         load_sql_data(self)
+
+
 
     except:
         pass
 
     # TODO
     # More settings
+
+# Load column names
+def load_column_names(self):
+    # Load column names
+    column_names = read_columns()
+    
+    # Make widget visible if hidden
+    self.ui.tableWidget_db_view.horizontalHeader().setVisible(True)
+
+    print(len(column_names))
+    # Write column names to widget
+    for i, column in enumerate(column_names):
+        # Create widget
+        self.ui.tableWidget_db_view.setHorizontalHeaderItem(i, QTableWidgetItem())
+
+        # Set widget column text
+        widgetColumn = self.ui.tableWidget_db_view.horizontalHeaderItem(i)
+        widgetColumn.setText(QCoreApplication.translate("MainWindow", column, None))     
+        
+        print(f"Sat column name to: {column}")
 
 # Create new db and update list
 def new_database_creation(self):
@@ -242,7 +280,7 @@ def new_database_creation(self):
         # update db list
         update_db_list(self)
 
-
+    update(self)
     # Update db list
     # load_sql_data(self)
 
@@ -290,6 +328,14 @@ def add_to_db(self):
     # Update view
     load_sql_data(self)
 
+    # Remove selections
+    self.ui.lineEdit_add_participant_ID.clear()
+    self.ui.lineEdit_add_visit.clear()
+    self.ui.lineEdit_add_group.clear()
+
+    # Update picharts
+
+
 
 # Remove from db
 def remove_from_db(self):
@@ -299,8 +345,8 @@ def remove_from_db(self):
     # Create DB session
     session = engine_connect(db_name)
 
-
     delete_sql_data()
+
 
 def delete_db(self):
     # Get currently selected db in view
@@ -314,12 +360,32 @@ def delete_db(self):
 
     # Clear table
     self.ui.tableWidget_db_view.clear()
+    print("DB view was cleared")
+
+    # Write new table
+    load_column_names(self)
+
+    # Update pie charts
+
+    # Set text for table
+    self.ui.label_14.setText("No database selected") 
 
     # Update db count and name
     self.ui.label_n_samples.setText("No selection")
 
+    # Update pie_charts
+    self.ui.graphicsView.setScene(pie_chart(self))
+    self.ui.graphicsView_2.setScene(pie_chart_2(self))
+
     # Set database text
     self.ui.label_current_database.setText("No selection")
+
+
+
+
+
+
+
 
 # Create pie charts
 def pie_chart(self):
@@ -329,8 +395,26 @@ def pie_chart(self):
     set_angle = 0 # Start angle
 
     # Get db name
-    db_name = self.ui.tree_select_database.currentItem().text(0)
-    
+    try:
+        db_name = self.ui.tree_select_database.currentItem().text(0)
+    except:
+        # Create empty circle
+        ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
+        ellipse.setBrush(QColor(235,142,64)) # Set color
+        location = ellipse.boundingRect()
+
+
+        # Set text
+        text = QGraphicsTextItem("No database\nselected")
+        text.setPos(location.center().x() - 25, location.center().y() - 15)
+
+        # add stuff
+        self.scene.addItem(ellipse)
+        self.scene.addItem(text)        
+        
+        # Return
+        return self.scene    
+        
     # get data
     data = db_query_sample_type(self, db_name)
     words = ["Citrate", "EDTA", "Serum", "EV-EDTA"]
@@ -345,7 +429,84 @@ def pie_chart(self):
 
         # Set text
         text = QGraphicsTextItem("No data")
-        text.setPos(location.center().x() - 15, location.center().y() - 15)
+        text.setPos(location.center().x() - 24, location.center().y() - 15)
+
+        # add stuff
+        self.scene.addItem(ellipse)
+        self.scene.addItem(text)        
+        
+        # Return
+        return self.scene
+    # Create pie chart
+    for i, section in enumerate(data):
+            # Create part of circle
+            angle = round(float(section*5760)/sum(data))
+            ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
+            ellipse.setStartAngle(set_angle) # from angle
+            ellipse.setSpanAngle(angle) # to angle
+
+            # Set text
+            text = words[i]
+            location = ellipse.boundingRect()
+            text = QGraphicsTextItem(text)
+            text.setPos(location.center().x() - 25, location.center().y() - 10)
+
+            
+            ellipse.setBrush(colours[i]) # Set color
+
+            # Change angle
+            set_angle += angle
+
+            # Edit with CSS
+            # Add item
+            self.scene.addItem(ellipse)
+            self.scene.addItem(text)
+
+    # Return scene
+    return self.scene
+
+
+def pie_chart_2(self):
+    # Create scene and define settings
+    self.scene = QGraphicsScene(self)
+    colours = [QColor(97,158,97), QColor(235,142,64), QColor(197, 67, 62), QColor(83, 167, 185)] #  TODO update to prettier colours
+    set_angle = 0 # Start angle
+
+    # Get db name
+    try:
+        db_name = self.ui.tree_select_database.currentItem().text(0)
+    except:
+        # Create empty circle
+        ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
+        ellipse.setBrush(QColor(235,142,64)) # Set color
+        location = ellipse.boundingRect()
+
+
+        # Set text
+        text = QGraphicsTextItem("No database\nselected")
+        text.setPos(location.center().x() - 25, location.center().y() - 15)
+
+        # add stuff
+        self.scene.addItem(ellipse)
+        self.scene.addItem(text)        
+        
+        # Return
+        return self.scene    
+    # get data
+    data = db_query_group(self, db_name)
+    words = ["Obese", "Control", "Other"]
+
+    # If empty - Add text to middle saying no selection
+    if not data:
+        # Create empty circle
+        ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
+        ellipse.setBrush(QColor(235,142,64)) # Set color
+        location = ellipse.boundingRect()
+
+
+        # Set text
+        text = QGraphicsTextItem("No data")
+        text.setPos(location.center().x() - 25, location.center().y() - 15)
 
         # add stuff
         self.scene.addItem(ellipse)
@@ -366,9 +527,6 @@ def pie_chart(self):
             location = ellipse.boundingRect()
             text = QGraphicsTextItem(text)
             text.setPos(location.center().x() - 10, location.center().y() - 10)
-            print(location.center())
-            print(location.getCoords())
-            print(location.getRect())
 
             
             ellipse.setBrush(colours[i]) # Set color
@@ -376,12 +534,196 @@ def pie_chart(self):
             # Change angle
             set_angle += angle
 
+            # Edit with CSS
             # Add item
             self.scene.addItem(ellipse)
             self.scene.addItem(text)
 
-
     # Return scene
     return self.scene
 
+def delete_entry_table(self):
+    identifier = self.ui.tableWidget_db_view.item(self.ui.tableWidget_db_view.currentRow(), 1).text()
+    db_name = self.ui.tree_select_database.currentItem().text(0)
+    session = engine_connect(db_name)
+    del_sql_entry(self, session=session, identifier=identifier)
+    update(self)
 
+
+def delete_entry(self):
+    # Extract data
+    # Get current db
+    db_name = self.ui.tree_select_database.currentItem().text(0)
+
+    # Extract selection
+    identifier = int(self.ui.lineEdit_delete_identifier.text())
+
+    # Create DB session
+    session = engine_connect(db_name)
+
+    # Write error checking function
+    # TODO 
+    
+    # Write data to class
+    # Citrate
+    del_sql_entry(self, session=session, identifier=identifier)
+
+
+    # Update view
+    update(self)
+
+    # Remove selections
+    self.ui.lineEdit_delete_identifier.clear()
+
+
+
+
+############################################################
+################# Updated functions #######################
+# Combined update function
+def update(self):
+    # If database selection is valid
+    try:
+        ### Get needed variables ###
+        # Get selected DB
+        database = self.ui.tree_select_database.currentItem().text(0)
+        print("database was selected")
+
+        # Get database column names
+        columns = sql_column_keys(database=database)
+        print("Colums keys was selected")
+
+        # Get n of columns
+        column_n = len(columns)
+
+        # Get SQL_data into a dictionairy
+        sql_data = sql_to_dict(database=database)
+        print("database dict was selected")
+
+        ### Write column names ###
+        load_column_names_update(self, column_n)
+        print("Column name was updated")
+
+        ### Load data into table ###
+        load_sql_data(self)
+        print("Data in table was written")
+
+        ### Update table header ###
+        self.ui.label_14.setText("Table view for database: \"" + database + "\".") 
+        print("Table heading name was updated")
+
+        ### Update current database selection text ###
+        self.ui.label_current_database.setText(database)
+        print("Database text was selected")
+
+        ### Update number of samples in database ###
+        self.ui.label_n_samples.setText(str(n_samples(database)))
+        print("Database n was selected")
+
+        # Load pie charts
+        self.ui.graphicsView.setScene(pie_chart(self))
+        self.ui.graphicsView_2.setScene(pie_chart_2(self))
+
+        # DEBUG - Print test
+        print("Database was selected and update is completed")
+    # If no database is selected
+    except:
+        # Set text for table
+        self.ui.label_14.setText("No database selected") 
+
+        # Update db count and name
+        self.ui.label_n_samples.setText("No selection")
+
+        # Update pie_charts
+        self.ui.graphicsView.setScene(pie_chart(self))
+        self.ui.graphicsView_2.setScene(pie_chart_2(self))
+
+        # Set database text
+        self.ui.label_current_database.setText("No selection")
+
+        # Clear table
+        self.ui.tableWidget_db_view.clear()
+        print("clearing table")
+        load_column_names_update(self, 0)
+
+
+def load_settings_update(self):
+    # Database selection
+    try:
+        # Update database list
+        update_db_list(self)
+
+        # Get index
+        index = config_check_selected_db()
+
+        print(f" Index is: {index}")
+        # Set selection
+        self.ui.tree_select_database.setCurrentItem(self.ui.tree_select_database.topLevelItem(index)) # Selects multisite
+        self.ui.tree_select_database_2.setCurrentItem(self.ui.tree_select_database_2.topLevelItem(index)) # Selects multisite
+
+        # Update everything
+        print(f"Initial load function is running update")
+        update(self)
+
+
+    except:
+        update(self)
+
+
+# New update function for sql data
+def load_sql_data_update(self, columns, sql_data):
+    print(f"Writing table for {columns} with the following data: {sql_data}")
+
+    # Write to  QTableWidget
+    for i, data in enumerate(sql_data):
+        for j, column in enumerate(columns):
+            self.ui.tableWidget_db_view.setItem(i, j, QtWidgets.QTableWidgetItem(str(data.__dict__[column])))
+    print("Finished wrting data")
+
+# New update function for setting column names
+def load_column_names_update(self, column_n):
+    # Set table visible if not allready
+    self.ui.tableWidget_db_view.horizontalHeader().setVisible(True)
+
+    if column_n == 0:
+        self.ui.tableWidget_db_view.setColumnCount(1)
+        self.ui.tableWidget_db_view.setRowCount(0)
+        print("Rows were set to 0")
+
+        self.ui.tableWidget_db_view.setHorizontalHeaderItem(0, QTableWidgetItem())
+        widgetColumn = self.ui.tableWidget_db_view.horizontalHeaderItem(0)
+        widgetColumn.setText(QCoreApplication.translate("MainWindow", "No data", None))     
+    else:
+        # Load column names
+        column_names = read_columns()
+
+        # Set column count
+        self.ui.tableWidget_db_view.setColumnCount(column_n - 5)
+
+        # Write column names to widget
+        for i, column in enumerate(column_names):
+            # Create widget
+            print(column)
+            self.ui.tableWidget_db_view.setHorizontalHeaderItem(i, QTableWidgetItem())
+
+            # Set widget column text
+            widgetColumn = self.ui.tableWidget_db_view.horizontalHeaderItem(i)
+            widgetColumn.setText(QCoreApplication.translate("MainWindow", column, None))     
+
+def delete_db_update(self):
+    # Get currently selected db in view
+    db_name = self.ui.tree_select_database.currentItem().text(0)
+    print("db name is extracted")
+
+    # Delete file
+    os.remove("databases/" + db_name + ".db")
+
+    # Clear table
+    update_db_list(self)
+
+    # update data table
+    update(self)
+
+
+# TODO
+# Piechart text angle equal to angle start - angle end of ellipse. Maybe I can turn them around

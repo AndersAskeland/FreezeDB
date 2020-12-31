@@ -26,7 +26,7 @@ from classes.sql_classes import Database, Base
 
 # Function that creates a connection to the needed database
 def engine_connect(database):
-    engine = create_engine("sqlite:///databases/" + database + ".db", echo=True, future=True)
+    engine = create_engine("sqlite:///databases/" + database + ".db", echo=False, future=True)
     return(Session(bind=engine))
 
 
@@ -44,7 +44,7 @@ def n_samples(database_name):
     print(session)
 
     # Query db
-    samples_n = session.query(Database).count()
+    samples_n = session.query(Database).filter(Database.delete == False).count()
 
     # Close session
     session.close()
@@ -65,12 +65,12 @@ def sql_column_keys(database):
 
 
 # 3.3 RETURN DICTIONARY OF SQL DB - Returns a itterable dictionary to use for qtablewidgets
-def sql_to_dict(database, table):
+def sql_to_dict(database):
     # Connect
     session = engine_connect(database=database)
 
     # Query db
-    dict = session.query(table).filter(Database.delete == False).all()
+    dict = session.query(Database).filter(Database.delete == False).all()
 
     # Close session
     session.close()
@@ -92,7 +92,7 @@ def create_database(db_name):
 def max_identifier(session, sample_type):
     # Query
     max = session.execute(select(Database, func.max(Database.identifier)).filter(Database.sample_type == sample_type)).fetchone()
-    print("WOHO") 
+
     if max.Database is None:
         return(None)
     else:
@@ -111,6 +111,7 @@ def add_sql_data(self, session, sample_type, n, identifier):
             participant_id = int(self.ui.lineEdit_add_participant_ID.text()),
             visit = self.ui.lineEdit_add_visit.text(),
             sample_type = sample_type,
+            group = str(self.ui.lineEdit_add_group.text()),
             identifier = current_identifer + i,
             date=date.today(),
             delete=0
@@ -128,10 +129,10 @@ def db_query_sample_type(self, db_name):
 
     # Create empty return list
     data = [
-        session.query(Database).filter(Database.sample_type == "Citrate").count(),
-        session.query(Database).filter(Database.sample_type == "EDTA").count(),
-        session.query(Database).filter(Database.sample_type == "Serum").count(),
-        session.query(Database).filter(Database.sample_type == "EV_EDTA").count()]
+        session.query(Database).filter(Database.sample_type == "Citrate", Database.delete == False).count(),
+        session.query(Database).filter(Database.sample_type == "EDTA", Database.delete == False).count(),
+        session.query(Database).filter(Database.sample_type == "Serum", Database.delete == False).count(),
+        session.query(Database).filter(Database.sample_type == "EV_EDTA", Database.delete == False).count()]
 
     print(data)
     # Remove all 0 values
@@ -142,3 +143,34 @@ def db_query_sample_type(self, db_name):
         return False
     else:
         return clean_data
+
+def db_query_group(self, db_name):
+    # Establish connection
+    session = engine_connect(db_name)
+
+    # Create empty return list
+    data = [
+        session.query(Database).filter(Database.group == "Obese", Database.delete == False).count(),
+        session.query(Database).filter(Database.group == "Control", Database.delete == False).count()]
+
+    # Remove all 0 values
+    clean_data = [x for x in data if x > 0]
+
+    # Check if list is empty
+    if not clean_data:
+        return False
+    else:
+        return clean_data
+
+
+def del_sql_entry(self, session, identifier):
+    # Get row
+    row = session.query(Database).filter_by(identifier=identifier).first()
+
+    # Write to delete row
+    row.delete = True
+
+    # commit data
+    session.flush()
+    session.commit()
+

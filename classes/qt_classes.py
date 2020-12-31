@@ -17,8 +17,9 @@ from PySide6.QtGui import QColor
 
 
 # Internal modules
-from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_settings, new_database_creation, add_to_db, delete_db, pie_chart
+from functions.gui_functions import change_database, update_db_list, toggle_menu, change_page, load_settings, new_database_creation, add_to_db, delete_db, update, load_settings_update, delete_db_update, delete_entry, delete_entry_table
 from functions.sql_functions import sql_column_keys, db_query_sample_type
+from functions.settings_functions import read_columns
 
 # UI files
 from ui.ui_mainwindow import Ui_MainWindow
@@ -64,10 +65,10 @@ class MainWindow(QMainWindow):
         ##########################
         
         # Update database list (populate treewidget on home page)
-        update_db_list(self)
+        # update_db_list(self)
 
         # Load setttings (config.ini)
-        load_settings(self)
+        load_settings_update(self)
         
         ##########################
         ## 2.3 - Connections    ##
@@ -95,7 +96,17 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_add.clicked.connect(lambda: add_to_db(self))
     
         # Delete db
-        self.ui.pushButton_7.clicked.connect(lambda: delete_db(self))
+        self.ui.pushButton_7.clicked.connect(lambda: delete_db_update(self))
+        read_columns()
+
+        # Update test
+        self.ui.toolButton_update.clicked.connect(lambda: update(self))
+
+        # Delete button identifier
+        self.ui.pushButton_2.clicked.connect(lambda: delete_entry(self))
+        
+        self.ui.toolButton_delete.clicked.connect(lambda: delete_entry_table(self))
+
 
 
     def popup(self):

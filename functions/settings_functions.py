@@ -41,6 +41,14 @@ def config_exist():
             'user': 'root'
         }
 
+        config["column_names"] = {
+            'column_1': 'Participant ID',
+            'column_2': 'Identifier',
+            'column_3': 'Group',
+            'column_4': 'Visit',
+            'column_5': 'Sample type',
+            'column_6': 'Date'
+        }
         # Write to config
         with open('config.ini', 'w') as f:
             config.write(f)
@@ -83,4 +91,19 @@ def config_write_selected_db(index):
         print(f"Changed settings file to {index}")
 
 
-# Load settings
+# Read column names
+def read_columns():
+    # Connection
+    parser = ConfigParser()
+    parser.read('config.ini')
+
+    # Extract column names
+    columns = [option for option in parser['column_names']]
+    
+    # Extract data
+    data = []
+    for column in columns:
+        data.append(parser.get('column_names', column))
+
+    print("Read column function is done")
+    return data

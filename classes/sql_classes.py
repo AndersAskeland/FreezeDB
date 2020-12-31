@@ -56,14 +56,16 @@ class Database(Base):
 
     participant_id = Column(Integer, nullable=False)
     identifier = Column(Integer, nullable=False, primary_key=True, unique=True)
+    group = Column(String, nullable=False)
     visit = Column(String, nullable=False)
     sample_type = Column(String, nullable=False)
-    date = Column(Date, nullable=True)
-    delete = Column(Boolean, nullable=False)
+    date = Column(Date, nullable=False)
     freeze_cycles = Column(Integer, nullable=True)
     operator = Column(String, nullable=True)
     location = Column(String, nullable=True)
     notes = Column(String, nullable=True)
+    delete = Column(Boolean, nullable=False)
+
 
     # Print method
     def __repr__(self):
