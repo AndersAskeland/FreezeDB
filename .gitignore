@@ -7,7 +7,7 @@
 /freeze.db
 /export.csv
 /databases/**
-/testing
+/testing/**
 /old
 .vscode/*
 config.ini
