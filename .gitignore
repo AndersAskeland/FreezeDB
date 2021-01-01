@@ -11,3 +11,4 @@
 /old
 .vscode/*
 .config.ini
+.test*
