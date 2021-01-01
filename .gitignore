@@ -10,5 +10,5 @@
 /testing
 /old
 .vscode/*
-.config.ini
+config.ini
 .test*
