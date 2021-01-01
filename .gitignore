@@ -10,3 +10,4 @@
 /testing
 /old
 .vscode/*
+.config.ini
