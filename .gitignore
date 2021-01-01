@@ -6,3 +6,7 @@
 /modules/__pycache__
 /freeze.db
 /export.csv
+/databases/**
+/testing
+/old
+.vscode/*
