@@ -389,6 +389,8 @@ def delete_db(self):
 
 # Create pie charts
 def pie_chart(self):
+    print("\n\nPIE CHART 2")
+
     # Create scene and define settings
     self.scene = QGraphicsScene(self)
     colours = [QColor(97,158,97), QColor(235,142,64), QColor(197, 67, 62), QColor(83, 167, 185)] #  TODO update to prettier colours
@@ -441,6 +443,9 @@ def pie_chart(self):
     for i, section in enumerate(data):
             # Create part of circle
             angle = round(float(section*5760)/sum(data))
+            print(f"From angle is: {angle / 16}")
+            print(f"To angle is: {set_angle / 16}")
+
             ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
             ellipse.setStartAngle(set_angle) # from angle
             ellipse.setSpanAngle(angle) # to angle
@@ -449,8 +454,10 @@ def pie_chart(self):
             text = words[i]
             location = ellipse.boundingRect()
             text = QGraphicsTextItem(text)
-            text.setPos(location.center().x() - 25, location.center().y() - 10)
-
+            text.setPos(location.center().x() + 12, location.center().y() - 20)
+            text.setRotation((angle / 16) / 2)
+            
+            print(f"Rotation is set to: {(angle / 16) - (set_angle / 16)}")
             
             ellipse.setBrush(colours[i]) # Set color
 
@@ -467,6 +474,7 @@ def pie_chart(self):
 
 
 def pie_chart_2(self):
+    print("\n\nPIE CHART 2")
     # Create scene and define settings
     self.scene = QGraphicsScene(self)
     colours = [QColor(97,158,97), QColor(235,142,64), QColor(197, 67, 62), QColor(83, 167, 185)] #  TODO update to prettier colours
@@ -521,14 +529,17 @@ def pie_chart_2(self):
             ellipse = QGraphicsEllipseItem(0,0,150,150) # Create an ciruclar ellispeitem
             ellipse.setStartAngle(set_angle) # from angle
             ellipse.setSpanAngle(angle) # to angle
+            print(f"From angle is: {angle / 16}")
+            print(f"To angle is: {set_angle / 16}")
 
             # Set text
             text = words[i]
             location = ellipse.boundingRect()
             text = QGraphicsTextItem(text)
-            text.setPos(location.center().x() - 10, location.center().y() - 10)
+            text.setPos(location.center().x() + 12, location.center().y() - 20)
+            text.setRotation((angle / 16) / 2)
 
-            
+            print(f"Rotation is set to: {(angle / 16) / 2}")
             ellipse.setBrush(colours[i]) # Set color
 
             # Change angle
