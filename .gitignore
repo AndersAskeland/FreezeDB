@@ -1,14 +1,13 @@
-/__pycache__
-/.pytest_cache
-/.vscode
-/Icon
-/freeze.db
-/modules/__pycache__
-/freeze.db
-/export.csv
-/databases/**
-/testing/**
-/old
-.vscode/*
+# Ignore directories
+__pycache__
+build
+.vscode
+databases/
+testing
+Icon
+
+# Ignore files
 config.ini
-.test*
+testing.py
+main.spec
+export.csv
