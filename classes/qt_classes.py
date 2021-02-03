@@ -11,9 +11,9 @@
 ##################################################################
 
 # External modules
-from PySide6.QtWidgets import QMainWindow, QWidget, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QVBoxLayout
-from PySide6.QtCore import QSize
-from PySide6.QtGui import QColor
+from PySide2.QtWidgets import QMainWindow, QWidget, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QVBoxLayout
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QColor
 
 
 # Internal modules

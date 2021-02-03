@@ -13,10 +13,10 @@
 # External modules
 import os
 from datetime import date
-from PySide6 import QtCore, QtWidgets
-from PySide6.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QVBoxLayout, QGraphicsTextItem
-from PySide6.QtCore import QCoreApplication, QPropertyAnimation, Qt
-from PySide6.QtGui import QColor, QPainter, QPen
+from PySide2 import QtCore, QtWidgets
+from PySide2.QtWidgets import QTreeWidgetItem, QTableWidgetItem, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QVBoxLayout, QGraphicsTextItem
+from PySide2.QtCore import QCoreApplication, QPropertyAnimation, Qt
+from PySide2.QtGui import QColor, QPainter, QPen
 from sqlalchemy import exc
 
 

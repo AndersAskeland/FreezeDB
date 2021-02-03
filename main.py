@@ -15,7 +15,7 @@
 
 # External modules
 import sys
-from PySide6.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 from configparser import ConfigParser
 
 # Internal modules
