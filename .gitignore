@@ -2,10 +2,12 @@
 __pycache__
 build
 .vscode
-databases/
 testing
 Icon
 
+# Ignore inside directory (you need a gitkeep file)
+databases/*
+!databases/.gitkeep
 # Ignore files
 config.ini
 testing.py
