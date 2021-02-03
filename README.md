@@ -27,5 +27,10 @@ The application is still in development, pending a larger rewrite, using more ob
 ## Information
 Git commit messages are tagged using the following system.
 
-> [style] = "placeholder"
+> [style]       Formatting, and typos
+> [doc]         Alterations to the documentation or code comments
+> [feature]     Added/changed feature
+> [fix]         Bug fixes
+> [clean]       Cleaned up the file structure
+> [test]        Testing new stuff
 
