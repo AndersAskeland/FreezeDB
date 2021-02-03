@@ -1,5 +1,7 @@
 # FreezeDB <img src="graphics/logo.png" align="right" width="120" />
 
+## Overview
+
 FreezeDB is a simple GUI application written in Python that can be used to manage (add, delete, edit) clinical samples in freezer storage. It uses sqlite3 files to manage data storage and editing. 
 
 The database element is managed by SQLAlchemy ORM. The GUI elements are written using Qt for Python (PySide6).
@@ -27,10 +29,11 @@ The application is still in development, pending a larger rewrite, using more ob
 ## Information
 Git commit messages are tagged using the following system.
 
-> [style]       Formatting, and typos
-> [doc]         Alterations to the documentation or code comments
-> [feature]     Added/changed feature
-> [fix]         Bug fixes
-> [clean]       Cleaned up the file structure
-> [test]        Testing new stuff
-
+```
+[style]       Formatting, and typos
+[doc]         Alterations to the documentation or code comments
+[feature]     Added/changed feature
+[fix]         Bug fixes
+[clean]       Cleaned up the file structure
+[test]        Testing new stuff
+```
