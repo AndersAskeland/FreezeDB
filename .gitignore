@@ -5,9 +5,10 @@ build
 testing
 Icon
 
-# Ignore inside directory (you need a gitkeep file)
+# Ignore directory but not outside (you need a gitkeep file)
 databases/*
 !databases/.gitkeep
+
 # Ignore files
 config.ini
 testing.py
