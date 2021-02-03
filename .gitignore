@@ -14,3 +14,5 @@ config.ini
 testing.py
 main.spec
 export.csv
+main.spec
+ui_mainwindow.py
