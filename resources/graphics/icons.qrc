@@ -1,0 +1,19 @@
+<RCC>
+  <qresource prefix="figures">
+    <file>figures/add.png</file>
+    <file>figures/remove.png</file>
+    <file>figures/logo.png</file>
+  </qresource>
+  <qresource prefix="white_icons">
+    <file>white_icons/delete-white-18dp.svg</file>
+    <file>white_icons/folder-white-18dp.svg</file>
+    <file>white_icons/home-white-18dp.svg</file>
+    <file>white_icons/leaderboard-white-18dp.svg</file>
+    <file>white_icons/library_add-white-48dp.svg</file>
+    <file>white_icons/menu-white-18dp.svg</file>
+    <file>white_icons/refresh-white-18dp.svg</file>
+    <file>white_icons/settings-white-18dp.svg</file>
+  </qresource>
+  <qresource prefix="black_icons"/>
+</RCC>
+

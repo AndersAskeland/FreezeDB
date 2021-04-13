@@ -1,0 +1,255 @@
+/* -------------------------------------------- */
+/* ---------------   Constants    ------------- */
+/* -------------------------------------------- */
+@
+color_text = rgb(204,204,204)
+background_colorMain = rgb(34, 40, 49)
+background_colorSecondary = rgb(27, 29, 35)
+background_colorTertiary = rgb(42,49,61)
+@
+
+
+/* -------------------------------------------- */
+/* ---------------   Widgets    --------------- */
+/* -------------------------------------------- */
+/* Q labels */
+QLabel{
+    color: $color_text$;
+}
+
+QMainWindow{
+    background-color: $background_colorTertiary$;
+}
+
+/* Cards */
+QCard{
+    background-color: $background_colorTertiary$;
+    border-radius: 20px;
+}
+
+/* Sidebar */
+QSideBar{
+    background-color: $background_colorSecondary$;
+}
+
+
+/* QWidget */
+QTabWidget::pane {
+    background: rgb(42,49,61);
+	color: rgb(204, 204, 204);
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+QTabWidget::tab-bar:top {
+    top: 1px;
+}
+
+QTabWidget::tab-bar:bottom {
+    bottom: 1px;
+}
+
+QTabWidget::tab-bar:left {
+    right: 1px;
+}
+
+QTabWidget::tab-bar:right {
+    left: 1px;
+}
+
+QTabBar::tab {
+	color: rgb(204, 204, 204);
+}
+
+QTabBar::tab:selected {
+    background: rgb(42,49,61);
+}
+
+QTabBar::tab:!selected {
+    background: silver;
+}
+
+QTabBar::tab:!selected:hover {
+    background: #999;
+}
+
+QTabBar::tab:top:!selected {
+    margin-top: 3px;
+}
+
+QTabBar::tab:bottom:!selected {
+    margin-bottom: 3px;
+}
+
+QTabBar::tab:top, QTabBar::tab:bottom {
+    min-width: 8ex;
+    margin-right: -1px;
+    padding: 5px 10px 5px 10px;
+}
+
+QTabBar::tab:top:selected {
+    border-bottom-color: none;
+}
+
+QTabBar::tab:bottom:selected {
+    border-top-color: none;
+}
+
+QTabBar::tab:top:last, QTabBar::tab:bottom:last,
+QTabBar::tab:top:only-one, QTabBar::tab:bottom:only-one {
+    margin-right: 0;
+}
+
+QTabBar::tab:left:!selected {
+    margin-right: 3px;
+}
+
+QTabBar::tab:right:!selected {
+    margin-left: 3px;
+}
+
+QTabBar::tab:left, QTabBar::tab:right {
+    min-height: 8ex;
+    margin-bottom: -1px;
+    padding: 10px 5px 10px 5px;
+}
+
+QTabBar::tab:left:selected {
+    border-left-color: none;
+}
+
+QTabBar::tab:right:selected {
+    border-right-color: none;
+}
+
+QTabBar::tab:left:last, QTabBar::tab:right:last,
+QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
+    margin-bottom: 0;
+}
+
+/* Background */
+QMainWindow{
+        background-color: rgb(27, 29, 35);
+
+}
+[objectName*=page_]{
+	background-color: rgb(34, 40, 49);
+}
+
+
+/* Line edit */
+QLineEdit {
+	background-color: rgb(255,255,255);
+	border-radius: 5px;
+	border: 2px solid rgb(27, 29, 35);
+	font-size: 15px;
+	color: #8f8f8f;
+
+}
+QLineEdit:hover {
+	border: 2px solid rgb(64, 71, 88);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(91, 101, 124);
+}
+
+
+/* QTreeWidget */
+QTreeWidget {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+}
+QTreeWidget::indicator{
+    width: 24px;
+  height: 24px;
+  background-color: #232629;
+  border-radius: 4px;
+}
+
+QTreeWidget:item {
+  padding: 5px;
+  min-height: 25px;
+}
+
+QHeaderView{
+    border-left: 4px;
+    border-right: 4px;
+}
+
+QHeaderView::section {
+    color:rgb(204, 204, 204);
+    text-transform: uppercase;
+    background-color: rgb(52, 73, 94);
+    border-radius: 0px;
+    padding: 0 10px;
+    height: 35px;
+}
+
+
+/* -------------------------------------------- */
+/* ---------------- Components ---------------- */
+/* -------------------------------------------- */
+/* Large button */
+QPushButton[objectName*=__btn_large] {
+    color: rgb(204, 204, 204);
+	font-size: 20px;
+    background-color: rgb(27, 29, 35);
+	padding-left: 17px;
+	text-align: left;
+	border: none;
+}
+QPushButton:hover[objectName*=__btn_large] {
+	background-color: rgb(33, 37, 43);
+}
+
+QPushButton:pressed[objectName*=__btn_large] {	
+	background-color: rgb(85, 170, 255);
+}
+
+/* Medium button */
+QPushButton[objectName*=__btn_med]{
+	background-color: rgb(52, 59, 72);
+	border-radius: 10px;
+	font-size: 20px;
+	color: rgb(201, 202, 204);
+
+}
+QPushButton:hover[objectName*=__btn_med] {
+	background-color: rgb(57, 65, 80);
+	border: 2px solid rgb(61, 70, 86);
+}
+QPushButton:pressed[objectName*=__btn_med] {	
+	background-color: rgb(35, 40, 49);
+	border: 2px solid rgb(43, 50, 61);
+}
+/* Small button */
+QPushButton[objectName*=__btn_small]{
+	border-radius:10px;
+    background-color: rgb(52, 59, 72);
+    max-width: 35px;
+    max-height: 35px;
+}
+
+QPushButton:hover[objectName*=__btn_small] {
+	background-color: rgb(57, 65, 80);
+	border: 2px solid rgb(61, 70, 86);
+}
+QPushButton:pressed[objectName*=__btn_small] {	
+	background-color: rgb(35, 40, 49);
+	border: 2px solid rgb(43, 50, 61);
+}
+
+
+
+
+/* -------------------------------------------- */
+/* ---------------- Attributes ---------------- */
+/* -------------------------------------------- */
+
+
+
+
+
+
+

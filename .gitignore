@@ -4,6 +4,7 @@ build
 .vscode
 testing
 Icon
+dist
 
 # Ignore directory but not outside (you need a gitkeep file)
 databases/*
@@ -12,6 +13,7 @@ databases/*
 # Ignore files
 config.ini
 testing.py
+MyApplication.spec
 main.spec
 export.csv
 main.spec

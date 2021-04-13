@@ -1,0 +1,75 @@
+
+
+/* Sidebar frame */
+QFrame[objectName^="sidebar_"] {
+    background-color: rgb(27, 29, 35);
+}
+
+/* Large buttons */
+QPushButton[objectName^=btn_large_] {
+	font-size: 20px;
+    background-color: rgb(27, 29, 35);
+    border-style: none;
+
+
+}
+QPushButton:hover[objectName^=btn_large_] {
+	background-color: rgb(33, 37, 43);
+}
+
+QPushButton:pressed[objectName^=btn_large_] {	
+	background-color: rgb(85, 170, 255);
+}
+
+/* Cards */
+QFrame[objectName^=card_] {
+    background-color: rgb(42,49,61);
+    border-radius: 20px;
+}
+
+/* Widgets */
+QWidget[objectName^=card_] {
+    background-color: rgb(42,49,61);
+    border-radius: 20px;
+}
+
+
+
+
+
+
+
+
+
+QFrame[objectName^="frame_"] { background-color: blue; }
+
+QFrame{
+background-color: red;}
+
+
+
+QListWidget {
+    color: #FFFFFF;
+    background-color: #33373B;
+}
+
+QListWidget::item {
+    height: 50px;
+}
+
+QListWidget::item:selected {
+    background-color: #2ABf9E;
+}
+
+QLabel {
+    background-color: #FFFFFF;
+    qproperty-alignment: AlignCenter;
+}
+
+QPushButton {
+    background-color: #2ABf9E;
+    padding: 20px;
+    font-size: 18px;
+}
+
+

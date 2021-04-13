@@ -36,4 +36,5 @@ Git commit messages are tagged using the following system.
 [fix]         Bug fixes
 [clean]       Cleaned up the file structure
 [test]        Testing new stuff
+[major]       Major changes. Usually only used if doing a large rewrite.
 ```
