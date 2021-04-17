@@ -203,7 +203,7 @@ QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab_3_card">
            <attribute name="title">

@@ -3,6 +3,9 @@ from datetime import date
 from configparser import ConfigParser
 from modules.helpers import resource_path, get_path, resource_path, get_session, get_engine
 from modules.constants import CONFIG_DIR
+from PySide2.QtWidgets import QTreeWidgetItem
+from PySide2.QtCore import QSize, QPropertyAnimation, QEasingCurve, QCoreApplication
+
 from modules.dialogs import FirstTimeSetup
 from sqlalchemy.sql.sqltypes import String, Date, Integer, Boolean
 
@@ -82,6 +85,8 @@ class ConfigMain(Config):
         self.data_dir = self.config.get("general", "dir")
 
         # Sections
+        self.section_database_names = self.config.items("database_names")
+        self.section_database_creation_dates = self.config.items("database_creation_date")
         
     ''' Functions '''
     # Set theme
@@ -91,7 +96,11 @@ class ConfigMain(Config):
 
         # Write
         self.write_to_config(self.path, self.config)
-
+    
+    # Get template of database
+    def read_template(self, index):
+        return self.config.get("database_template", str(index))
+    
     # Set currently selected database
     def set_database(self, database_index):
         self.config.set("general", "selected_db", str(database_index))
@@ -99,7 +108,7 @@ class ConfigMain(Config):
         self.write_to_config(self.path, self.config)
     
     # Create new database
-    def create_database(self, database_name):
+    def create_database(self, database_name, template):
         # Variables
         index = len(self.config.items("database_names"))
         date_time  = date.today().strftime("%Y-%m-%d")  
@@ -107,7 +116,8 @@ class ConfigMain(Config):
         # Add database to end
         self.config.set("database_names", str(index), str(database_name))
         self.config.set("database_creation_date", str(index), str(date_time))
-
+        self.config.set("database_template", str(index), str(template))
+        
         # Write
         self.write_to_config(self.path, self.config)
 
@@ -160,17 +170,75 @@ class ConfigMain(Config):
         # Write
         self.write_to_config(self.path, self.config)
 
+    
+    # ----------------- #
+    #      UI view      #
+    # ----------------- #
+    ''' Updates the lists showing avaliable databases (Reading from config file). ''' 
+    def ui_update_database_list(self, interface):
+        # Clear previous tree view
+        interface.ui.tree_databaseViewHome.clear()
+        interface.ui.tree_databaseViewAdd.clear()
+
+        # Get variables
+        database_names = self.section_database_names
+        database_creation_dates = self.section_database_creation_dates
+
+        # for item in 
+        for database in database_names:
+            # Create QTreeWidget item
+            QTreeWidgetItem(interface.ui.tree_databaseViewHome)
+            QTreeWidgetItem(interface.ui.tree_databaseViewAdd)
+
+            # Set QTreeWidget attributes
+            item_home = interface.ui.tree_databaseViewHome.topLevelItem(int(database[0]))
+            item_add = interface.ui.tree_databaseViewAdd.topLevelItem(int(database[0]))
+
+            item_home.setText(0, QCoreApplication.translate("MainWindow", database[1], None)) 
+            item_add.setText(0, QCoreApplication.translate("MainWindow", database[1], None))
+
+        for date in database_creation_dates:
+            item_home = interface.ui.tree_databaseViewHome.topLevelItem(int(date[0]))
+            item_add = interface.ui.tree_databaseViewAdd.topLevelItem(int(date[0]))
+            item_home.setText(1, QCoreApplication.translate("MainWindow", date[1], None)) 
+            item_add.setText(1, QCoreApplication.translate("MainWindow", date[1], None)) 
+    
+    
+    ''' Updates the lists showing avaliable databases (Reading from config file). ''' 
+    def ui_database_selection(self, interface):
+          # Check if db is not selected
+        if self.selected_database == "none":            
+            # Set output text to no selection
+            self.ui.output_databaseTable__text_xl2.setText("No database selected")
+            self.ui.output_dbSelection__text_lg__font_bold_2.setText("No selection")
+            self.ui.output_dbSelection__text_lg__font_bold.setText("No selection")
+        else:
+            try:
+                # Get Qitem
+                q_tree_widget_item = self.ui.tree_databaseViewHome.topLevelItem(int(db_index))
+
+                # Set selection
+                self.ui.tree_databaseViewHome.setCurrentItem(q_tree_widget_item)
+                self.ui.tree_databaseViewAdd.setCurrentItem(q_tree_widget_item)
+
+                # Get DB name and update view
+                db_name = q_tree_widget_item.text(0)
+                db = Db(database=db_name)
+                db.update_view(self)
+            except:
+                return
 
 
 class ConfigTemplate(ConfigMain):
     ''' Class attributes '''
 
     ''' Instance attributes '''
-    def __init__(self):
+    def __init__(self, template):
         # Classes
         self.config_main = ConfigMain()
+
         # Variables
-        self.template_name = self.config_main.selected_template
+        self.template_name = template
         self.path = self.base_dir + self.template_name + ".ini"
         self.config = self.read_config(path=self.path)
 
