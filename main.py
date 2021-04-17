@@ -69,6 +69,7 @@ def load_ui(self):
 # ------------------------------------------------------------- #
 # 3 - Classes                                                   #
 # ------------------------------------------------------------- #
+''' Main window '''
 class MainWindow(QMainWindow):
     # ------------------------- #
     #        Main window        #
@@ -321,7 +322,7 @@ def ui_change_page(self, previous_page=None, page=None): # TODO - create custom 
     # ------------- #
     #     Debug     #
     # ------------- #
-    debug_print(level="top", name="User self", message=f"Changing page to '{page}'", function=ui_change_page.__name__)
+    debug_print(level="top", name="User interface", message=f"Changing page to '{page}'", function=ui_change_page.__name__)
 
     # ------------- #
     #    Classes    #
@@ -361,7 +362,51 @@ def ui_change_page(self, previous_page=None, page=None): # TODO - create custom 
         self.ui.btn_add__btn_large.setStyleSheet("background-color: rgb(27, 29, 35)")
     elif previous_page == 2:
         self.ui.btn_data__btn_large.setStyleSheet("background-color: rgb(27, 29, 35)")
+
+# --------------------------- #
+# 3.5 - Set selected database #
+# --------------------------- # 
+''' Updates the view to represent the currently selected db - Reads config file. '''
+def ui_selected_database(self):
+    # Debug/print
+    print(f"[Update] Setting currently selected DB")
+
+    # Read config
+    config = Settings()
+    db_index = config.item_current_db
     
+
+    # Check if db is not selected
+    if db_index == "none":
+        # Progress message
+        print("        [STATUS] - Currently no selection - Setting no selection")
+        
+        # Set output text to no selection
+        self.ui.output_databaseTable__text_xl2.setText("No database selected")
+        self.ui.output_dbSelection__text_lg__font_bold_2.setText("No selection")
+        self.ui.output_dbSelection__text_lg__font_bold.setText("No selection")
+    # If there is selection
+    else:
+        # Progress message
+        print("        [STATUS] - Setting db selection")
+
+        try:
+            # Get Qitem
+            q_tree_widget_item = self.ui.tree_databaseViewHome.topLevelItem(int(db_index))
+
+            # Set selection
+            self.ui.tree_databaseViewHome.setCurrentItem(q_tree_widget_item)
+            self.ui.tree_databaseViewAdd.setCurrentItem(q_tree_widget_item)
+
+            # Get DB name and update view
+            db_name = q_tree_widget_item.text(0)
+            db = Db(database=db_name)
+            db.update_view(self)
+        except:
+            return
+
+    # Message
+    print("        [SUCCESS] - Currently selected db is set")
 
 
 # ------------------------------------------------------------- #

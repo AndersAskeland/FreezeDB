@@ -10,16 +10,19 @@
 # 1 - Imports                                                   #
 # ------------------------------------------------------------- #
 ''' External packages '''
+import sys
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import Qt, QSize, QPoint, QPointF, QRectF, QRect,QEasingCurve, QPropertyAnimation, QSequentialAnimationGroup, Slot, Property, QXmlStreamReader
 from PySide2.QtSvg import QSvgGenerator, QSvgRenderer, QSvgWidget
 from PySide2.QtWidgets import QCheckBox, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSpacerItem, QSizePolicy, QFrame
 from PySide2.QtGui import QColor, QBrush, QPaintEvent, QPen, QPainter, QPixmap
-import sys
 
-''' Local modules '''
+''' Local functions '''
 from modules.svg import svg_moon, svg_sun
 
+''' Local classes '''
+
+''' Local resources '''
 
 # ------------------------------------------------------------- #
 # 2 - Settings/constants                                        #

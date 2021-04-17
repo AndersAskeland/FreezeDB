@@ -1,3 +1,13 @@
+# ----------------------------------------------------------------------------- #
+# Module: Configuration                                                         #
+#                                                                               #
+# What: Class and functions related to the configuration.                       #
+#                                                                               #
+# ----------------------------------------------------------------------------- #
+# ------------------------------------------------------------- #
+# 1 - Imports                                                   #
+# ------------------------------------------------------------- #
+''' External modules '''
 import os, sys, shutil
 from datetime import date
 from configparser import ConfigParser
@@ -5,10 +15,23 @@ from modules.helpers import resource_path, get_path, resource_path, get_session,
 from modules.constants import CONFIG_DIR
 from PySide2.QtWidgets import QTreeWidgetItem
 from PySide2.QtCore import QSize, QPropertyAnimation, QEasingCurve, QCoreApplication
-
-from modules.dialogs import FirstTimeSetup
 from sqlalchemy.sql.sqltypes import String, Date, Integer, Boolean
 
+''' Local functions '''
+
+''' Local classes '''
+from modules.dialogs import FirstTimeSetup
+
+''' Local resources '''
+
+# ------------------------------------------------------------- #
+# 2 - Settings, constants, helper functions                     #
+# ------------------------------------------------------------- #
+
+# ------------------------------------------------------------- #
+# 3 - Classes                                                   #
+# ------------------------------------------------------------- #
+''' Default config behaviours '''
 class Config:
     ''' Class attributes '''
     base_dir = resource_path(CONFIG_DIR)
