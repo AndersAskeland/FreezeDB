@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>2048</width>
-    <height>764</height>
+    <width>1163</width>
+    <height>789</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -81,7 +81,7 @@
           <string>     Home</string>
          </property>
          <property name="icon">
-          <iconset resource="../graphics/icons.qrc">
+          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/home-white-18dp.svg</normaloff>:/white_icons/white_icons/home-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -104,7 +104,7 @@
           <string notr="true">     Add</string>
          </property>
          <property name="icon">
-          <iconset resource="../graphics/icons.qrc">
+          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/library_add-white-48dp.svg</normaloff>:/white_icons/white_icons/library_add-white-48dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -127,7 +127,7 @@
           <string>     View</string>
          </property>
          <property name="icon">
-          <iconset resource="../graphics/icons.qrc">
+          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/leaderboard-white-18dp.svg</normaloff>:/white_icons/white_icons/leaderboard-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -150,7 +150,7 @@
           <string>     Export</string>
          </property>
          <property name="icon">
-          <iconset resource="../graphics/icons.qrc">
+          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/folder-white-18dp.svg</normaloff>:/white_icons/white_icons/folder-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -186,7 +186,7 @@
           <string>     Settings</string>
          </property>
          <property name="icon">
-          <iconset resource="../graphics/icons.qrc">
+          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/settings-white-18dp.svg</normaloff>:/white_icons/white_icons/settings-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -248,7 +248,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../graphics/icons.qrc">
+          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/menu-white-18dp.svg</normaloff>:/white_icons/white_icons/menu-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -415,7 +415,7 @@
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap resource="../graphics/icons.qrc">:/figures/figures/logo.png</pixmap>
+                   <pixmap resource="../../### REWRITE ###/resources/graphics/icons.qrc">:/figures/figures/logo.png</pixmap>
                   </property>
                  </widget>
                 </item>
@@ -469,11 +469,11 @@ of clinical samples.</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_8">
                 <item>
-                 <widget class="QLabel" name="txt_dashboard__text_2xl">
+                 <widget class="QLabel" name="txt_dashboard">
                   <property name="maximumSize">
                    <size>
                     <width>16777214</width>
-                    <height>30</height>
+                    <height>40</height>
                    </size>
                   </property>
                   <property name="text">
@@ -695,7 +695,7 @@ of clinical samples.</string>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="btn_pref__btn_small">
+                          <widget class="QSmallButton" name="btn_pref">
                            <property name="maximumSize">
                             <size>
                              <width>16777215</width>
@@ -706,7 +706,7 @@ of clinical samples.</string>
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset resource="../graphics/icons.qrc">
+                            <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
                              <normaloff>:/white_icons/white_icons/settings-white-18dp.svg</normaloff>:/white_icons/white_icons/settings-white-18dp.svg</iconset>
                            </property>
                            <property name="iconSize">
@@ -867,12 +867,12 @@ of clinical samples.</string>
                          <item>
                           <layout class="QVBoxLayout" name="layout_level_4__1">
                            <item>
-                            <widget class="QPushButton" name="btn_refreshDatabase__btn_small">
+                            <widget class="QSmallButton" name="btn_refreshDatabase">
                              <property name="text">
                               <string/>
                              </property>
                              <property name="icon">
-                              <iconset resource="../graphics/icons.qrc">
+                              <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
                                <normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</iconset>
                              </property>
                              <property name="iconSize">
@@ -884,13 +884,13 @@ of clinical samples.</string>
                             </widget>
                            </item>
                            <item>
-                            <widget class="QPushButton" name="btn_deleteDatabase__btn_small">
+                            <widget class="QSmallButton" name="btn_deleteDatabase">
                              <property name="text">
                               <string/>
                              </property>
                              <property name="icon">
-                              <iconset resource="../graphics/icons.qrc">
-                               <normaloff>:/white_icons/white_icons/settings-white-18dp.svg</normaloff>:/white_icons/white_icons/settings-white-18dp.svg</iconset>
+                              <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+                               <normaloff>:/white_icons/white_icons/delete-white-18dp.svg</normaloff>:/white_icons/white_icons/delete-white-18dp.svg</iconset>
                              </property>
                              <property name="iconSize">
                               <size>
@@ -1023,7 +1023,7 @@ and remove to/from.</string>
                        <string/>
                       </property>
                       <property name="pixmap">
-                       <pixmap resource="../graphics/icons.qrc">:/figures/figures/add.png</pixmap>
+                       <pixmap resource="../../### REWRITE ###/resources/graphics/icons.qrc">:/figures/figures/add.png</pixmap>
                       </property>
                      </widget>
                     </item>
@@ -1232,7 +1232,7 @@ and remove to/from.</string>
                        <string/>
                       </property>
                       <property name="pixmap">
-                       <pixmap resource="../graphics/icons.qrc">:/figures/figures/remove.png</pixmap>
+                       <pixmap resource="../../### REWRITE ###/resources/graphics/icons.qrc">:/figures/figures/remove.png</pixmap>
                       </property>
                      </widget>
                     </item>
@@ -1389,7 +1389,7 @@ and remove to/from.</string>
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="../graphics/icons.qrc">
+                       <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
                         <normaloff>:/white_icons/white_icons/delete-white-18dp.svg</normaloff>:/white_icons/white_icons/delete-white-18dp.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -1406,7 +1406,7 @@ and remove to/from.</string>
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="../graphics/icons.qrc">
+                       <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
                         <normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -1459,7 +1459,7 @@ and remove to/from.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>2048</width>
+     <width>1163</width>
      <height>22</height>
     </rect>
    </property>
@@ -1483,9 +1483,14 @@ and remove to/from.</string>
    <extends>QCheckBox</extends>
    <header>modules.widgets</header>
   </customwidget>
+  <customwidget>
+   <class>QSmallButton</class>
+   <extends>QPushButton</extends>
+   <header>modules.property</header>
+  </customwidget>
  </customwidgets>
  <resources>
-  <include location="../graphics/icons.qrc"/>
+  <include location="../../### REWRITE ###/resources/graphics/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
