@@ -4,12 +4,10 @@
 # What: Custom widgets that are incorerated into app.                           #
 #                                                                               #
 # ----------------------------------------------------------------------------- #
-
-
 # ------------------------------------------------------------- #
 # 1 - Imports                                                   #
 # ------------------------------------------------------------- #
-''' External packages '''
+''' External modules '''
 import sys
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import Qt, QSize, QPoint, QPointF, QRectF, QRect,QEasingCurve, QPropertyAnimation, QSequentialAnimationGroup, Slot, Property, QXmlStreamReader

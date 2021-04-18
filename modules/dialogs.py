@@ -1,39 +1,34 @@
-# ----------------------------------------------------------------------------- #
-# Title: Dialogs                                                                #
-#                                                                               #
-# What: Different types of dialogs used in the program.                         #
-#                                                                               #
-# ----------------------------------------------------------------------------- #
-# ------------------------------------------------------------- #
-# 1 - Imports                                                   #
-# ------------------------------------------------------------- #
-''' External modules '''
+# -----------------------------------------------------------------------------
+# Module: Dialogs                                                                
+#                                                                               
+# What: Different types of dialogs used in the program.                         
+#                                                                               
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Imports
+# ------------------------------------------------------------------------------
+# External modules
 import sys
+from lorem_text import lorem
 from PySide2.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QApplication, QScrollArea, QWizard, QSizePolicy, QFileDialog, QWizard, QHBoxLayout, QPushButton, QLineEdit, QSpacerItem, QDialog
 from PySide2.QtCore import QCoreApplication
-from lorem_text import lorem
 
-''' Local functions '''
+# Local functions 
 
-''' Local classes '''
+# Local classes
 from modules.widgets import SidebarFirstSetup, AnimatedToggle
 
-''' Local resources '''
+# Local resources 
 from resources.user_interface.dialog_create_db import Ui_create_db_page_
  
-# ------------------------------------------------------------- #
-# 2 - Settings/constants                                        #
-# ------------------------------------------------------------- #
-
-
-# ------------------------------------------------------------- #
-# 3 - Classes                                                   #
-# ------------------------------------------------------------- #
-# --------------------------- #
-# 3.1 - First time startup    #
-# --------------------------- # 
-''' Dialog/wizard that is shown on first program startup. '''
+# ------------------------------------------------------------------------------
+# Classes
+# ------------------------------------------------------------------------------
 class FirstTimeSetup(QWizard):
+    ''' Wizard that is shown on first program startup. '''
+    # ------------------- Attributes ------------------- # 
+
+    # ---------------------- Init ---------------------- # 
     def __init__(self, parent=None):
         super().__init__(parent)
         # Set text/etc
@@ -46,7 +41,7 @@ class FirstTimeSetup(QWizard):
         self.wizard.addPage(self.licencePage())
         self.wizard.addPage(self.selectDBPage())
 
-        # Wizard settings
+        # Settings
         self.wizard.setWindowTitle("FreezeDB - First time setup")
         self.wizard.setWizardStyle(QWizard.ModernStyle)        
         self.wizard.setMinimumSize(730, 400)
@@ -59,9 +54,9 @@ class FirstTimeSetup(QWizard):
         self.wizard.show()
         self.wizard.exec_()
 
-
-    # Welcome
+    # -------------------- Pages -------------------- # 
     def introPage(self):
+        ''' Front page of first time setup dialog. '''
         page = QWizardPage()
         page.setTitle("FreezeDB - First time setup")
 
@@ -74,9 +69,8 @@ class FirstTimeSetup(QWizard):
 
         return page
 
-    
-    # Licence page
     def licencePage(self):
+        ''' Page showing licence. '''
         page = QWizardPage()
         page.setTitle("Licence terms")
         page.setButtonText(QWizard.NextButton, "Accept")
@@ -96,8 +90,8 @@ class FirstTimeSetup(QWizard):
 
         return page
 
-    # Select DB page
     def selectDBPage(self, text="No folder selected!"):
+        ''' Page allowing user to select folder where database files are to be stored. '''
         self.page = QWizardPage()
         self.page.setTitle("Set data folder")
 
@@ -136,8 +130,9 @@ class FirstTimeSetup(QWizard):
         # Return
         return self.page
 
-    # Set folder
+    # -------------------- Function -------------------- # 
     def dialog_setFolder(self):
+        ''' Popup dialog that allows user to select folder using native wizard. '''
         dlg = QFileDialog()
         
         # Options
@@ -145,18 +140,17 @@ class FirstTimeSetup(QWizard):
         dlg.setFileMode(QFileDialog.Directory)
         dlg.Option.ShowDirsOnly
 
-        # Retrieve  selection
+        # Retrieve selection
         if dlg.exec_():
             self.selected_dir = dlg.selectedFiles()[0] + "/"
             self.set_folder_label()
 
-    # Store folder into settings
     def data_folder(self):
+        ''' Set data folder. NOTE: Might not be used. '''
         return str(self.selected_dir)
 
-    # Set folder name
     def set_folder_label(self):
-        print("Inside set text function")
+        ''' Set folder label. TODO: Figure out what this does. '''
         if self.selected_dir == None:
             return "No Folder Selected!"
         else:
@@ -164,13 +158,13 @@ class FirstTimeSetup(QWizard):
 
 
 class CreateDBTemplate(QDialog):
+    ''' Dialog/wizard to create database template. '''
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # Set widget
+        # Setup UI
         self.dialog = Ui_create_db_page_()
-        
-        # 
         self.dialog.setupUi(self)
 
+        # Run
         self.exec_()
