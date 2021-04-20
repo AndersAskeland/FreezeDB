@@ -19,3 +19,4 @@ from configparser import ConfigParser
 CONFIG_DIR = "resources/settings/"
 STYLE_DARK = "resources/stylesheets/stylesheet_main_dark.qss"
 STYLE_LIGHT = "resources/stylesheets/stylesheet_main_light.qss"
+STYLESHEET = "resources/stylesheets/stylesheet.qss"

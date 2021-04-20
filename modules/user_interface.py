@@ -1,84 +1,51 @@
-# ----------------------------------------------------------------------------- #
-# Module: User interface                                                        #
-#                                                                               #
-# What: User interface logic and definitions.                                   #
-#                                                                               #
-# ----------------------------------------------------------------------------- #
-# ------------------------------------------------------------- #
-# 1 - Imports                                                   #
-# ------------------------------------------------------------- #
-''' External modules '''
+# -----------------------------------------------------------------------------
+# Module: User interface
+#
+# What:User interface logic and definitions.
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# 1 - Imports
+# ------------------------------------------------------------------------------
+# External modules 
 import sys
+from jinja2 import Template
+from xml.etree import ElementTree
 from PySide2.QtWidgets import QApplication, QMainWindow, QTreeWidgetItem
 from PySide2.QtCore import QSize, QPropertyAnimation, QEasingCurve, QCoreApplication
 from PySide2.QtGui import QPalette, QColor
 
-''' Local functions '''
+# Local functions 
 from modules.database import database_activate, database_create, database_delete, database_dir
-from modules.constants import CONFIG_DIR, STYLE_DARK, STYLE_LIGHT
+from modules.constants import CONFIG_DIR, STYLE_DARK, STYLE_LIGHT, STYLESHEET
 from modules.helpers import load_defaults, debug_print, resource_path
 
-''' Local classes '''
+# Local classes 
 from modules.widgets import AnimatedToggle
 from modules.database import Database
 from modules.dialogs import CreateDBTemplate
 from modules.configuration import ConfigMain
 
-''' Local resources '''
+# Local resources 
 from resources.user_interface.mainwindow import Ui_MainWindow
 from resources.user_interface.dialog_create_db import Ui_create_db_page_
 
-# ------------------------------------------------------------- #
-# 2 - Settings, constants, helper functions                     #
-# ------------------------------------------------------------- #
-''' Loads the view from settings file ''' 
-def load_ui(self):
-    # Debug
-    debug_print(level="top", name="Startup", message="Loading settings.", function="load_ui")
 
-    # Check if config exists
-    debug_print(level="sub", message="Checking if config exists.")
-    config = ConfigMain()
-
-    # Load theme 
-    debug_print(level="sub", message="Reading and applying theme from settings file.")
-    palette = QPalette()
-    dark_theme_dir = resource_path(STYLE_DARK)
-    light_theme_dir = resource_path(STYLE_LIGHT) 
-    theme = config.selected_theme
-    if theme == "dark":
-        self.setStyleSheet(open(dark_theme_dir, "r").read())
-        self.ui.animate_toggle.setChecked(True)
-
-        palette.setColor(QPalette.Window, QColor(27, 29, 35))
-        self.setPalette(palette)
-    else:
-        self.setStyleSheet(open(light_theme_dir, "r").read())
-
-        # TODO - Palatte
-    
-    # Update database list
-    debug_print(level="sub", message="Reading database list from config.")
-    self.ui.tree_databaseViewHome.clear()
-    self.ui.tree_databaseViewAdd.clear()
-    config.ui_update_database_list(self)
-
-    # Set database 
-
-
-# ------------------------------------------------------------- #
-# 3 - Classes                                                   #
-# ------------------------------------------------------------- #
-''' Main window '''
+# ------------------------------------------------------------------------------
+# 2 - Classes
+# ------------------------------------------------------------------------------
 class MainWindow(QMainWindow):
-    # ------------------------- #
-    #        Main window        #
-    # ------------------------- # 
+    ''' Main FreezeDB window '''
+    
+    # ------------------- Attributes ------------------- # 
+
+    # ------------------ Constructor ------------------- #
     def __init__(self):
         super(MainWindow, self).__init__()
 
         # Initialize user self
-        self.init_ui()
+        self.initialize_ui()
 
         # Custom widgets
         self.custom_widgets()
@@ -90,10 +57,10 @@ class MainWindow(QMainWindow):
         self.load_settings()
 
 
-    # ------------------------- #
-    # 2.2 - User self      #
-    # ------------------------- # 
-    def init_ui(self):
+    # ------------------- Functions ------------------- # 
+    def initialize_ui(self):
+        ''' Loads the UI '''
+        
         # Load UI 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -110,18 +77,16 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(window_size)
     
 
-    # ------------------------- #
-    # 2.3 - Custom widgets      #
-    # ------------------------- # 
     def custom_widgets(self):
+        ''' Loads custom widgets '''
+        
         pass
         # Sidebar
-        ''' TODO - Every sidebar button can be custom '''
-    
-    # ------------------------- #
-    # 2.4 - Load settings       #
-    # ------------------------- # 
+        # TODO: Do i need this function?
+
     def load_settings(self): 
+        ''' Setup the UI based on settings stored in config.ini '''
+        
         # Load UI
         load_ui(self)
      
@@ -129,10 +94,9 @@ class MainWindow(QMainWindow):
         database_dir(self)
 
 
-    # ------------------------- #
-    # 2.5 - Connections/signals #
-    # ------------------------- # 
     def connections(self):
+        ''' Defines connections. '''
+        
         # Menu toggle
         self.ui.btn_toggleMenu__btn_large.clicked.connect(lambda: ui_menu_toggle(self))
         
@@ -165,111 +129,78 @@ class MainWindow(QMainWindow):
 
 
 
-
-
-# ---------------------------------------------------------------------------------------------------------------------------- #
-# ---------------------------------------------------------------------------------------------------------------------------- #
-# ---------------------------------------------------------------------------------------------------------------------------- #
-
-# ------------------------------------------------------------- #
-# 4 - Functions                                                 #
-# ------------------------------------------------------------- #
-# --------------------------- #
-# 3.1 - Change theme          #
-# --------------------------- # 
-''' Connected to custom theme change widget - changes the theme from dark to light. '''
-def ui_change_theme(self): # UPDATED
-    # ------------- #
-    #     Debug     #
-    # ------------- #
+# ------------------------------------------------------------------------------
+# 3 - Functions
+# ------------------------------------------------------------------------------
+def ui_change_theme(self): 
+    ''' Connected to custom theme change widget - changes the theme from dark to light. '''
+    
+    # --------------------- Debug --------------------- # 
     debug_print(level="top", name="User interface", message="Changing theme and saving theme to config.", function=ui_change_theme.__name__)
     
-    # ------------- #
-    #    Classes    #
-    # ------------- #
+    # ------------------- Variables ------------------- # 
     palette = QPalette()
-    config_main = ConfigMain()
-
-    # ------------- #
-    #   Variables   #
-    # ------------- #    
+    config_main = ConfigMain()   
     dark_theme_dir = resource_path(STYLE_DARK)
     light_theme_dir = resource_path(STYLE_LIGHT) 
     button_state = self.ui.animate_toggle.isChecked()
 
-    # ------------- #
-    #     Error     #
-    # ------------- #
+    # ---------------- Error handling ---------------- # 
 
-    # ------------- #
-    #     Logic     #
-    # ------------- #
+    # -------------------- Logics -------------------- #
+    # Read template file (XML)
     if button_state:
-        # Dark theme
-        theme = "dark"
-        self.setStyleSheet(open(dark_theme_dir, "r").read()) # Dark
-        
-        palette.setColor(QPalette.Window, QColor(27, 29, 35))
-        self.setPalette(palette)
+        tree = ElementTree.parse("resources/stylesheets/dark_theme.xml")
+        theme = {child.attrib['name']: child.text for child in tree.getroot()}
+        color = "dark"
     else:
-        # Light theme
-        self.setStyleSheet(open(light_theme_dir, "r").read()) # Dark
-        theme = "light"
+        tree = ElementTree.parse("resources/stylesheets/light_theme.xml")
+        theme = {child.attrib['name']: child.text for child in tree.getroot()}
+        color = "light"
+    
+    # Create template
+    with open("resources/stylesheets/template.qss", "r") as template_file:
+        with open("resources/stylesheets/stylesheet.qss", "w") as stylesheet_file:
+            template = Template(template_file.read())
+            output = (template.render(theme))
+            stylesheet_file.write(output)
 
-        # TODO - Palette
+    # Set stylesheet
+    self.setStyleSheet(open(STYLESHEET, "r").read())
+
+    #     palette.setColor(QPalette.Window, QColor(27, 29, 35))
+    #     self.setPalette(palette)
 
     # Save to config
-    config_main.change_theme(theme)
-
-    # ------------- #
-    #      End      #
-    # ------------- #
-    debug_print(complete=1)
+    config_main.change_theme(color)
 
 
-# --------------------------- #
-# 3.2 - Load theme            #
-# --------------------------- # 
 ''' Loads theme from settings file. '''
-def ui_load_theme(self): # UPDATED
-    # ------------- #
-    #     Debug     #
-    # ------------- #
+def ui_load_theme(self):
+    ''' Loads theme from settings file. ''' 
+    
+    # --------------------- Debug --------------------- # 
     debug_print(level="top", name="User interface", message="Reading and applying theme from settings file.", function=ui_load_theme.__name__)
     
-    # ------------- #
-    #    Classes    #
-    # ------------- #
+    # ------------------- Variables ------------------- # 
     palette = QPalette()
-    config_main = ConfigMain()
-    
-    # ------------- #
-    #    Classes    #
-    # ------------- #    
+    config_main = ConfigMain()   
     dark_theme_dir = resource_path(STYLE_DARK)
     light_theme_dir = resource_path(STYLE_LIGHT) 
     theme = config_main.selected_theme
 
-    # ------------- #
-    #     Error     #
-    # ------------- #
+    # ---------------- Error handling ---------------- # 
 
-    # ------------- #
-    #     Logic     #
-    # ------------- #
-    if theme == "dark":
-        # Dark theme
+
+    # -------------------- Logics -------------------- #
+    if theme == "dark": # Dark theme
         self.setStyleSheet(open(dark_theme_dir, "r").read()) # Dark
         self.ui.animate_toggle.setChecked(True)
 
         palette.setColor(QPalette.Window, QColor(27, 29, 35))
         self.setPalette(palette)
-
-    else:
-        # Light theme
+    else: # Light theme
         self.setStyleSheet(open(light_theme_dir, "r").read()) # Dark)
-
-        # TODO - Palatte
 
 
 # --------------------------- #
@@ -407,6 +338,40 @@ def ui_selected_database(self):
 
     # Message
     print("        [SUCCESS] - Currently selected db is set")
+
+''' Loads the view from settings file ''' 
+def load_ui(self):
+    # Debug
+    debug_print(level="top", name="Startup", message="Loading settings.", function="load_ui")
+
+    # Check if config exists
+    debug_print(level="sub", message="Checking if config exists.")
+    config = ConfigMain()
+
+    # Load theme 
+    debug_print(level="sub", message="Reading and applying theme from settings file.")
+    palette = QPalette()
+    dark_theme_dir = resource_path(STYLE_DARK)
+    light_theme_dir = resource_path(STYLE_LIGHT) 
+    theme = config.selected_theme
+    if theme == "dark":
+        self.setStyleSheet(open(dark_theme_dir, "r").read())
+        self.ui.animate_toggle.setChecked(True)
+
+        palette.setColor(QPalette.Window, QColor(27, 29, 35))
+        self.setPalette(palette)
+    else:
+        self.setStyleSheet(open(light_theme_dir, "r").read())
+
+        # TODO - Palatte
+    
+    # Update database list
+    debug_print(level="sub", message="Reading database list from config.")
+    self.ui.tree_databaseViewHome.clear()
+    self.ui.tree_databaseViewAdd.clear()
+    config.ui_update_database_list(self)
+
+    # Set database 
 
 
 # ------------------------------------------------------------- #

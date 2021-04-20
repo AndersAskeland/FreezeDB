@@ -4,7 +4,6 @@
 # What: Functions used in multiple modules. Defined here to avoid circular      #
 #       imports.                                                                #
 # ----------------------------------------------------------------------------- #
-
 # ------------------------------------------------------------- #
 # 1 - Imports                                                   #
 # ------------------------------------------------------------- #
@@ -21,8 +20,8 @@ from sqlalchemy.orm import sessionmaker
 # ------------------------------------------------------------- #
 # 2 - SETTING, CONSTANTS, AND HELPER FUNCTIONS                  #
 # ------------------------------------------------------------- #
-""" Set print colors. """
 class PrintColor:
+    """ Set terminal print colors. Used for debug messages. """
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'

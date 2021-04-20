@@ -1,22 +1,21 @@
 # -----------------------------------------------------------------------------
-# Module: Dialogs                                                                
-#                                                                               
-# What: Different types of dialogs used in the program.                         
-#                                                                               
+# Module: Dialog's
+#
+# What: Different types of dialog's used in the program.
+#
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Imports
 # ------------------------------------------------------------------------------
 # External modules
-import sys
 from lorem_text import lorem
-from PySide2.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QApplication, QScrollArea, QWizard, QSizePolicy, QFileDialog, QWizard, QHBoxLayout, QPushButton, QLineEdit, QSpacerItem, QDialog
+from PySide2.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QScrollArea, QWizard, QSizePolicy, QFileDialog, QWizard, QHBoxLayout, QPushButton, QLineEdit, QSpacerItem, QDialog
 from PySide2.QtCore import QCoreApplication
 
 # Local functions 
 
 # Local classes
-from modules.widgets import SidebarFirstSetup, AnimatedToggle
+from modules.widgets import SidebarFirstSetup
 
 # Local resources 
 from resources.user_interface.dialog_create_db import Ui_create_db_page_
@@ -28,7 +27,7 @@ class FirstTimeSetup(QWizard):
     ''' Wizard that is shown on first program startup. '''
     # ------------------- Attributes ------------------- # 
 
-    # ---------------------- Init ---------------------- # 
+    # ------------------ Constructor ------------------- # 
     def __init__(self, parent=None):
         super().__init__(parent)
         # Set text/etc

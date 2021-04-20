@@ -1,35 +1,25 @@
-/* -------------------------------------------- */
-/* ---------------   Constants    ------------- */
-/* -------------------------------------------- */
-@
-color_text = rgb(204,204,204)
-background_colorMain = rgb(34, 40, 49)
-background_colorSecondary = rgb(27, 29, 35)
-background_colorTertiary = rgb(42,49,61)
-@
 
-
-/* -------------------------------------------- */
-/* ---------------   Widgets    --------------- */
-/* -------------------------------------------- */
+/* --------------------------------------------
+/*  Widgets 
+/* --------------------------------------------
 /* Q labels */
 QLabel{
-    color: $color_text$;
+    color: {{ primaryColor }};
 }
 
 QMainWindow{
-    background-color: $background_colorTertiary$;
+    background-color: {{ secondaryColor }};
 }
 
 /* Cards */
 QCard{
-    background-color: $background_colorTertiary$;
+    background-color: {{ secondaryColor }};
     border-radius: 20px;
 }
 
 /* Sidebar */
 QSideBar{
-    background-color: $background_colorSecondary$;
+    background-color: {{ primaryLightColor }};
 }
 
 
