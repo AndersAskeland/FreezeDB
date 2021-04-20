@@ -8,7 +8,6 @@ dist
 pyinstaller
 __build__
 old_versions
-
 # Ignore directory but not outside (you need a gitkeep file)
 resources/data*
 !resources/data/.gitkeep
@@ -16,6 +15,7 @@ resources/data*
 # Ignore files
 config.ini
 testing.py
+.DS_Store
 MyApplication.spec
 main.spec
 export.csv
