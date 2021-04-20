@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         window_size = QSize(1350, 800)
         self.resize(window_size)
         self.setMinimumSize(window_size)
-    
+
 
     def custom_widgets(self):
         ''' Loads custom widgets '''
@@ -89,7 +89,7 @@ class MainWindow(QMainWindow):
         
         # Load UI
         load_ui(self)
-     
+
         # Read databases
         database_dir(self)
 
@@ -374,16 +374,3 @@ def load_ui(self):
     # Set database 
 
 
-# ------------------------------------------------------------- #
-# 5 - Application start                                         #
-# ------------------------------------------------------------- #
-if __name__ == "__main__":
-    # Create application
-    app = QApplication(sys.argv)
-
-    # Show GUI window
-    window = MainWindow()
-    window.show()
-    
-    # App execute/loop
-    sys.exit(app.exec_())
