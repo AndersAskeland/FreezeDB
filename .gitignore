@@ -5,10 +5,13 @@ build
 testing
 Icon
 dist
+pyinstaller
+__build__
+old_versions
 
 # Ignore directory but not outside (you need a gitkeep file)
-databases/*
-!databases/.gitkeep
+resources/data*
+!resources/data/.gitkeep
 
 # Ignore files
 config.ini
@@ -18,3 +21,4 @@ main.spec
 export.csv
 main.spec
 ui_mainwindow.py
+resources/settings/config.ini
