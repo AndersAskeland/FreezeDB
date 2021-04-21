@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1025</width>
+    <width>1103</width>
     <height>829</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="mainWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -52,7 +55,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <property name="spacing">
-        <number>-1</number>
+        <number>0</number>
        </property>
        <property name="sizeConstraint">
         <enum>QLayout::SetNoConstraint</enum>
@@ -70,18 +73,18 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="btn_home__btn_large">
+        <widget class="QMenuButton" name="menu_home">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>55</height>
           </size>
          </property>
          <property name="text">
           <string>     Home</string>
          </property>
          <property name="icon">
-          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+          <iconset resource="../graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/home-white-18dp.svg</normaloff>:/white_icons/white_icons/home-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -93,18 +96,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_add__btn_large">
+        <widget class="QMenuButton" name="menu_add">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>55</height>
           </size>
          </property>
          <property name="text">
           <string notr="true">     Add</string>
          </property>
          <property name="icon">
-          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+          <iconset resource="../graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/library_add-white-48dp.svg</normaloff>:/white_icons/white_icons/library_add-white-48dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -116,18 +119,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_data__btn_large">
+        <widget class="QMenuButton" name="menu_data">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>55</height>
           </size>
          </property>
          <property name="text">
           <string>     View</string>
          </property>
          <property name="icon">
-          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+          <iconset resource="../graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/leaderboard-white-18dp.svg</normaloff>:/white_icons/white_icons/leaderboard-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -139,18 +142,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_export__btn_large">
+        <widget class="QMenuButton" name="menu_export">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>55</height>
           </size>
          </property>
          <property name="text">
           <string>     Export</string>
          </property>
          <property name="icon">
-          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+          <iconset resource="../graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/folder-white-18dp.svg</normaloff>:/white_icons/white_icons/folder-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -175,18 +178,18 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_settings__btn_large">
+        <widget class="QMenuButton" name="menu_settings">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>55</height>
           </size>
          </property>
          <property name="text">
           <string>     Settings</string>
          </property>
          <property name="icon">
-          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+          <iconset resource="../graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/settings-white-18dp.svg</normaloff>:/white_icons/white_icons/settings-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -237,7 +240,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="btn_toggleMenu__btn_large">
+        <widget class="QMenuButton" name="menu_toggle">
          <property name="minimumSize">
           <size>
            <width>55</width>
@@ -248,7 +251,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+          <iconset resource="../graphics/icons.qrc">
            <normaloff>:/white_icons/white_icons/menu-white-18dp.svg</normaloff>:/white_icons/white_icons/menu-white-18dp.svg</iconset>
          </property>
          <property name="iconSize">
@@ -316,8 +319,16 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>23</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Page</string>
+          <string>Home</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -415,7 +426,7 @@
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap resource="../../### REWRITE ###/resources/graphics/icons.qrc">:/figures/figures/logo.png</pixmap>
+                   <pixmap resource="../graphics/icons.qrc">:/figures/figures/logo.png</pixmap>
                   </property>
                  </widget>
                 </item>
@@ -438,12 +449,17 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="txt_subtitle__text_base">
+                   <widget class="QLabel" name="txt_subtitle">
                     <property name="minimumSize">
                      <size>
                       <width>400</width>
                       <height>0</height>
                      </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <pointsize>15</pointsize>
+                     </font>
                     </property>
                     <property name="text">
                      <string>A simple GUI based database manager for keeping track 
@@ -516,9 +532,19 @@ of clinical samples.</string>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QLabel" name="output_dbSelection__text_lg__font_bold">
+                          <widget class="QTextOutput" name="output_db_selection">
+                           <property name="font">
+                            <font>
+                             <pointsize>23</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
                            <property name="text">
-                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;No selection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            <string>No selection</string>
+                           </property>
+                           <property name="textFormat">
+                            <enum>Qt::PlainText</enum>
                            </property>
                           </widget>
                          </item>
@@ -596,9 +622,19 @@ of clinical samples.</string>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QLabel" name="output_dbSelection__text_lg__font_bold_2">
+                          <widget class="QTextOutput" name="output_number_of_samples">
+                           <property name="font">
+                            <font>
+                             <pointsize>23</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
                            <property name="text">
-                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;No selection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            <string>No selection</string>
+                           </property>
+                           <property name="textFormat">
+                            <enum>Qt::PlainText</enum>
                            </property>
                           </widget>
                          </item>
@@ -706,7 +742,7 @@ of clinical samples.</string>
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+                            <iconset resource="../graphics/icons.qrc">
                              <normaloff>:/white_icons/white_icons/settings-white-18dp.svg</normaloff>:/white_icons/white_icons/settings-white-18dp.svg</iconset>
                            </property>
                            <property name="iconSize">
@@ -792,7 +828,7 @@ of clinical samples.</string>
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="btn_createDB__btn_med">
+                          <widget class="QMediumButton" name="btn_createDB">
                            <property name="text">
                             <string>Create</string>
                            </property>
@@ -872,7 +908,7 @@ of clinical samples.</string>
                               <string/>
                              </property>
                              <property name="icon">
-                              <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+                              <iconset resource="../graphics/icons.qrc">
                                <normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</iconset>
                              </property>
                              <property name="iconSize">
@@ -889,7 +925,7 @@ of clinical samples.</string>
                               <string/>
                              </property>
                              <property name="icon">
-                              <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+                              <iconset resource="../graphics/icons.qrc">
                                <normaloff>:/white_icons/white_icons/delete-white-18dp.svg</normaloff>:/white_icons/white_icons/delete-white-18dp.svg</iconset>
                              </property>
                              <property name="iconSize">
@@ -921,7 +957,7 @@ of clinical samples.</string>
              <item>
               <layout class="QHBoxLayout" name="layout_level_1__4">
                <item>
-                <widget class="QFrame" name="card_databaseView">
+                <widget class="QCard" name="card_databaseView">
                  <property name="maximumSize">
                   <size>
                    <width>250</width>
@@ -929,7 +965,7 @@ of clinical samples.</string>
                   </size>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
@@ -937,6 +973,11 @@ of clinical samples.</string>
                  <layout class="QVBoxLayout" name="verticalLayout_6">
                   <item>
                    <widget class="QLabel" name="txt_databases__text_xl2">
+                    <property name="font">
+                     <font>
+                      <pointsize>23</pointsize>
+                     </font>
+                    </property>
                     <property name="text">
                      <string>Databases</string>
                     </property>
@@ -980,7 +1021,7 @@ and remove to/from.</string>
                 </widget>
                </item>
                <item>
-                <widget class="QFrame" name="card_add">
+                <widget class="QCard" name="card_add">
                  <property name="minimumSize">
                   <size>
                    <width>350</width>
@@ -994,7 +1035,7 @@ and remove to/from.</string>
                   </size>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
@@ -1023,7 +1064,7 @@ and remove to/from.</string>
                        <string/>
                       </property>
                       <property name="pixmap">
-                       <pixmap resource="../../### REWRITE ###/resources/graphics/icons.qrc">:/figures/figures/add.png</pixmap>
+                       <pixmap resource="../graphics/icons.qrc">:/figures/figures/add.png</pixmap>
                       </property>
                      </widget>
                     </item>
@@ -1036,6 +1077,11 @@ and remove to/from.</string>
                           <width>16777215</width>
                           <height>30</height>
                          </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>23</pointsize>
+                         </font>
                         </property>
                         <property name="text">
                          <string>Add</string>
@@ -1067,7 +1113,7 @@ and remove to/from.</string>
                      </layout>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="btn_prefAdd__btn_small">
+                     <widget class="QSmallButton" name="btn_prefAdd__btn_small">
                       <property name="text">
                        <string/>
                       </property>
@@ -1176,7 +1222,7 @@ and remove to/from.</string>
                    </layout>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btn_add__btn_med">
+                   <widget class="QMediumButton" name="btn_add__btn_med">
                     <property name="text">
                      <string>Add</string>
                     </property>
@@ -1186,7 +1232,7 @@ and remove to/from.</string>
                 </widget>
                </item>
                <item>
-                <widget class="QFrame" name="card_delete">
+                <widget class="QCard" name="card_delete">
                  <property name="minimumSize">
                   <size>
                    <width>350</width>
@@ -1200,7 +1246,7 @@ and remove to/from.</string>
                   </size>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
@@ -1232,7 +1278,7 @@ and remove to/from.</string>
                        <string/>
                       </property>
                       <property name="pixmap">
-                       <pixmap resource="../../### REWRITE ###/resources/graphics/icons.qrc">:/figures/figures/remove.png</pixmap>
+                       <pixmap resource="../graphics/icons.qrc">:/figures/figures/remove.png</pixmap>
                       </property>
                      </widget>
                     </item>
@@ -1245,6 +1291,11 @@ and remove to/from.</string>
                           <width>16777215</width>
                           <height>30</height>
                          </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>23</pointsize>
+                         </font>
                         </property>
                         <property name="text">
                          <string>Remove</string>
@@ -1276,7 +1327,7 @@ and remove to/from.</string>
                      </layout>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="btn_prefAdd__btn_small_2">
+                     <widget class="QSmallButton" name="btn_prefAdd__btn_small_2">
                       <property name="text">
                        <string/>
                       </property>
@@ -1325,7 +1376,7 @@ and remove to/from.</string>
                    </layout>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btn_remove__btn_med">
+                   <widget class="QMediumButton" name="btn_remove__btn_med">
                     <property name="text">
                      <string>Remove</string>
                     </property>
@@ -1337,7 +1388,7 @@ and remove to/from.</string>
               </layout>
              </item>
              <item>
-              <widget class="QFrame" name="card_databaseTable">
+              <widget class="QCard" name="card_databaseTable">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -1351,14 +1402,21 @@ and remove to/from.</string>
                 </size>
                </property>
                <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
+                <enum>QFrame::NoFrame</enum>
                </property>
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_20">
                 <item>
-                 <widget class="QLabel" name="output_databaseTable__text_xl2">
+                 <widget class="QTextOutput" name="output_database_selection_2">
+                  <property name="font">
+                   <font>
+                    <pointsize>23</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
                   <property name="text">
                    <string>No database selected</string>
                   </property>
@@ -1384,12 +1442,12 @@ and remove to/from.</string>
                   <item>
                    <layout class="QVBoxLayout" name="layout_level_2__4">
                     <item>
-                     <widget class="QPushButton" name="btn_deleteEntry__btn_small">
+                     <widget class="QSmallButton" name="btn_deleteEntry__btn_small">
                       <property name="text">
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+                       <iconset resource="../graphics/icons.qrc">
                         <normaloff>:/white_icons/white_icons/delete-white-18dp.svg</normaloff>:/white_icons/white_icons/delete-white-18dp.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -1401,12 +1459,12 @@ and remove to/from.</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="btn_refresh__btn_small_2">
+                     <widget class="QSmallButton" name="btn_refresh__btn_small_2">
                       <property name="text">
                        <string/>
                       </property>
                       <property name="icon">
-                       <iconset resource="../../### REWRITE ###/resources/graphics/icons.qrc">
+                       <iconset resource="../graphics/icons.qrc">
                         <normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</normaloff>:/white_icons/white_icons/refresh-white-18dp.svg</iconset>
                       </property>
                       <property name="iconSize">
@@ -1459,7 +1517,7 @@ and remove to/from.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1025</width>
+     <width>1103</width>
      <height>22</height>
     </rect>
    </property>
@@ -1488,9 +1546,25 @@ and remove to/from.</string>
    <extends>QPushButton</extends>
    <header>modules.property</header>
   </customwidget>
+  <customwidget>
+   <class>QMenuButton</class>
+   <extends>QPushButton</extends>
+   <header>modules.property</header>
+  </customwidget>
+  <customwidget>
+   <class>QTextOutput</class>
+   <extends>QLabel</extends>
+   <header>modules.property</header>
+  </customwidget>
+  <customwidget>
+   <class>QMediumButton</class>
+   <extends>QPushButton</extends>
+   <header>modules.property</header>
+  </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../### REWRITE ###/resources/graphics/icons.qrc"/>
+  <include location="../graphics/icons.qrc"/>
+  <include location="../graphics/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

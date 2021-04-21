@@ -17,6 +17,7 @@ from configparser import ConfigParser
 # 2 - MAIN CONSTANTS                                            #
 # ------------------------------------------------------------- #
 CONFIG_DIR = "resources/settings/"
-STYLE_DARK = "resources/stylesheets/stylesheet_main_dark.qss"
-STYLE_LIGHT = "resources/stylesheets/stylesheet_main_light.qss"
+THEME_DARK = "resources/stylesheets/dark_theme.xml"
+THEME_LIGHT = "resources/stylesheets/light_theme.xml"
+STYLESHEET_TEMPLATE = "resources/stylesheets/template.qss" 
 STYLESHEET = "resources/stylesheets/stylesheet.qss"

@@ -6,4 +6,4 @@ pyside2-uic resources/user_interface/dialog_create_db.ui -o resources/user_inter
 
 pyside2-rcc resources/graphics/icons.qrc -o icons_rc.py
 
-python main.py
+python FreezeDB.py

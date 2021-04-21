@@ -78,17 +78,9 @@ def get_engine(path):
 
 ''' Print messages '''
 def debug_print(level=0, name="", message="", complete=0, function=0): 
-    # Get name
-    name = "[" + name.upper() + "]"
-    
-    # Print
     if level == "top":
-        print(PrintColor.HEADER + name + PrintColor.ENDC + " - " + message + " Function: " + PrintColor.OKCYAN + str(function) + PrintColor.ENDC)
+        print(PrintColor.HEADER + "[" + name .upper() + "]" + PrintColor.ENDC + " - " + message + " Function: " + PrintColor.OKCYAN + str(function) + PrintColor.ENDC)
     elif level == "sub":
         print(PrintColor.OKGREEN + "   > " + message + PrintColor.ENDC)
     elif level == "error":
         print(PrintColor.FAIL + "   Error: " + PrintColor.ENDC + message)
-
-    # Newline if complete
-    if complete == 1:
-        pass

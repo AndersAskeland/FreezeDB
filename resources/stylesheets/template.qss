@@ -1,31 +1,72 @@
-
-/* --------------------------------------------
-/*  Widgets 
-/* --------------------------------------------
-/* Q labels */
-QLabel{
-    color: {{ primaryColor }};
+/* Text */
+*{
+    color: {{ primaryTextColor }};
 }
 
+/* Main application window */
 QMainWindow{
-    background-color: {{ secondaryColor }};
+    background-color: {{ primaryColor }};
 }
 
 /* Cards */
 QCard{
-    background-color: {{ secondaryColor }};
-    border-radius: 20px;
+    background-color: {{ tertiraryColor }};
+    border-radius: 10px;
 }
 
 /* Sidebar */
 QSideBar{
-    background-color: {{ primaryLightColor }};
+    background-color: {{ secondaryColor }};
 }
 
+/* Menu buttons */
+QMenuButton{
+    color: {{ primaryTextColor }};
+	font-size: 20px;
+	padding-left: 17px;
+	text-align: left;
+	border: none;
+} QMenuButton:hover{
+	background-color: rgb(33, 37, 43);
+} QMenuButton:pressed{	
+	background-color: rgb(85, 170, 255);
+}
+
+QMediumButton{
+    color: {{ primaryTextColor }};
+	background-color:  {{ secondaryDarkColor }};
+	border-radius: 10px;
+	font-size: 20px;
+} QMediumButton:hover{
+	background-color: rgb(57, 65, 80);
+	border: 2px solid rgb(61, 70, 86);
+} QMediumButton:pressed{	
+	background-color: rgb(35, 40, 49);
+	border: 2px solid rgb(43, 50, 61);
+}
+
+QSmallButton{
+	border-radius:10px;
+    background-color: {{ secondaryDarkColor }};
+    max-width: 35px;
+    max-height: 35px;
+} QSmallButton:hover{
+	background-color: rgb(57, 65, 80);
+	border: 2px solid rgb(61, 70, 86);
+} QSmallButton:pressed{	
+	background-color: rgb(35, 40, 49);
+	border: 2px solid rgb(43, 50, 61);
+}
+
+QDatabaseSettings{
+    background-color: {{ secondaryDarkColor }};
+    background: {{ secondaryDarkColor }};
+
+}
 
 /* QWidget */
 QTabWidget::pane {
-    background: rgb(42,49,61);
+    background: #FFFFFF;
 	color: rgb(204, 204, 204);
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
@@ -49,11 +90,11 @@ QTabWidget::tab-bar:right {
 }
 
 QTabBar::tab {
-	color: rgb(204, 204, 204);
+	color: #FFFFFF;
 }
 
 QTabBar::tab:selected {
-    background: rgb(42,49,61);
+    background: #FFFFFF;
 }
 
 QTabBar::tab:!selected {
@@ -118,15 +159,6 @@ QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
     margin-bottom: 0;
 }
 
-/* Background */
-QMainWindow{
-        background-color: rgb(27, 29, 35);
-
-}
-[objectName*=page_]{
-	background-color: rgb(34, 40, 49);
-}
-
 
 /* Line edit */
 QLineEdit {
@@ -147,19 +179,19 @@ QLineEdit:focus {
 
 /* QTreeWidget */
 QTreeWidget {
-  background-color: #FFFFFF;
-  border-radius: 4px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
 }
 QTreeWidget::indicator{
     width: 24px;
-  height: 24px;
-  background-color: #232629;
-  border-radius: 4px;
+    height: 24px;
+    background-color: #232629;
+    border-radius: 4px;
 }
 
 QTreeWidget:item {
-  padding: 5px;
-  min-height: 25px;
+    padding: 5px;
+    min-height: 25px;
 }
 
 QHeaderView{
@@ -175,68 +207,6 @@ QHeaderView::section {
     padding: 0 10px;
     height: 35px;
 }
-
-
-/* -------------------------------------------- */
-/* ---------------- Components ---------------- */
-/* -------------------------------------------- */
-/* Large button */
-QPushButton[objectName*=__btn_large] {
-    color: rgb(204, 204, 204);
-	font-size: 20px;
-    background-color: rgb(27, 29, 35);
-	padding-left: 17px;
-	text-align: left;
-	border: none;
-}
-QPushButton:hover[objectName*=__btn_large] {
-	background-color: rgb(33, 37, 43);
-}
-
-QPushButton:pressed[objectName*=__btn_large] {	
-	background-color: rgb(85, 170, 255);
-}
-
-/* Medium button */
-QPushButton[objectName*=__btn_med]{
-	background-color: rgb(52, 59, 72);
-	border-radius: 10px;
-	font-size: 20px;
-	color: rgb(201, 202, 204);
-
-}
-QPushButton:hover[objectName*=__btn_med] {
-	background-color: rgb(57, 65, 80);
-	border: 2px solid rgb(61, 70, 86);
-}
-QPushButton:pressed[objectName*=__btn_med] {	
-	background-color: rgb(35, 40, 49);
-	border: 2px solid rgb(43, 50, 61);
-}
-/* Small button */
-QPushButton[objectName*=__btn_small]{
-	border-radius:10px;
-    background-color: rgb(52, 59, 72);
-    max-width: 35px;
-    max-height: 35px;
-}
-
-QPushButton:hover[objectName*=__btn_small] {
-	background-color: rgb(57, 65, 80);
-	border: 2px solid rgb(61, 70, 86);
-}
-QPushButton:pressed[objectName*=__btn_small] {	
-	background-color: rgb(35, 40, 49);
-	border: 2px solid rgb(43, 50, 61);
-}
-
-
-
-
-/* -------------------------------------------- */
-/* ---------------- Attributes ---------------- */
-/* -------------------------------------------- */
-
 
 
 

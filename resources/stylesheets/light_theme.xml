@@ -1,10 +1,10 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-  <color name="primaryColor">#222831</color>
-  <color name="secondaryColor">#1b1d23</color>
-  <color name="tertiraryColor">#2a313d</color>
+  <color name="primaryColor">#F6F9FA</color>
+  <color name="secondaryColor">#31393D</color>
+  <color name="tertiraryColor">#FFFFFF</color>
   <color name="secondaryLightColor">#F27649</color>
   <color name="secondaryDarkColor">#343E48</color>
-  <color name="primaryTextColor">#cccccc</color>
+  <color name="primaryTextColor">#000000</color>
   <color name="secondaryTextColor">#F27649</color>
 </resources>

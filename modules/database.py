@@ -138,11 +138,11 @@ class CurrentDatabase(Database):
     # Update GUI view
     def update_view(self, interface):
         # Update selection
-        interface.ui.output_dbSelection__text_lg__font_bold.setText(self.name) # Home
-        interface.ui.output_databaseTable__text_xl2.setText('Table view for database: "' + self.name + '".') # Add/update
+        interface.ui.output_db_selection.setText(self.name) # Home
+        interface.ui.output_database_selection_2.setText('Table view for database: "' + self.name + '".') # Add/update
 
         # Update number of samples
-        interface.ui.output_dbSelection__text_lg__font_bold_2.setText(str(self.samples_n))
+        interface.ui.output_number_of_samples.setText(str(self.samples_n))
 
     def clear_tables(self):
         self.Base.metadata.clear()

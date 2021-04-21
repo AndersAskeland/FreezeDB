@@ -16,6 +16,7 @@ from PySide2.QtCore import QCoreApplication
 
 # Local classes
 from modules.widgets import SidebarFirstSetup
+from modules.constants import STYLESHEET
 
 # Local resources 
 from resources.user_interface.dialog_create_db import Ui_create_db_page_
@@ -164,6 +165,9 @@ class CreateDBTemplate(QDialog):
         # Setup UI
         self.dialog = Ui_create_db_page_()
         self.dialog.setupUi(self)
+
+        # Template
+        self.setStyleSheet(open(STYLESHEET, "r").read())
 
         # Run
         self.exec_()

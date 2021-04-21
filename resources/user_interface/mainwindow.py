@@ -15,14 +15,20 @@ from PySide2.QtWidgets import *
 from modules.property import QSideBar
 from modules.property import QCard
 from modules.widgets import AnimatedToggle
+from modules.property import QSmallButton
+from modules.property import QMenuButton
+from modules.property import QTextOutput
+from modules.property import QMediumButton
 
+import icons_rc
 import icons_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(2048, 764)
+        MainWindow.resize(1103, 829)
+        MainWindow.setStyleSheet(u"")
         self.mainWidget = QWidget(MainWindow)
         self.mainWidget.setObjectName(u"mainWidget")
         self.gridLayout = QGridLayout(self.mainWidget)
@@ -36,66 +42,64 @@ class Ui_MainWindow(object):
         self.sidebar_left.setFrameShape(QFrame.NoFrame)
         self.sidebar_left.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.sidebar_left)
-#ifndef Q_OS_MAC
-        self.verticalLayout_2.setSpacing(-1)
-#endif
+        self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setSizeConstraint(QLayout.SetNoConstraint)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.btn_home__btn_large = QPushButton(self.sidebar_left)
-        self.btn_home__btn_large.setObjectName(u"btn_home__btn_large")
-        self.btn_home__btn_large.setMinimumSize(QSize(0, 50))
+        self.menu_home = QMenuButton(self.sidebar_left)
+        self.menu_home.setObjectName(u"menu_home")
+        self.menu_home.setMinimumSize(QSize(0, 55))
         icon = QIcon()
         icon.addFile(u":/white_icons/white_icons/home-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_home__btn_large.setIcon(icon)
-        self.btn_home__btn_large.setIconSize(QSize(32, 32))
+        self.menu_home.setIcon(icon)
+        self.menu_home.setIconSize(QSize(32, 32))
 
-        self.verticalLayout_2.addWidget(self.btn_home__btn_large)
+        self.verticalLayout_2.addWidget(self.menu_home)
 
-        self.btn_add__btn_large = QPushButton(self.sidebar_left)
-        self.btn_add__btn_large.setObjectName(u"btn_add__btn_large")
-        self.btn_add__btn_large.setMinimumSize(QSize(0, 50))
-        self.btn_add__btn_large.setText(u"     Add")
+        self.menu_add = QMenuButton(self.sidebar_left)
+        self.menu_add.setObjectName(u"menu_add")
+        self.menu_add.setMinimumSize(QSize(0, 55))
+        self.menu_add.setText(u"     Add")
         icon1 = QIcon()
         icon1.addFile(u":/white_icons/white_icons/library_add-white-48dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_add__btn_large.setIcon(icon1)
-        self.btn_add__btn_large.setIconSize(QSize(32, 32))
+        self.menu_add.setIcon(icon1)
+        self.menu_add.setIconSize(QSize(32, 32))
 
-        self.verticalLayout_2.addWidget(self.btn_add__btn_large)
+        self.verticalLayout_2.addWidget(self.menu_add)
 
-        self.btn_data__btn_large = QPushButton(self.sidebar_left)
-        self.btn_data__btn_large.setObjectName(u"btn_data__btn_large")
-        self.btn_data__btn_large.setMinimumSize(QSize(0, 50))
+        self.menu_data = QMenuButton(self.sidebar_left)
+        self.menu_data.setObjectName(u"menu_data")
+        self.menu_data.setMinimumSize(QSize(0, 55))
         icon2 = QIcon()
         icon2.addFile(u":/white_icons/white_icons/leaderboard-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_data__btn_large.setIcon(icon2)
-        self.btn_data__btn_large.setIconSize(QSize(32, 32))
+        self.menu_data.setIcon(icon2)
+        self.menu_data.setIconSize(QSize(32, 32))
 
-        self.verticalLayout_2.addWidget(self.btn_data__btn_large)
+        self.verticalLayout_2.addWidget(self.menu_data)
 
-        self.btn_export__btn_large = QPushButton(self.sidebar_left)
-        self.btn_export__btn_large.setObjectName(u"btn_export__btn_large")
-        self.btn_export__btn_large.setMinimumSize(QSize(0, 50))
+        self.menu_export = QMenuButton(self.sidebar_left)
+        self.menu_export.setObjectName(u"menu_export")
+        self.menu_export.setMinimumSize(QSize(0, 55))
         icon3 = QIcon()
         icon3.addFile(u":/white_icons/white_icons/folder-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_export__btn_large.setIcon(icon3)
-        self.btn_export__btn_large.setIconSize(QSize(32, 32))
+        self.menu_export.setIcon(icon3)
+        self.menu_export.setIconSize(QSize(32, 32))
 
-        self.verticalLayout_2.addWidget(self.btn_export__btn_large)
+        self.verticalLayout_2.addWidget(self.menu_export)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
 
-        self.btn_settings__btn_large = QPushButton(self.sidebar_left)
-        self.btn_settings__btn_large.setObjectName(u"btn_settings__btn_large")
-        self.btn_settings__btn_large.setMinimumSize(QSize(0, 50))
+        self.menu_settings = QMenuButton(self.sidebar_left)
+        self.menu_settings.setObjectName(u"menu_settings")
+        self.menu_settings.setMinimumSize(QSize(0, 55))
         icon4 = QIcon()
         icon4.addFile(u":/white_icons/white_icons/settings-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_settings__btn_large.setIcon(icon4)
-        self.btn_settings__btn_large.setIconSize(QSize(32, 32))
+        self.menu_settings.setIcon(icon4)
+        self.menu_settings.setIconSize(QSize(32, 32))
 
-        self.verticalLayout_2.addWidget(self.btn_settings__btn_large)
+        self.verticalLayout_2.addWidget(self.menu_settings)
 
 
         self.gridLayout.addWidget(self.sidebar_left, 1, 0, 1, 1)
@@ -112,16 +116,16 @@ class Ui_MainWindow(object):
 #endif
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.btn_toggleMenu__btn_large = QPushButton(self.sidebar_corner)
-        self.btn_toggleMenu__btn_large.setObjectName(u"btn_toggleMenu__btn_large")
-        self.btn_toggleMenu__btn_large.setMinimumSize(QSize(55, 55))
+        self.menu_toggle = QMenuButton(self.sidebar_corner)
+        self.menu_toggle.setObjectName(u"menu_toggle")
+        self.menu_toggle.setMinimumSize(QSize(55, 55))
         icon5 = QIcon()
         icon5.addFile(u":/white_icons/white_icons/menu-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_toggleMenu__btn_large.setIcon(icon5)
-        self.btn_toggleMenu__btn_large.setIconSize(QSize(32, 32))
-        self.btn_toggleMenu__btn_large.setFlat(True)
+        self.menu_toggle.setIcon(icon5)
+        self.menu_toggle.setIconSize(QSize(32, 32))
+        self.menu_toggle.setFlat(True)
 
-        self.verticalLayout_4.addWidget(self.btn_toggleMenu__btn_large)
+        self.verticalLayout_4.addWidget(self.menu_toggle)
 
 
         self.gridLayout.addWidget(self.sidebar_corner, 0, 0, 1, 1)
@@ -146,6 +150,10 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.txt_header.sizePolicy().hasHeightForWidth())
         self.txt_header.setSizePolicy(sizePolicy)
+        font = QFont()
+        font.setPointSize(23)
+        self.txt_header.setFont(font)
+        self.txt_header.setTextFormat(Qt.PlainText)
         self.txt_header.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.txt_header)
@@ -203,12 +211,15 @@ class Ui_MainWindow(object):
 
         self.layout_level_1__1.addWidget(self.txt_freezedb)
 
-        self.txt_subtitle__text_base = QLabel(self.frame_top)
-        self.txt_subtitle__text_base.setObjectName(u"txt_subtitle__text_base")
-        self.txt_subtitle__text_base.setMinimumSize(QSize(400, 0))
-        self.txt_subtitle__text_base.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.txt_subtitle = QLabel(self.frame_top)
+        self.txt_subtitle.setObjectName(u"txt_subtitle")
+        self.txt_subtitle.setMinimumSize(QSize(400, 0))
+        font1 = QFont()
+        font1.setPointSize(15)
+        self.txt_subtitle.setFont(font1)
+        self.txt_subtitle.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
-        self.layout_level_1__1.addWidget(self.txt_subtitle__text_base)
+        self.layout_level_1__1.addWidget(self.txt_subtitle)
 
 
         self.horizontalLayout_4.addLayout(self.layout_level_1__1)
@@ -222,11 +233,11 @@ class Ui_MainWindow(object):
         self.frame_bottom.setFrameShadow(QFrame.Plain)
         self.verticalLayout_8 = QVBoxLayout(self.frame_bottom)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.txt_dashboard__text_2xl = QLabel(self.frame_bottom)
-        self.txt_dashboard__text_2xl.setObjectName(u"txt_dashboard__text_2xl")
-        self.txt_dashboard__text_2xl.setMaximumSize(QSize(16777214, 30))
+        self.txt_dashboard = QLabel(self.frame_bottom)
+        self.txt_dashboard.setObjectName(u"txt_dashboard")
+        self.txt_dashboard.setMaximumSize(QSize(16777214, 40))
 
-        self.verticalLayout_8.addWidget(self.txt_dashboard__text_2xl)
+        self.verticalLayout_8.addWidget(self.txt_dashboard)
 
         self.layout_level_1__2 = QHBoxLayout()
         self.layout_level_1__2.setObjectName(u"layout_level_1__2")
@@ -252,10 +263,16 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.txt_currentDatabase)
 
-        self.output_dbSelection__text_lg__font_bold = QLabel(self.card_currentDatabase)
-        self.output_dbSelection__text_lg__font_bold.setObjectName(u"output_dbSelection__text_lg__font_bold")
+        self.output_db_selection = QTextOutput(self.card_currentDatabase)
+        self.output_db_selection.setObjectName(u"output_db_selection")
+        font2 = QFont()
+        font2.setPointSize(23)
+        font2.setBold(True)
+        font2.setWeight(75)
+        self.output_db_selection.setFont(font2)
+        self.output_db_selection.setTextFormat(Qt.PlainText)
 
-        self.verticalLayout_7.addWidget(self.output_dbSelection__text_lg__font_bold)
+        self.verticalLayout_7.addWidget(self.output_db_selection)
 
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -304,10 +321,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.txt_nSamples)
 
-        self.output_dbSelection__text_lg__font_bold_2 = QLabel(self.card_nSamples)
-        self.output_dbSelection__text_lg__font_bold_2.setObjectName(u"output_dbSelection__text_lg__font_bold_2")
+        self.output_number_of_samples = QTextOutput(self.card_nSamples)
+        self.output_number_of_samples.setObjectName(u"output_number_of_samples")
+        self.output_number_of_samples.setFont(font2)
+        self.output_number_of_samples.setTextFormat(Qt.PlainText)
 
-        self.verticalLayout_9.addWidget(self.output_dbSelection__text_lg__font_bold_2)
+        self.verticalLayout_9.addWidget(self.output_number_of_samples)
 
         self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -361,13 +380,13 @@ class Ui_MainWindow(object):
 
         self.layout_level_3_2.addWidget(self.txt_create_db__text_xl)
 
-        self.btn_pref__btn_small = QPushButton(self.card_database)
-        self.btn_pref__btn_small.setObjectName(u"btn_pref__btn_small")
-        self.btn_pref__btn_small.setMaximumSize(QSize(16777215, 16777215))
-        self.btn_pref__btn_small.setIcon(icon4)
-        self.btn_pref__btn_small.setIconSize(QSize(24, 24))
+        self.btn_pref = QSmallButton(self.card_database)
+        self.btn_pref.setObjectName(u"btn_pref")
+        self.btn_pref.setMaximumSize(QSize(16777215, 16777215))
+        self.btn_pref.setIcon(icon4)
+        self.btn_pref.setIconSize(QSize(24, 24))
 
-        self.layout_level_3_2.addWidget(self.btn_pref__btn_small)
+        self.layout_level_3_2.addWidget(self.btn_pref)
 
 
         self.layout_level_2__2.addLayout(self.layout_level_3_2)
@@ -418,10 +437,10 @@ class Ui_MainWindow(object):
 
         self.layout_level_3_3.addItem(self.verticalSpacer_4)
 
-        self.btn_createDB__btn_med = QPushButton(self.card_database)
-        self.btn_createDB__btn_med.setObjectName(u"btn_createDB__btn_med")
+        self.btn_createDB = QMediumButton(self.card_database)
+        self.btn_createDB.setObjectName(u"btn_createDB")
 
-        self.layout_level_3_3.addWidget(self.btn_createDB__btn_med)
+        self.layout_level_3_3.addWidget(self.btn_createDB)
 
 
         self.layout_level_2__2.addLayout(self.layout_level_3_3)
@@ -465,21 +484,23 @@ class Ui_MainWindow(object):
 
         self.layout_level_4__1 = QVBoxLayout()
         self.layout_level_4__1.setObjectName(u"layout_level_4__1")
-        self.btn_refreshDatabase__btn_small = QPushButton(self.card_database)
-        self.btn_refreshDatabase__btn_small.setObjectName(u"btn_refreshDatabase__btn_small")
+        self.btn_refreshDatabase = QSmallButton(self.card_database)
+        self.btn_refreshDatabase.setObjectName(u"btn_refreshDatabase")
         icon6 = QIcon()
         icon6.addFile(u":/white_icons/white_icons/refresh-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_refreshDatabase__btn_small.setIcon(icon6)
-        self.btn_refreshDatabase__btn_small.setIconSize(QSize(24, 24))
+        self.btn_refreshDatabase.setIcon(icon6)
+        self.btn_refreshDatabase.setIconSize(QSize(24, 24))
 
-        self.layout_level_4__1.addWidget(self.btn_refreshDatabase__btn_small)
+        self.layout_level_4__1.addWidget(self.btn_refreshDatabase)
 
-        self.btn_deleteDatabase__btn_small = QPushButton(self.card_database)
-        self.btn_deleteDatabase__btn_small.setObjectName(u"btn_deleteDatabase__btn_small")
-        self.btn_deleteDatabase__btn_small.setIcon(icon4)
-        self.btn_deleteDatabase__btn_small.setIconSize(QSize(24, 24))
+        self.btn_deleteDatabase = QSmallButton(self.card_database)
+        self.btn_deleteDatabase.setObjectName(u"btn_deleteDatabase")
+        icon7 = QIcon()
+        icon7.addFile(u":/white_icons/white_icons/delete-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_deleteDatabase.setIcon(icon7)
+        self.btn_deleteDatabase.setIconSize(QSize(24, 24))
 
-        self.layout_level_4__1.addWidget(self.btn_deleteDatabase__btn_small)
+        self.layout_level_4__1.addWidget(self.btn_deleteDatabase)
 
 
         self.layout_level_3__3.addLayout(self.layout_level_4__1)
@@ -506,15 +527,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.layout_level_1__4 = QHBoxLayout()
         self.layout_level_1__4.setObjectName(u"layout_level_1__4")
-        self.card_databaseView = QFrame(self.page_add)
+        self.card_databaseView = QCard(self.page_add)
         self.card_databaseView.setObjectName(u"card_databaseView")
         self.card_databaseView.setMaximumSize(QSize(250, 350))
-        self.card_databaseView.setFrameShape(QFrame.StyledPanel)
+        self.card_databaseView.setFrameShape(QFrame.NoFrame)
         self.card_databaseView.setFrameShadow(QFrame.Raised)
         self.verticalLayout_6 = QVBoxLayout(self.card_databaseView)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.txt_databases__text_xl2 = QLabel(self.card_databaseView)
         self.txt_databases__text_xl2.setObjectName(u"txt_databases__text_xl2")
+        self.txt_databases__text_xl2.setFont(font)
 
         self.verticalLayout_6.addWidget(self.txt_databases__text_xl2)
 
@@ -534,11 +556,11 @@ class Ui_MainWindow(object):
 
         self.layout_level_1__4.addWidget(self.card_databaseView)
 
-        self.card_add = QFrame(self.page_add)
+        self.card_add = QCard(self.page_add)
         self.card_add.setObjectName(u"card_add")
         self.card_add.setMinimumSize(QSize(350, 0))
         self.card_add.setMaximumSize(QSize(16777215, 350))
-        self.card_add.setFrameShape(QFrame.StyledPanel)
+        self.card_add.setFrameShape(QFrame.NoFrame)
         self.card_add.setFrameShadow(QFrame.Raised)
         self.verticalLayout_16 = QVBoxLayout(self.card_add)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
@@ -558,6 +580,7 @@ class Ui_MainWindow(object):
         self.txt_addData__text_xl2 = QLabel(self.card_add)
         self.txt_addData__text_xl2.setObjectName(u"txt_addData__text_xl2")
         self.txt_addData__text_xl2.setMaximumSize(QSize(16777215, 30))
+        self.txt_addData__text_xl2.setFont(font)
 
         self.layout_level_3__4.addWidget(self.txt_addData__text_xl2)
 
@@ -576,11 +599,11 @@ class Ui_MainWindow(object):
 
         self.layout_level_2__5.addLayout(self.layout_level_3__4)
 
-        self.btn_prefAdd__btn_small = QPushButton(self.card_add)
+        self.btn_prefAdd__btn_small = QSmallButton(self.card_add)
         self.btn_prefAdd__btn_small.setObjectName(u"btn_prefAdd__btn_small")
-        icon7 = QIcon()
-        icon7.addFile(u":/icons_white/graphics/white_icons/settings-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_prefAdd__btn_small.setIcon(icon7)
+        icon8 = QIcon()
+        icon8.addFile(u":/icons_white/graphics/white_icons/settings-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_prefAdd__btn_small.setIcon(icon8)
         self.btn_prefAdd__btn_small.setIconSize(QSize(24, 24))
 
         self.layout_level_2__5.addWidget(self.btn_prefAdd__btn_small)
@@ -655,7 +678,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_16.addLayout(self.layout_level_2__6)
 
-        self.btn_add__btn_med = QPushButton(self.card_add)
+        self.btn_add__btn_med = QMediumButton(self.card_add)
         self.btn_add__btn_med.setObjectName(u"btn_add__btn_med")
 
         self.verticalLayout_16.addWidget(self.btn_add__btn_med)
@@ -663,11 +686,11 @@ class Ui_MainWindow(object):
 
         self.layout_level_1__4.addWidget(self.card_add)
 
-        self.card_delete = QFrame(self.page_add)
+        self.card_delete = QCard(self.page_add)
         self.card_delete.setObjectName(u"card_delete")
         self.card_delete.setMinimumSize(QSize(350, 0))
         self.card_delete.setMaximumSize(QSize(16777215, 350))
-        self.card_delete.setFrameShape(QFrame.StyledPanel)
+        self.card_delete.setFrameShape(QFrame.NoFrame)
         self.card_delete.setFrameShadow(QFrame.Raised)
         self.verticalLayout_19 = QVBoxLayout(self.card_delete)
         self.verticalLayout_19.setObjectName(u"verticalLayout_19")
@@ -688,6 +711,7 @@ class Ui_MainWindow(object):
         self.txt_removeData__text_xl2_2 = QLabel(self.card_delete)
         self.txt_removeData__text_xl2_2.setObjectName(u"txt_removeData__text_xl2_2")
         self.txt_removeData__text_xl2_2.setMaximumSize(QSize(16777215, 30))
+        self.txt_removeData__text_xl2_2.setFont(font)
 
         self.layout_level_2__7.addWidget(self.txt_removeData__text_xl2_2)
 
@@ -703,9 +727,9 @@ class Ui_MainWindow(object):
 
         self.layout_level_1__5.addLayout(self.layout_level_2__7)
 
-        self.btn_prefAdd__btn_small_2 = QPushButton(self.card_delete)
+        self.btn_prefAdd__btn_small_2 = QSmallButton(self.card_delete)
         self.btn_prefAdd__btn_small_2.setObjectName(u"btn_prefAdd__btn_small_2")
-        self.btn_prefAdd__btn_small_2.setIcon(icon7)
+        self.btn_prefAdd__btn_small_2.setIcon(icon8)
         self.btn_prefAdd__btn_small_2.setIconSize(QSize(24, 24))
 
         self.layout_level_1__5.addWidget(self.btn_prefAdd__btn_small_2)
@@ -733,7 +757,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_19.addLayout(self.layout_level_1__6)
 
-        self.btn_remove__btn_med = QPushButton(self.card_delete)
+        self.btn_remove__btn_med = QMediumButton(self.card_delete)
         self.btn_remove__btn_med.setObjectName(u"btn_remove__btn_med")
 
         self.verticalLayout_19.addWidget(self.btn_remove__btn_med)
@@ -744,7 +768,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addLayout(self.layout_level_1__4)
 
-        self.card_databaseTable = QFrame(self.page_add)
+        self.card_databaseTable = QCard(self.page_add)
         self.card_databaseTable.setObjectName(u"card_databaseTable")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy3.setHorizontalStretch(0)
@@ -752,14 +776,15 @@ class Ui_MainWindow(object):
         sizePolicy3.setHeightForWidth(self.card_databaseTable.sizePolicy().hasHeightForWidth())
         self.card_databaseTable.setSizePolicy(sizePolicy3)
         self.card_databaseTable.setMinimumSize(QSize(0, 300))
-        self.card_databaseTable.setFrameShape(QFrame.StyledPanel)
+        self.card_databaseTable.setFrameShape(QFrame.NoFrame)
         self.card_databaseTable.setFrameShadow(QFrame.Raised)
         self.verticalLayout_20 = QVBoxLayout(self.card_databaseTable)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
-        self.output_databaseTable__text_xl2 = QLabel(self.card_databaseTable)
-        self.output_databaseTable__text_xl2.setObjectName(u"output_databaseTable__text_xl2")
+        self.output_database_selection_2 = QTextOutput(self.card_databaseTable)
+        self.output_database_selection_2.setObjectName(u"output_database_selection_2")
+        self.output_database_selection_2.setFont(font2)
 
-        self.verticalLayout_20.addWidget(self.output_databaseTable__text_xl2)
+        self.verticalLayout_20.addWidget(self.output_database_selection_2)
 
         self.layout_level_1__3 = QHBoxLayout()
         self.layout_level_1__3.setObjectName(u"layout_level_1__3")
@@ -775,16 +800,14 @@ class Ui_MainWindow(object):
 
         self.layout_level_2__4 = QVBoxLayout()
         self.layout_level_2__4.setObjectName(u"layout_level_2__4")
-        self.btn_deleteEntry__btn_small = QPushButton(self.card_databaseTable)
+        self.btn_deleteEntry__btn_small = QSmallButton(self.card_databaseTable)
         self.btn_deleteEntry__btn_small.setObjectName(u"btn_deleteEntry__btn_small")
-        icon8 = QIcon()
-        icon8.addFile(u":/white_icons/white_icons/delete-white-18dp.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_deleteEntry__btn_small.setIcon(icon8)
+        self.btn_deleteEntry__btn_small.setIcon(icon7)
         self.btn_deleteEntry__btn_small.setIconSize(QSize(24, 24))
 
         self.layout_level_2__4.addWidget(self.btn_deleteEntry__btn_small)
 
-        self.btn_refresh__btn_small_2 = QPushButton(self.card_databaseTable)
+        self.btn_refresh__btn_small_2 = QSmallButton(self.card_databaseTable)
         self.btn_refresh__btn_small_2.setObjectName(u"btn_refresh__btn_small_2")
         self.btn_refresh__btn_small_2.setIcon(icon6)
         self.btn_refresh__btn_small_2.setIconSize(QSize(24, 24))
@@ -830,7 +853,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.mainWidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 2048, 22))
+        self.menubar.setGeometry(QRect(0, 0, 1103, 22))
         MainWindow.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow)
@@ -840,34 +863,34 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.btn_home__btn_large.setText(QCoreApplication.translate("MainWindow", u"     Home", None))
-        self.btn_data__btn_large.setText(QCoreApplication.translate("MainWindow", u"     View", None))
-        self.btn_export__btn_large.setText(QCoreApplication.translate("MainWindow", u"     Export", None))
-        self.btn_settings__btn_large.setText(QCoreApplication.translate("MainWindow", u"     Settings", None))
-        self.btn_toggleMenu__btn_large.setText("")
-        self.txt_header.setText(QCoreApplication.translate("MainWindow", u"Page", None))
+        self.menu_home.setText(QCoreApplication.translate("MainWindow", u"     Home", None))
+        self.menu_data.setText(QCoreApplication.translate("MainWindow", u"     View", None))
+        self.menu_export.setText(QCoreApplication.translate("MainWindow", u"     Export", None))
+        self.menu_settings.setText(QCoreApplication.translate("MainWindow", u"     Settings", None))
+        self.menu_toggle.setText("")
+        self.txt_header.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.animate_toggle.setText("")
         self.figure_logo.setText("")
         self.txt_freezedb.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:48pt;\">FreezeDB</span></p></body></html>", None))
-        self.txt_subtitle__text_base.setText(QCoreApplication.translate("MainWindow", u"A simple GUI based database manager for keeping track \n"
+        self.txt_subtitle.setText(QCoreApplication.translate("MainWindow", u"A simple GUI based database manager for keeping track \n"
 "of clinical samples.", None))
-        self.txt_dashboard__text_2xl.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:36pt;\">Dashboard</span></p></body></html>", None))
+        self.txt_dashboard.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:36pt;\">Dashboard</span></p></body></html>", None))
         self.txt_currentDatabase.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt;\">Current database</span></p></body></html>", None))
-        self.output_dbSelection__text_lg__font_bold.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\">No selection</span></p></body></html>", None))
+        self.output_db_selection.setText(QCoreApplication.translate("MainWindow", u"No selection", None))
         self.txt_sample_dist__text_xl.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt;\">Sample distribution</span></p></body></html>", None))
         self.txt_nSamples.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt;\">Number of entries</span></p></body></html>", None))
-        self.output_dbSelection__text_lg__font_bold_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\">No selection</span></p></body></html>", None))
+        self.output_number_of_samples.setText(QCoreApplication.translate("MainWindow", u"No selection", None))
         self.txt_group_dist__text_xl.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt;\">Group distribution</span></p></body></html>", None))
         self.txt_create_db__text_xl.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt;\">Create database</span></p></body></html>", None))
-        self.btn_pref__btn_small.setText("")
+        self.btn_pref.setText("")
         self.txt_db_name__text_base.setText(QCoreApplication.translate("MainWindow", u"Database name", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Database layout", None))
-        self.btn_createDB__btn_med.setText(QCoreApplication.translate("MainWindow", u"Create", None))
+        self.btn_createDB.setText(QCoreApplication.translate("MainWindow", u"Create", None))
         self.txt_select_db__text_xl.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:24pt;\">Avaliable databases</span></p></body></html>", None))
         ___qtreewidgetitem = self.tree_databaseViewHome.headerItem()
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"Creation date", None));
-        self.btn_refreshDatabase__btn_small.setText("")
-        self.btn_deleteDatabase__btn_small.setText("")
+        self.btn_refreshDatabase.setText("")
+        self.btn_deleteDatabase.setText("")
         self.txt_databases__text_xl2.setText(QCoreApplication.translate("MainWindow", u"Databases", None))
         self.txt_databaseSubtitle__text_base.setText(QCoreApplication.translate("MainWindow", u"Select database to add \n"
 "and remove to/from.", None))
@@ -889,7 +912,7 @@ class Ui_MainWindow(object):
         self.btn_prefAdd__btn_small_2.setText("")
         self.txt_participantID__text_lg_2.setText(QCoreApplication.translate("MainWindow", u"Identifier", None))
         self.btn_remove__btn_med.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
-        self.output_databaseTable__text_xl2.setText(QCoreApplication.translate("MainWindow", u"No database selected", None))
+        self.output_database_selection_2.setText(QCoreApplication.translate("MainWindow", u"No database selected", None))
         ___qtablewidgetitem = self.table_database.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Test", None));
         self.btn_deleteEntry__btn_small.setText("")

@@ -12,6 +12,9 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+from modules.property import QCard
+from modules.property import QDatabaseSettings
+
 
 class Ui_create_db_page_(object):
     def setupUi(self, create_db_page_):
@@ -20,9 +23,11 @@ class Ui_create_db_page_(object):
         create_db_page_.resize(683, 390)
         self.verticalLayout_2 = QVBoxLayout(create_db_page_)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout = QVBoxLayout()
+        self.card_createdatabase = QCard(create_db_page_)
+        self.card_createdatabase.setObjectName(u"card_createdatabase")
+        self.verticalLayout = QVBoxLayout(self.card_createdatabase)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.txt_freezedb = QLabel(create_db_page_)
+        self.txt_freezedb = QLabel(self.card_createdatabase)
         self.txt_freezedb.setObjectName(u"txt_freezedb")
         self.txt_freezedb.setMinimumSize(QSize(0, 40))
 
@@ -31,13 +36,13 @@ class Ui_create_db_page_(object):
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.label_2 = QLabel(create_db_page_)
+        self.label_2 = QLabel(self.card_createdatabase)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setMaximumSize(QSize(200, 16777215))
 
         self.horizontalLayout.addWidget(self.label_2)
 
-        self.lineEdit_4 = QLineEdit(create_db_page_)
+        self.lineEdit_4 = QLineEdit(self.card_createdatabase)
         self.lineEdit_4.setObjectName(u"lineEdit_4")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -57,7 +62,7 @@ class Ui_create_db_page_(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.frame = QFrame(create_db_page_)
+        self.frame = QDatabaseSettings(self.card_createdatabase)
         self.frame.setObjectName(u"frame")
         self.frame.setMinimumSize(QSize(0, 40))
         self.frame.setFrameShape(QFrame.NoFrame)
@@ -454,20 +459,18 @@ class Ui_create_db_page_(object):
 
         self.verticalLayout.addWidget(self.frame)
 
+
+        self.verticalLayout_2.addWidget(self.card_createdatabase)
+
         self.buttonBox = QDialogButtonBox(create_db_page_)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Save)
 
-        self.verticalLayout.addWidget(self.buttonBox)
-
-
-        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.verticalLayout_2.addWidget(self.buttonBox)
 
 
         self.retranslateUi(create_db_page_)
-        self.buttonBox.accepted.connect(create_db_page_.accept)
-        self.buttonBox.rejected.connect(create_db_page_.reject)
 
         self.card_tabWidget.setCurrentIndex(0)
 

@@ -229,7 +229,7 @@ class ConfigMain(Config):
     
     ''' Updates the lists showing avaliable databases (Reading from config file). ''' 
     def ui_database_selection(self, interface):
-          # Check if db is not selected
+        # Check if db is not selected
         if self.selected_database == "none":            
             # Set output text to no selection
             self.ui.output_databaseTable__text_xl2.setText("No database selected")
