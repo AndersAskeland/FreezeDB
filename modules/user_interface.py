@@ -18,7 +18,7 @@ from PySide2.QtGui import QPalette, QColor
 # Local functions 
 from modules.database import database_activate, database_create, database_delete, database_dir
 from modules.constants import CONFIG_DIR, THEME_DARK, THEME_LIGHT, STYLESHEET, STYLESHEET_TEMPLATE
-from modules.helpers import load_defaults, debug_print, resource_path
+from modules.helpers import debug_print, resource_path
 
 # Local classes 
 from modules.widgets import AnimatedToggle
@@ -248,7 +248,7 @@ def ui_selected_database(self):
     print(f"[Update] Setting currently selected DB")
 
     # Read config
-    config = Settings()
+    config = Settings() 
     db_index = config.item_current_db
     
 

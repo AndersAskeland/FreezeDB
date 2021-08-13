@@ -10,9 +10,9 @@
 ''' External modules '''
 import sys
 from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import Qt, QSize, QPoint, QPointF, QRectF, QRect,QEasingCurve, QPropertyAnimation, QSequentialAnimationGroup, Slot, Property, QXmlStreamReader
+from PySide2.QtCore import Qt, QSize, QPoint, QPointF, QRectF, QRect, QEasingCurve, QPropertyAnimation, QSequentialAnimationGroup, Slot, Property, QXmlStreamReader
 from PySide2.QtSvg import QSvgGenerator, QSvgRenderer, QSvgWidget
-from PySide2.QtWidgets import QCheckBox, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSpacerItem, QSizePolicy, QFrame
+from PySide2.QtWidgets import QCheckBox, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSpacerItem, QSizePolicy, QFrame, QFileDialog
 from PySide2.QtGui import QColor, QBrush, QPaintEvent, QPen, QPainter, QPixmap
 
 ''' Local functions '''
@@ -86,7 +86,7 @@ class AnimatedToggle(QCheckBox):
 
         # Sets circle size
         handleRadius = round(0.24 * contRect.height())
-        # æprint(f"The handle radius is: {handleRadius}") # Debug
+        # print(f"The handle radius is: {handleRadius}") # Debug
 
         # Creates a painter event
         p = QPainter(self)
@@ -180,11 +180,11 @@ class SidebarFirstSetup(QWidget):
 class SelectFolder(QWidget):
     def __init__(self,parent=None):
         super().__init__(parent)
-        self.dlg = QFileDialog()
-        self.dlg.setLabelText(QFileDialog.Accept, "Select directory")
-        self.dlg.setFileMode(QFileDialog.Directory)
-        self.dlg.Option.ShowDirsOnly
-        self.dlg.Option.HideNameFilterDetails
+        dlg = QFileDialog()
+        dlg.setLabelText(QFileDialog.Accept, "Select directory")
+        dlg.setFileMode(QFileDialog.Directory)
+        dlg.Option.ShowDirsOnly
+        dlg.Option.HideNameFilterDetails
 
         if dlg.exec_():
             selected_dir = dlg.selectedFiles()[0]

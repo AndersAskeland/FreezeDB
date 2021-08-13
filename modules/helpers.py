@@ -35,10 +35,6 @@ class PrintColor:
 # ------------------------------------------------------------- #
 # 3 - General functions                                         #
 # ------------------------------------------------------------- #
-""" """
-def load_defaults(self):
-    ConfigMain().ui_update_database_list(self)
-
 """ Don't really know what this do) """
 def get_base_path():
     try:

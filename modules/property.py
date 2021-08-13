@@ -43,7 +43,6 @@ class QDatabaseSettings(QFrame):
         self.shadow.setOffset(0, 3)
         self.setGraphicsEffect(self.shadow)
 
-
 class QSideBar(QFrame):
     ''' Sidebars on top and left. '''
     def __init__(self,parent=None):

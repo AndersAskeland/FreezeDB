@@ -1,13 +1,13 @@
-# ----------------------------------------------------------------------------- #
-# Module: Configuration                                                         #
-#                                                                               #
-# What: Class and functions related to the configuration.                       #
-#                                                                               #
-# ----------------------------------------------------------------------------- #
-# ------------------------------------------------------------- #
-# 1 - Imports                                                   #
-# ------------------------------------------------------------- #
-''' External modules '''
+# -----------------------------------------------------------------------------
+# Module: Configuration     
+#
+# What: Property classifications as done in qtDesigner.   
+#
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# 1 - Imports
+# ------------------------------------------------------------------------------
+# External modules
 import os, sys, shutil
 from datetime import date
 from configparser import ConfigParser
@@ -17,23 +17,20 @@ from PySide2.QtWidgets import QTreeWidgetItem
 from PySide2.QtCore import QSize, QPropertyAnimation, QEasingCurve, QCoreApplication
 from sqlalchemy.sql.sqltypes import String, Date, Integer, Boolean
 
-''' Local functions '''
+# Local functions 
 
-''' Local classes '''
+# Local classes 
 from modules.dialogs import FirstTimeSetup
 
-''' Local resources '''
+# Local resources
 
-# ------------------------------------------------------------- #
-# 2 - Settings, constants, helper functions                     #
-# ------------------------------------------------------------- #
 
-# ------------------------------------------------------------- #
-# 3 - Classes                                                   #
-# ------------------------------------------------------------- #
-''' Default config behaviours '''
+# ------------------------------------------------------------------------------
+# 2 - Classes
+# ------------------------------------------------------------------------------
 class Config:
-    ''' Class attributes '''
+    ''' Default config behaviours '''
+    
     base_dir = resource_path(CONFIG_DIR)
     main_dir = resource_path(CONFIG_DIR + "config.ini")
     default_dir = resource_path(CONFIG_DIR + "config_default.ini")
@@ -71,19 +68,19 @@ class Config:
         # Return
         return self.config
 
-    # Reset main config 
+    # Reset main config to template config file
     def reset_config(self):
         # Find data dir from old file
-        self.config.read(main_dir)
+        self.config.read(self.main_dir)
         dir_data = self.main_config.get("general", "dir")
 
         # Replace file with default
-        shutil.copy2(default_dir, main_dir)
+        shutil.copy2(self.default_dir, self.main_dir)
 
         # Write data dir back
-        self.config.read(main_dir)
+        self.config.read(self.main_dir)
         self.config.set("general", "dir", dir_data)
-        self.write_to_config(path=main_dir, config=self.config)
+        self.write_to_config(path=self.main_dir, config=self.config)
 
 
     # Write to config
