@@ -23,7 +23,7 @@ from modules.helpers import debug_print, resource_path
 # Local classes 
 from modules.widgets import AnimatedToggle
 from modules.database import Database
-from modules.dialogs import CreateDBTemplate
+from modules.dialogs import CreateDBTemplate, FirstTimeSetup
 from modules.configuration import ConfigMain
 
 # Local resources 
@@ -34,11 +34,23 @@ from resources.user_interface.dialog_create_db import Ui_create_db_page_
 # 2 - Classes
 # ------------------------------------------------------------------------------
 class MainWindow(QMainWindow):
-    ''' Main FreezeDB window '''
+    '''Main user interface window.
     
-    # ------------------- Attributes ------------------- # 
+    Class that contains all functions and interactions related to
+    the main user interace, including initialization of ui, loading
+    custom widgets and settings and establishing ui connections.
 
-    # ------------------ Constructor ------------------- #
+    Args:
+        None
+    
+    Attributes:
+        None
+    '''
+    
+    # ---- Class attributes ---- #
+
+
+    # ---- Instance/object attributes ---- #
     def __init__(self):
         super(MainWindow, self).__init__()
 
@@ -55,11 +67,11 @@ class MainWindow(QMainWindow):
         self.connections()
 
 
-    # ------------------- Functions ------------------- # 
+    # ---- Class functions ---- #
     def initialize_ui(self):
-        ''' Loads the UI '''
+        ''' [Class function] - Loads UI and sets window size '''
         
-        # Load UI 
+        # Load UI from imported py/ui file
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -82,6 +94,9 @@ class MainWindow(QMainWindow):
         # Sidebar
         # TODO: Do i need this function?
 
+    def load_dialogs(self):
+        dialog_first_time = FirstTimeSetup()
+        fialog_create_db = CreateDBTemplate()
 
     def load_settings(self):
         ''' Setup the UI based on settings stored in config.ini '''

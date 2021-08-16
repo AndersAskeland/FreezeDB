@@ -13,6 +13,7 @@ from PySide2.QtWidgets import QWizardPage, QLabel, QVBoxLayout, QScrollArea, QWi
 from PySide2.QtCore import QCoreApplication
 
 # Local functions 
+from modules.helpers import resource_path
 
 # Local classes
 from modules.widgets import SidebarFirstSetup
@@ -167,7 +168,7 @@ class CreateDBTemplate(QDialog):
         self.dialog.setupUi(self)
 
         # Template
-        self.setStyleSheet(open(STYLESHEET, "r").read())
+        self.setStyleSheet(open(resource_path(STYLESHEET), "r").read())
 
         # Run
         self.exec_()

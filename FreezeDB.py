@@ -2,11 +2,12 @@
 # 1 - Imports
 # ------------------------------------------------------------------------------
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow, QTreeWidgetItem
+from PySide2.QtWidgets import QApplication
 from modules.user_interface import MainWindow
+from modules.dialogs import FirstTimeSetup, CreateDBTemplate
 
 # ------------------------------------------------------------- #
-# 5 - Application start                                         #
+# 2 - Application start                                         #
 # ------------------------------------------------------------- #
 if __name__ == "__main__":
     # Create application
