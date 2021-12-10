@@ -89,7 +89,6 @@ class Config:
             config.write(pref)
 
 
-
 # Configuration class for main config
 class ConfigMain(Config):
     ''' Instance attributes '''

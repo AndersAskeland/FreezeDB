@@ -126,7 +126,7 @@ class FirstTimeSetup(QWizard):
         self.page.setLayout(self.pageLayout)
 
         # Check
-        self.page.registerField("folder*", self.line)
+        self.page.registerField("test*", self.line)
 
         # Return
         return self.page

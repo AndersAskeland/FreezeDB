@@ -1,4 +1,0 @@
-sqlalchemy
-configparser
-pyside2
-shiboken2
